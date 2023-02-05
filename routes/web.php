@@ -5,6 +5,7 @@ use App\Http\Controllers\My\ContactController as MyContacts;
 use App\Http\Controllers\All\AccountController as AllAccounts;
 use App\Http\Controllers\All\ContactController as AllContacts;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\My\RequestController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +27,10 @@ Route::group(['prefix' => 'my', 'as' => 'my.'], function () {
     Route::get('account/{Id}/contacts/show', [MyContacts::class, 'show'])->name('accounts.contacts.show');
     Route::get('account/contacts/{id}/edit', [MyContacts::class, 'edit'])->name('accounts.contacts.edit');
     Route::put('account/contacts/{id}/update', [MyContacts::class, 'update'])->name('account.contacts.update');
+
+    //sr routes
+    Route::get('account/contacts/{id}/requests', [RequestController::class, 'index'])->name('accounts.contact.requests');
+    Route::get('account/contacts/{id}/requests/create', [RequestController::class, 'create'])->name('accounts.contact.requests.create');
 });
 
 //end of my accounts

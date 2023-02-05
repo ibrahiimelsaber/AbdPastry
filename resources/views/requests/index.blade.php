@@ -1,16 +1,13 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage My Contacts')
+@section('title','Manage My Service Requests')
 
 @section('content')
     <section class="section">
-
         <div class="section-header">
-            <h1 class="ml-2">Manage My Contacts</h1>
+            <h1 class="ml-2">Manage My Service Requests</h1>
             <h1 class="ml-2">||</h1>
-    <a href="{{route('my.accounts')}}" class="ml-2 btn btn-primary">Return Back</a>
-
-
+    <a href="{{route("my.accounts.contacts.show",$contact->AccountId)}}" class="ml-2 btn btn-primary">Go To Contact</a>
 
 
             <div class="section-header-breadcrumb">
@@ -24,45 +21,49 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>My Contacts <span>({{ $total }})</span></h4>
+                                <h4>My Service Requests <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
-                                        <a href="{{route('all.accounts.contacts.create',$accountId)}}"
-                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Contact</a>
+                                        <a href="{{route('accounts.contact.requests.create')}}"
+                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Service Request</a>
 
                                 </div>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive table-invoice">
-                                    @if(count($contacts)>0)
+                                    @if(count($requests)>0)
                                         <table class="table table-responsive-sm table-hover table-outline">
                                             <thead>
                                             <tr>
-                                                <th>Contact Id</th>
                                                 <th>Contact Name</th>
-                                                <th>Contact Age</th>
+                                                <th>Request Id</th>
+                                                <th>Request Type</th>
+                                                <th>Request Sub Type</th>
+                                                <th>Request Status</th>
                                                 <th>Created On</th>
                                                 <th>Created By</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($contacts as $contact)
+                                            @foreach($requests as $request)
                                                 <tr>
 
-                                                    <td>{{ $contact->Id }}</td>
-                                                    <td>{{ $contact->Name }}</td>
-                                                    <td>{{ $contact->AgeId }}</td>
-                                                    <td>{{ $contact->CreatedOn }}</td>
-                                                    <td>{{ $contact->CreatedBy }}</td>
+                                                    <td>{{ optional($request->contact)->Name }}</td>
+                                                    <td>{{ $request->Id }}</td>
+                                                    <td>{{ optional($request->type)->Name }}</td>
+                                                    <td>{{ optional($request->subType)->Name }}</td>
+                                                    <td>{{ optional($request->status)->Name }}</td>
+                                                    <td>{{ $request->Created }}</td>
+                                                    <td>{{ $request->CreatedBy }}</td>
 
                                                     <td>
 
-                                                            <a href="{{route('my.accounts.contacts.edit',$contact->Id)}}"
-                                                               class="btn btn-primary"><i class="fa fa-edit"> Update Contact</i>
+                                                            <a href="{{route('my.accounts.edit',$request->Id)}}"
+                                                               class="btn btn-primary"><i class="fa fa-edit"> Update SR</i>
                                                             </a>
 
-                                                            <a href="{{route('my.accounts.contact.requests',$contact->Id)}}"
-                                                               class="btn btn-warning"><i class="fa fa-cog"> Service Requests</i>
+                                                            <a href="{{route('my.accounts.contacts.show',$request->Id)}}"
+                                                               class="btn btn-warning"><i class="fa fa-eye"> Activites</i>
                                                             </a>
 
                                                     </td>
@@ -80,10 +81,10 @@
                                 </div>
                             </div>
                         </div>
-                        @if(count($contacts)>0)
+                        @if(count($requests)>0)
                             <div class="text-center">
-                                {{ $contacts->links() }}
-                                 {{ $contacts->appends(Request::except('page'))->links() }}
+                                {{ $requests->links() }}
+{{--                                 {{ $requests->appends(Request::except('page'))->links() }}--}}
                             </div>
                         @endif
                     </div>
