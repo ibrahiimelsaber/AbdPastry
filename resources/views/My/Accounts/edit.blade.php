@@ -144,7 +144,7 @@
                                     <div class="col-sm-12 col-md-6">
                                         <select
                                             class="form-control city-search @error('CityId') is-invalid @enderror"
-                                            name="CityId" id="Cities">
+                                            name="CityId" id="CityId">
                                             @foreach($cities as $id => $value)
                                                 <option
                                                     {{$account->CityId==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
@@ -160,14 +160,15 @@
 
                                 <!-- Account District -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Area</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">District</label>
                                     <div class="col-sm-12 col-md-6">
                                         <select class="form-control area-search @error('DistrictId') is-invalid @enderror"
-                                                name="DistrictId" id="districts">
-                                            @foreach($districts as $id => $value)
-                                                <option
-                                                    {{$account->DistrictId==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
-                                            @endforeach
+                                                name="AreaId" id="AreaId">
+                                            <option value="{{$account->area->Id}}">{{$account->area->Name}}</option>
+{{--                                            @foreach($districts as $id => $value)--}}
+{{--                                                <option--}}
+{{--                                                    {{$account->DistrictId==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>--}}
+{{--                                            @endforeach--}}
                                         </select>
                                         @error('DistrictId')
                                         <div class="invalid-feedback">
@@ -221,6 +222,39 @@
             $('.city-search').select2();
             $('.area-search').select2();
             $('.call-search').select2();
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#CityId').on('change', function () {
+                var CityId = $(this).val();
+                // console.log(CityId)
+                if (CityId) {
+                    $.ajax({
+                        url: '/getAreas/' + CityId,
+                        type: "GET",
+                        data: {"_token": "{{ csrf_token() }}"},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                $('#AreaId').empty();
+                                $('#AreaId').append('<option hidden>Choose District</option>');
+                                $.each(data, function (key, val) {
+                                    // console.log('<option value="'+ key +'">' + val+ '</option>');
+                                    $('select[name="AreaId"]').append('<option value="' + key + '">' + val + '</option>');
+                                });
+                            } else {
+                                $('#AreaId').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#AreaId').empty();
+                }
+            });
+
         });
     </script>
 @endsection

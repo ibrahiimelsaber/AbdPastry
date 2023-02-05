@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\My;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,9 +47,6 @@ class AccountController extends Controller
             ->where('Type', '=', 'City')
             ->pluck('name', 'id');
 
-        $districts = DB::table('picklists')
-            ->where('Type', '=', 'Area')
-            ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
@@ -61,7 +59,6 @@ class AccountController extends Controller
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)
             ->with('cities', $cities)
-            ->with('districts', $districts)
             ->with('gender', $gender)
             ->with('callSource', $callSource);
 
@@ -81,7 +78,7 @@ class AccountController extends Controller
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
                 'GenderId' => 'required',
                 'CityId' => 'required',
-                'DistrictId' => 'required',
+                'AreaId' => 'required',
                 'call_source' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules);
@@ -93,7 +90,7 @@ class AccountController extends Controller
             }
 
 
-            $acc = DB::table('accounts')->insert(
+            DB::table('accounts')->insert(
                 [
                     'Name' => $request->Name,
                     'AccountTypeId' => $request->AccountTypeId,
@@ -103,7 +100,7 @@ class AccountController extends Controller
                     'Address' => $request->Address ?? '',
                     'CityId' => $request->CityId,
                     'AreaId' => $request->AreaId ?? 0,
-                    'DistrictId' => $request->DistrictId,
+                    'DistrictId' => $request->DistrictId ?? 0,
                     'Active' => 1,
                     'call_source' => $request->call_source,
                     'Comments' => $request->Comments ?? '',
@@ -136,9 +133,7 @@ class AccountController extends Controller
 
     public function edit($id)
     {
-        $account = DB::table('accounts')
-            ->where('Id', '=', $id)
-            ->first();
+        $account = Account::with('area')->where('Id', $id)->first();
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
             ->pluck('name', 'id');
@@ -182,13 +177,13 @@ class AccountController extends Controller
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
             'GenderId' => 'required',
             'CityId' => 'required',
-            'DistrictId' => 'required',
+            'Area' => 'required',
             'call_source' => 'required',
         ];
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to(route('my.accounts.edit',$id))
+            return Redirect::to(route('my.accounts.edit', $id))
                 ->withErrors($validator->errors())
                 ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
         }
@@ -236,10 +231,10 @@ class AccountController extends Controller
                 $inputs['CityId'] = $account->CityId;
             }
             if (isset($request->DistrictId)) {
-                $inputs['DistrictId'] = $request->DistrictId;
+                $inputs['AreaId'] = $request->AreaId;
 
             } else {
-                $inputs['DistrictId'] = $account->DistrictId;
+                $inputs['AreaId'] = $account->AreaId;
             }
             if (isset($request->call_source)) {
                 $inputs['call_source'] = $request->call_source;
@@ -257,7 +252,7 @@ class AccountController extends Controller
                     'GenderId' => $inputs['GenderId'],
                     'Address' => $inputs['Address'],
                     'CityId' => $inputs['CityId'],
-                    'DistrictId' => $inputs['DistrictId'],
+                    'AreaId' => $inputs['AreaId'],
                     'call_source' => $inputs['call_source'],
                 ]);
 

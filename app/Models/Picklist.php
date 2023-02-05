@@ -22,4 +22,9 @@ class Picklist extends Model
     {
         return $this->hasMany(Request::class);
     }
+
+    public function accounts()
+    {
+        return $this->hasMany(Request::class);
+    }
 }

@@ -6,6 +6,10 @@
     <section class="section">
         <div class="section-header">
             <h1>Add Account</h1>
+            <h1 class="ml-2">|| </h1>
+            <a  href="{{route('my.accounts')}}"
+               class="ml-2 btn btn-primary">Return Back
+            </a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
             </div>
@@ -155,7 +159,7 @@
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">District</label>
                                     <div class="col-sm-12 col-md-6">
                                         <select class="form-control area-search @error('DistrictId') is-invalid @enderror"
-                                                name="DistrictId" id="DistrictId">
+                                                name="AreaId" id="DistrictId">
 
                                         </select>
                                         @error('DistrictId')
@@ -243,7 +247,7 @@
                             success: function (data) {
                                 if (data) {
                                     $('#DistrictId').empty();
-                                    $('#DistrictId').append('<option hidden>Choose Sub District</option>');
+                                    $('#DistrictId').append('<option hidden>Choose District</option>');
                                     $.each(data, function (key, val) {
                                         console.log('<option value="'+ key +'">' + val+ '</option>');
                                         $('select[name="DistrictId"]').append('<option value="' + key + '">' + val + '</option>');
