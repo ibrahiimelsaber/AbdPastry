@@ -136,7 +136,7 @@
                                     <div class="col-sm-12 col-md-6">
                                         <select
                                             class="form-control city-search @error('CityId') is-invalid @enderror"
-                                            name="CityId" id="Cities">
+                                            name="CityId" id="CityId">
                                             @foreach($cities as $id => $value)
                                                 <option
                                                     value="{{$id}}">{{$value}}</option>
@@ -152,14 +152,11 @@
 
                                 <!-- Account District -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Area</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">District</label>
                                     <div class="col-sm-12 col-md-6">
                                         <select class="form-control area-search @error('DistrictId') is-invalid @enderror"
-                                                name="DistrictId" id="districts">
-                                            @foreach($districts as $id => $value)
-                                                <option
-                                                 value="{{$id}}">{{$value}}</option>
-                                            @endforeach
+                                                name="DistrictId" id="DistrictId">
+
                                         </select>
                                         @error('DistrictId')
                                         <div class="invalid-feedback">
@@ -221,6 +218,8 @@
     </section>
 @endsection
 @section('scripts')
+
+
     <script>
         $(document).ready(function () {
             $('.city-search').select2();
@@ -228,4 +227,39 @@
             $('.call-search').select2();
         });
     </script>
+
+
+
+        <script>
+            $(document).ready(function () {
+                $('#CityId').on('change', function () {
+                    var CityId = $(this).val();
+                    if (CityId) {
+                        $.ajax({
+                            url: '/getAreas/' + CityId,
+                            type: "GET",
+                            data: {"_token": "{{ csrf_token() }}"},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data) {
+                                    $('#DistrictId').empty();
+                                    $('#DistrictId').append('<option hidden>Choose Sub District</option>');
+                                    $.each(data, function (key, val) {
+                                        console.log('<option value="'+ key +'">' + val+ '</option>');
+                                        $('select[name="DistrictId"]').append('<option value="' + key + '">' + val + '</option>');
+                                    });
+                                } else {
+                                    $('#DistrictId').empty();
+                                }
+                            }
+                        });
+                    } else {
+                        $('#DistrictId').empty();
+                    }
+                });
+
+            });
+        </script>
+
+
 @endsection

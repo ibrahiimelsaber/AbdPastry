@@ -23,7 +23,7 @@
                             <div class="card-header">
                                 <h4>My Service Requests <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
-                                        <a href="{{route('accounts.contact.requests.create')}}"
+                                        <a href="{{route('my.accounts.contact.requests.create',$contact->Id)}}"
                                            class="btn btn-primary"><i class="fas fa-plus"></i> Add New Service Request</a>
 
                                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\All\AccountController as AllAccounts;
 use App\Http\Controllers\All\ContactController as AllContacts;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\My\RequestController;
+use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,9 +32,16 @@ Route::group(['prefix' => 'my', 'as' => 'my.'], function () {
     //sr routes
     Route::get('account/contacts/{id}/requests', [RequestController::class, 'index'])->name('accounts.contact.requests');
     Route::get('account/contacts/{id}/requests/create', [RequestController::class, 'create'])->name('accounts.contact.requests.create');
+    Route::post('account/contacts/requests/store', [RequestController::class, 'store'])->name('accounts.contact.requests.store');
 });
 
 //end of my accounts
+
+
+Route::get('getSubTypes/{id}',[UtilityController::class,'getSRSubTypes']);
+Route::get('getSubProducts/{id}',[UtilityController::class,'getSRProductsSubTypes']);
+Route::get('getSubSubType/{id}',[UtilityController::class,'getSRSubSubTypes']);
+Route::get('getAreas/{id}',[UtilityController::class,'getAreas']);
 
 
 //start of all accounts

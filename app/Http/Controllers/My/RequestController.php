@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use  App\Models\Request as SR;
+use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
 {
 
     public function index($id)
     {
-        $contact = Contact::where('Id','=',$id)->first();
+        $contact = Contact::where('Id', '=', $id)->first();
         $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('ContactId', '=', $id)->paginate(10);
         return view('requests.index')
             ->with('requests', $requests)
@@ -22,9 +23,45 @@ class RequestController extends Controller
     }
 
 
-    public function create()
+    public function create($id)
     {
-        dd("hi");
+        $contact = Contact::where('Id', '=', $id)->first();
+
+        $status = DB::table('picklists')
+            ->where('Type', '=', 'Status')
+            ->pluck('name', 'id');
+
+        $directions = DB::table('picklists')
+            ->where('Type', '=', 'CallDirection')
+            ->pluck('name', 'id');
+
+        $srTypes = DB::table('picklists')
+            ->where('Type', '=', 'Type')
+            ->pluck('name', 'id');
+
+        $complaintsTypes = DB::table('picklists')
+            ->where('Type', '=', 'ComplaintType')
+            ->pluck('name', 'id');
+
+        $branches = DB::table('picklists')
+            ->where('Type', '=', 'Branch')
+            ->pluck('name', 'id');
+
+        $products = DB::table('picklists')
+            ->where('Type', '=', 'Product')
+            ->pluck('name', 'id');
+
+
+
+
+        return view('requests.create')
+            ->with('contact', $contact)
+            ->with('status', $status)
+            ->with('directions', $directions)
+            ->with('srTypes', $srTypes)
+            ->with('branches', $branches)
+            ->with('products', $products)
+            ->with('complaintsTypes', $complaintsTypes);
     }
 
     /**
