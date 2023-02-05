@@ -177,7 +177,8 @@ class AccountController extends Controller
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
             'GenderId' => 'required',
             'CityId' => 'required',
-            'Area' => 'required',
+            'DistrictId' => 'sometimes',
+            'AreaId' => 'sometimes',
             'call_source' => 'required',
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -188,6 +189,7 @@ class AccountController extends Controller
                 ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
         }
 
+     
 
         $account = DB::table('accounts')
             ->where('Id', '=', $id)
@@ -230,12 +232,21 @@ class AccountController extends Controller
             } else {
                 $inputs['CityId'] = $account->CityId;
             }
-            if (isset($request->DistrictId)) {
+            if (isset($request->AreaId)) {
                 $inputs['AreaId'] = $request->AreaId;
 
             } else {
                 $inputs['AreaId'] = $account->AreaId;
             }
+
+            if (isset($request->DistrictId)) {
+                $inputs['DistrictId'] = $request->DistrictId;
+
+            } else {
+                $inputs['DistrictId'] = $account->DistrictId;
+            }
+
+
             if (isset($request->call_source)) {
                 $inputs['call_source'] = $request->call_source;
 
@@ -259,7 +270,7 @@ class AccountController extends Controller
             return redirect()->back()->with('message', 'Account is updated successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
-            return Redirect::to(route('accounts.edit', $id))->withErrors('Update failed. ' . $ex->getMessage())->withInput($request->all());
+            return Redirect::to(route('my.accounts.edit', $id))->withErrors('Update failed. ' . $ex->getMessage())->withInput($request->all());
         }
 
     }

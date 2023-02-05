@@ -160,11 +160,11 @@
 
                                 <!-- Account District -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">District</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Area</label>
                                     <div class="col-sm-12 col-md-6">
                                         <select class="form-control area-search @error('DistrictId') is-invalid @enderror"
                                                 name="AreaId" id="AreaId">
-                                            <option value="{{$account->area->Id}}">{{$account->area->Name}}</option>
+                                            <option value="{{optional($account->area)->Id}}">{{optional($account->area)->Name}}</option>
 {{--                                            @foreach($districts as $id => $value)--}}
 {{--                                                <option--}}
 {{--                                                    {{$account->DistrictId==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>--}}
@@ -240,7 +240,7 @@
                         success: function (data) {
                             if (data) {
                                 $('#AreaId').empty();
-                                $('#AreaId').append('<option hidden>Choose District</option>');
+                                $('#AreaId').append('<option hidden value="0">Choose District</option>');
                                 $.each(data, function (key, val) {
                                     // console.log('<option value="'+ key +'">' + val+ '</option>');
                                     $('select[name="AreaId"]').append('<option value="' + key + '">' + val + '</option>');
