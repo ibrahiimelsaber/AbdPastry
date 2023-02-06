@@ -31,26 +31,32 @@ class RequestController extends Controller
 
         $status = DB::table('picklists')
             ->where('Type', '=', 'Status')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $directions = DB::table('picklists')
             ->where('Type', '=', 'CallDirection')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $srTypes = DB::table('picklists')
             ->where('Type', '=', 'Type')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $complaintsTypes = DB::table('picklists')
             ->where('Type', '=', 'ComplaintType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $branches = DB::table('picklists')
             ->where('Type', '=', 'Branch')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $products = DB::table('picklists')
             ->where('Type', '=', 'Product')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
 

@@ -24,53 +24,43 @@
                             <div class="card-header">
                                 <h4>Activities <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
-    @if(isset($contact))
-                                        <a href="{{route('accounts.contact.requests.create',$contact->Id)}}"
-                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Service Request</a>
+    @if(isset($sr))
+                                        <a href="{{route('accounts.contact.requests.activities.create',$sr->Id)}}"
+                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Activity</a>
 @endif
                                 </div>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive table-invoice">
-                                    @if(count($requests)>0)
+
+                                    @if(count($activities)>0)
                                         <table class="table table-responsive-sm table-hover table-outline">
                                             <thead>
                                             <tr>
-{{--                                                <th>Contact Id</th>--}}
-                                                <th>Contact Name</th>
+                                                <th>Activity Id</th>
                                                 <th>Request Id</th>
-                                                <th>Request Type</th>
-                                                <th>Request Sub Type</th>
-                                                <th>Request Status</th>
+                                                <th>Contact Name</th>
+                                                <th>Activity Type</th>
+                                                <th>Activity Sub Type</th>
                                                 <th>Created On</th>
                                                 <th>Created By</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($requests as $request)
+                                            @foreach($activities as $activity)
                                                 <tr>
-
-{{--                                                    <td>{{ optional($request->contact)->Id }}</td>--}}
-                                                    <td>{{ optional($request->contact)->Name }}</td>
-                                                    <td>{{ $request->Id }}</td>
-                                                    <td>{{ optional($request->type)->Name }}</td>
-                                                    <td>{{ optional($request->subType)->Name }}</td>
-                                                    <td>{{ optional($request->status)->Name }}</td>
-                                                    <td>{{ $request->Created }}</td>
-                                                    <td>{{ $request->CreatedBy }}</td>
-
+                                                    <td>{{ $activity->Id }}</td>
+                                                    <td>{{ $activity->SRId}}</td>
+                                                    <td>{{ optional($activity->request->contact->account)->Name ?? '' }}</td>
+                                                    <td>{{ optional($activity->type)->Name }}</td>
+                                                    <td>{{ optional($activity->subType)->Name }}</td>
+                                                    <td>{{ $activity->Created }}</td>
+                                                    <td>{{ $activity->CreatedBy }}</td>
                                                     <td>
-
-                                                            <a href="{{route('accounts.contact.requests.edit',$request->Id)}}"
-                                                               class="btn btn-primary"><i class="fa fa-edit"> Update SR</i>
+                                                            <a href="{{route('accounts.contact.requests.activities.edit',$activity->Id)}}"
+                                                               class="btn btn-primary"><i class="fa fa-edit"> Update Activity</i>
                                                             </a>
-
-                                                            <a href="{{route('my.accounts.contacts.show',$request->Id)}}"
-                                                               class="btn btn-warning"><i class="fa fa-eye"> Activites</i>
-                                                            </a>
-                                        <a href="{{route('accounts.contact.requests.create',optional($request->contact)->Id)}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New SR</a>
-
                                                     </td>
 
                                                 </tr>
@@ -86,9 +76,9 @@
                                 </div>
                             </div>
                         </div>
-                        @if(count($requests)>0)
+                        @if(count($activities)>0)
                             <div class="text-center">
-                                {{ $requests->links() }}
+                                {{ $activities->links() }}
 {{--                                 {{ $requests->appends(Request::except('page'))->links() }}--}}
                             </div>
                         @endif

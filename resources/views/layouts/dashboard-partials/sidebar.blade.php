@@ -8,37 +8,27 @@
     <ul class="sidebar-menu">
         <li class="{{ Request::route()->getName() === 'dashboard.index' ? ' active' : '' }}">
             <a class="nav-link" href="#">
-                <i class="fa fa-columns"></i> <span>Al-Abd Pastry</span>
+                <i class="fa fa-hamburger"></i> <span>Al-Abd Pastry</span>
             </a>
         </li>
 
-{{--        <li class="menu-header">My</li>--}}
-
+        <li class="menu-header">My Actions</li>
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-users"></i> <span>MY Accounts</span>
+                <i class="fa fa-user-tie"></i> <span>MY Accounts</span>
             </a>
             <ul class="dropdown-menu">
                 <li>
                     <a class="nav-link" href="{{route('my.accounts')}}">Accounts</a>
                 </li>
 
-{{--                <li>--}}
-{{--                    <a class="nav-link" href="{{route('my.contacts')}}">Contacts</a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a class="nav-link" href="{{route('my.accounts')}}">Service Requests</a>--}}
-{{--                </li>--}}
-
-
             </ul>
         </li>
 
 
-
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-users"></i> <span>MY Contacts</span>
+                <i class="fa fa-user-plus"></i> <span>MY Contacts</span>
             </a>
             <ul class="dropdown-menu">
                 <li>
@@ -46,16 +36,42 @@
                 </li>
 
 
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fa fa-tasks"></i> <span>My Service Requests</span>
+            </a>
+            <ul class="dropdown-menu">
+
+                <li>
+                    <a class="nav-link" href="{{route('all.requests')}}">Service Requests</a>
+                </li>
 
 
             </ul>
         </li>
 
-{{--        <li class="menu-header"><strong>All</strong></li>--}}
-
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-users"></i> <span>All Accounts</span>
+                <i class="fa fa-hand-holding-usd"></i> <span>My Activities</span>
+            </a>
+            <ul class="dropdown-menu">
+
+                <li>
+                    <a class="nav-link" href="{{route('all.requests')}}">Activities</a>
+                </li>
+
+
+            </ul>
+        </li>
+
+        <li class="menu-header">All Actions</li>
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fa fa-user-tie"></i> <span>All Accounts</span>
             </a>
             <ul class="dropdown-menu">
                 <li>
@@ -68,7 +84,7 @@
 
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-users"></i> <span>All Contacts</span>
+                <i class="fa fa-user-plus"></i> <span>All Contacts</span>
             </a>
             <ul class="dropdown-menu">
 
@@ -83,12 +99,26 @@
 
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-users"></i> <span>All Service Requests</span>
+                <i class="fa fa-tasks"></i> <span>All Service Requests</span>
             </a>
             <ul class="dropdown-menu">
 
                 <li>
                     <a class="nav-link" href="{{route('all.requests')}}">Service Requests</a>
+                </li>
+
+
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fa fa-hand-holding-usd"></i> <span>All Activities</span>
+            </a>
+            <ul class="dropdown-menu">
+
+                <li>
+                    <a class="nav-link" href="{{route('all.requests')}}">Activities</a>
                 </li>
 
 

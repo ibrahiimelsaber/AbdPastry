@@ -72,8 +72,8 @@
                                                                 </a>
 
 
-                                                            <a href="{{route('my.accounts.contacts.show',$request->Id)}}"
-                                                               class="btn btn-warning"><i class="fa fa-eye"> Activites</i>
+                                                            <a href="{{route('accounts.contact.requests.activities',$request->Id)}}"
+                                                               class="btn btn-warning"><i class="fa fa-eye"> Activities</i>
                                                             </a>
 {{--                                        <a href="{{route('accounts.contact.requests.create',optional($request->contact)->Id)}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New SR</a>--}}
 

@@ -38,17 +38,21 @@ class ContactController extends Controller
         $account = Account::with('Type')->where('Id', $id)->first();
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $phoneTypes = DB::table('picklists')
             ->where('Type', '=', 'PhoneType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $titles = DB::table('picklists')
             ->where('Type', '=', 'Title')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         return view('all.accounts.contacts.create')
@@ -140,17 +144,21 @@ class ContactController extends Controller
         $contact = Contact::with('account', 'gender', 'phoneType')->where('Id', $id)->first();
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $phoneTypes = DB::table('picklists')
             ->where('Type', '=', 'PhoneType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $titles = DB::table('picklists')
             ->where('Type', '=', 'Title')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
 

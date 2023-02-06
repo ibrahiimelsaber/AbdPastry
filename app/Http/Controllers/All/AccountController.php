@@ -38,24 +38,30 @@ class AccountController extends Controller
 
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $phoneTypes = DB::table('picklists')
             ->where('Type', '=', 'PhoneType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $cities = DB::table('picklists')
             ->where('Type', '=', 'City')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $districts = DB::table('picklists')
             ->where('Type', '=', 'Area')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $callSource = DB::table('picklists')
             ->where('Type', '=', 'callSource')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         return view('All.accounts.create')
@@ -141,24 +147,30 @@ class AccountController extends Controller
 
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $phoneTypes = DB::table('picklists')
             ->where('Type', '=', 'PhoneType')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $cities = DB::table('picklists')
             ->where('Type', '=', 'City')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $districts = DB::table('picklists')
             ->where('Type', '=', 'Area')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $callSource = DB::table('picklists')
             ->where('Type', '=', 'callSource')
+             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         return view('All.accounts.edit')

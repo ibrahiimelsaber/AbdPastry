@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\My\AccountController as MyAccounts;
 use App\Http\Controllers\My\ContactController as MyContacts;
 use App\Http\Controllers\All\AccountController as AllAccounts;
@@ -72,3 +73,15 @@ Route::get('account/contacts/{id}/requests/create', [RequestController::class, '
 Route::get('account/contacts/requests/{id}/edit', [RequestController::class, 'edit'])->name('accounts.contact.requests.edit');
 Route::post('account/contacts/requests/store', [RequestController::class, 'store'])->name('accounts.contact.requests.store');
 Route::put('account/contacts/requests/update', [RequestController::class, 'update'])->name('accounts.contact.requests.update');
+
+
+//sr activity routes
+Route::get('account/contacts/requests/{id}/activities', [ActivityController::class, 'index'])->name('accounts.contact.requests.activities');
+Route::get('account/contacts/requests/activities/{id}/create', [ActivityController::class, 'create'])->name('accounts.contact.requests.activities.create');
+Route::get('account/contacts/requests/activities/{id}edit', [ActivityController::class, 'edit'])->name('accounts.contact.requests.activities.edit');
+Route::post('account/contacts/requests/activities/store', [ActivityController::class, 'store'])->name('accounts.contact.requests.activities.store');
+Route::put('account/contacts/requests/activities/update', [ActivityController::class, 'update'])->name('accounts.contact.requests.activities.update');
+
+Route::get('st',function (){
+    return view('st');
+});

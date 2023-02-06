@@ -23,6 +23,11 @@ class Picklist extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
     public function requestsHistory()
     {
         return $this->hasMany(RequestHistory::class);

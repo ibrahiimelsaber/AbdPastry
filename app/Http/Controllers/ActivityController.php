@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Contact;
 use App\Models\RequestHistory;
 use Illuminate\Http\Request;
@@ -11,18 +12,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class RequestController extends Controller
+class ActivityController extends Controller
 {
 
     public function index($id)
     {
-        $contact = Contact::where('Id', '=', $id)->first();
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('ContactId', '=', $id)->paginate(30);
-        return view('requests.index')
-            ->with('requests', $requests)
-            ->with('contact', $contact)
-            ->with('total', $requests->total())
-            ->with('indexUrl', route('accounts.contact.requests', $id));
+
+        $sr = SR::where('Id', '=', $id)->first();
+
+        $activities = Activity::with('request', 'status', 'type', 'subType', 'focalStatus', 'branch', 'branch', 'statusBack')->where('SRId', '=', $id)->paginate(30);
+
+        return view('activities.index')
+            ->with('sr', $sr)
+            ->with('activities', $activities)
+            ->with('total', $activities->total())
+            ->with('indexUrl', route('accounts.contact.requests.activities', $id));
     }
 
     public function all()
@@ -41,72 +45,65 @@ class RequestController extends Controller
 
     public function create($id)
     {
-        $contact = Contact::where('Id', '=', $id)->first();
+        $sr = SR::where('Id', '=', $id)->first();
 
-        $status = DB::table('picklists')
-            ->where('Type', '=', 'Status')
+        $activityCallStatus = DB::table('picklists')
+            ->where('Type', '=', 'CallStatus2')
             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        $directions = DB::table('picklists')
-            ->where('Type', '=', 'CallDirection')
+        $activityCallBackStatus = DB::table('picklists')
+            ->where('Type', '=', 'CallBackStatus')
             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        $srTypes = DB::table('picklists')
-            ->where('Type', '=', 'Type')
+        $activityTypes = DB::table('picklists')
+            ->where('Type', '=', 'ActType')
             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        $complaintsTypes = DB::table('picklists')
-            ->where('Type', '=', 'ComplaintType')
+        $activitySubTypes = DB::table('picklists')
+            ->where('Type', '=', 'ActSubType')
             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $branches = DB::table('picklists')
+            ->where('Active', '=', '1')
             ->where('Type', '=', 'Branch')
             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        $products = DB::table('picklists')
-            ->where('Type', '=', 'Product')
+        $activityFocalPointBranchStatus = DB::table('picklists')
+            ->where('Type', '=', 'FocalPointBranchStatus')
             ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
 
-        return view('requests.create')
-            ->with('contact', $contact)
-            ->with('status', $status)
-            ->with('directions', $directions)
-            ->with('srTypes', $srTypes)
+        return view('activities.create')
+            ->with('sr', $sr)
+            ->with('activityCallStatus', $activityCallStatus)
+            ->with('activityCallBackStatus', $activityCallBackStatus)
+            ->with('activityTypes', $activityTypes)
+            ->with('activitySubTypes', $activitySubTypes)
             ->with('branches', $branches)
-            ->with('products', $products)
-            ->with('complaintsTypes', $complaintsTypes);
+            ->with('activityFocalPointBranchStatus', $activityFocalPointBranchStatus);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         try {
             DB::beginTransaction();
             $rules = [
-                'StatusId' => 'required',
-                'CallDirectionId' => 'required',
-                'ContactId' => 'required',
-                'TypeId' => 'required',
-                'BranchId' => 'required',
-                'SubTypeId' => 'sometimes',
-                'SubSubType' => 'sometimes',
-                'ProductId' => 'sometimes',
-                'SubProductId' => 'sometimes',
-                'ComplaintTypeId' => 'sometimes',
-                'CustomerComments' => 'sometimes',
-                'AgentComments' => 'sometimes',
+                'SRId' => 'required',
+                'ActTypeId' => 'sometimes',
+                'ActSubTypeId' => 'sometimes',
+                'CallStatusId' => 'sometimes',
+                'CallBackStatusId' => 'sometimes',
+                'BranchId' => 'sometimes',
+                'FocalPointBranchStatusId' => 'sometimes',
+                'CustomerActivityComments' => 'sometimes',
+                'CustomerActivityAgentComments' => 'sometimes',
             ];
             $validator = Validator::make($request->all(), $rules);
 
@@ -117,39 +114,21 @@ class RequestController extends Controller
             }
 
 
-            //facebook type id
-
-            $today_date = date('l');
-
-            if ($today_date == 'Thursday') {
-                $NowDate = date('Y-m-d H:i:s');
-                $timestamp = strtotime($NowDate) + 60 * 60 * 47;
-                $DueDate = date('Y-m-d H:i:s', $timestamp);
-            } else {
-                $NowDate = date('Y-m-d H:i:s');
-                $timestamp = strtotime($NowDate) + 60 * 60 * 47;
-                $DueDate = date('Y-m-d H:i:s', $timestamp);
-            }
-
-            DB::table('service_requests')->insert(
+            DB::table('activities')->insert(
                 [
-                    'StatusId' => $request->StatusId,
-                    'CallDirectionId' => $request->CallDirectionId,
-                    'ContactId' => $request->ContactId,
-                    'TypeId' => $request->TypeId,
-                    'BranchId' => $request->BranchId,
-                    'SubTypeId' => $request->SubTypeId ?? 0,
-                    'SubSubType' => $request->SubSubType ?? 0,
-                    'ProductId' => $request->ProductId,
-                    'SubProductId' => $request->SubProductId,
-                    'ComplaintTypeId' => $request->ComplaintTypeId,
-                    'DueDate' => $request->$DueDate,
-                    'CustomerComments' => $request->CustomerComments ?? '',
-                    'AgentComments' => $request->AgentComments ?? '',
+                    'SRId' => $request->SRId,
+                    'ActTypeId' => $request->ActTypeId,
+                    'ActSubTypeId' => $request->ActSubTypeId,
+                    'CallStatusId' => $request->CallStatusId,
+                    'CallBackStatusId' => $request->CallBackStatusId,
+                    'BranchId' => $request->BranchId ?? 0,
+                    'FocalPointBranchStatusId' => $request->FocalPointBranchStatusId ?? 0,
+                    'CustomerActivityComments' => $request->CustomerActivityComments,
+                    'CustomerActivityAgentComments' => $request->CustomerActivityAgentComments,
                     'Active' => 1,
                     'CreatedBy' => \session('userName'),
-                    'ModifiedBy' => \session('userName'),
                     'Created' => now()
+
                 ]);
 
             DB::commit();
@@ -180,32 +159,26 @@ class RequestController extends Controller
         $sr = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('Id', '=', $id)->first();
         $status = DB::table('picklists')
             ->where('Type', '=', 'Status')
-            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $directions = DB::table('picklists')
             ->where('Type', '=', 'CallDirection')
-            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $srTypes = DB::table('picklists')
             ->where('Type', '=', 'Type')
-            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $complaintsTypes = DB::table('picklists')
             ->where('Type', '=', 'ComplaintType')
-            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $branches = DB::table('picklists')
             ->where('Type', '=', 'Branch')
-            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $products = DB::table('picklists')
             ->where('Type', '=', 'Product')
-            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
 
@@ -290,7 +263,7 @@ class RequestController extends Controller
                     'AgentComments' => $request->AgentComments ?? '',
                     'Active' => 1,
                     'Modified' => now(),
-                    'ModifiedBy' => session('userName')
+                    'ModifiedBy' => \session('userName')
                 ]);
 
 
@@ -312,7 +285,7 @@ class RequestController extends Controller
                     'AgentComments' => $request->AgentComments ?? '',
                     'Active' => 1,
                     'Created' => now(),
-                    'CreatedBy' => session('userName')
+                    'CreatedBy' => \session('userName')
                 ]);
 
             DB::commit();
