@@ -6,6 +6,8 @@
     <section class="section">
         <div class="section-header">
             <h1>Add Account</h1>
+            <h1 class="ml-2">|| </h1>
+            <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
             </div>
@@ -23,10 +25,26 @@
                             <form method="POST" action="{{ route('all.accounts.store') }}"
                                   enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Account
-                                        Name</label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Account Type</label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <select class="form-control @error('AccountTypeId') is-invalid @enderror"
+                                                name="AccountTypeId" id="AccountTypeId">
+                                            @foreach($accountTypes as $id => $value)
+                                                <option value="{{$id}}">{{$value}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('AccountTypeId')
+                                        <div class="invalid-feedback">
+                                            <p>{{ $errors->first('AccountTypeId') }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Account Name</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <input type="text" name="Name"
                                                class="form-control @error('Name') is-invalid @enderror"/>
 
@@ -36,38 +54,18 @@
                                         </div>
                                         @enderror
                                     </div>
+
                                 </div>
 
-                                <!-- Account Type -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Account
-                                        Type</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control @error('AccountTypeId') is-invalid @enderror"
-                                                name="AccountTypeId" id="accountTypes_list">
-                                            @foreach($accountTypes as $id => $value)
-                                                <option
-                                                   value="{{$id}}">{{$value}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('AccountTypeId')
-                                        <div class="invalid-feedback">
-                                            <p>{{ $errors->first('AccountTypeId') }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
 
-                                <!-- Account Phone Type -->
+                                <!-- Phone Type and Number-->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone
-                                        Type</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control @error('AccountTypeId') is-invalid @enderror"
-                                                name="PhoneTypeId" id="phonetypes">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Phone Type</label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <select class="form-control @error('PhoneTypeId') is-invalid @enderror"
+                                                name="PhoneTypeId" id="PhoneTypeId">
                                             @foreach($phoneTypes as $id => $value)
-                                                <option
-                                                   value="{{$id}}">{{$value}}</option>
+                                                <option value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('PhoneTypeId')
@@ -76,16 +74,11 @@
                                         </div>
                                         @enderror
                                     </div>
-                                </div>
 
 
-                                <!-- Account Phone Number -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone
-                                        Number</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="number" name="PhoneNumber"
-
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Phone Number</label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="number" name="PhoneNumber" min="0"
                                                class="form-control @error('PhoneNumber') is-invalid @enderror"/>
 
                                         @error('PhoneNumber')
@@ -94,16 +87,20 @@
                                         </div>
                                         @enderror
                                     </div>
+
                                 </div>
-                                <!-- Account Gender -->
+
+
+
+
+                                <!-- Gender and Address-->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Gender</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control @error('GenderId') is-invalid @enderror"
-                                                name="GenderId" id="gender">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Gender</label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <select class="form-control @error('PhoneTypeId') is-invalid @enderror"
+                                                name="GenderId" id="GenderId">
                                             @foreach($gender as $id => $value)
-                                                <option
-                                                  value="{{$id}}">{{$value}}</option>
+                                                <option value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('GenderId')
@@ -112,12 +109,10 @@
                                         </div>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <!-- Account Address -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
-                                    <div class="col-sm-12 col-md-7">
+
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Address</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <input type="text" name="Address"
                                                class="form-control @error('Address') is-invalid @enderror"/>
 
@@ -127,16 +122,17 @@
                                         </div>
                                         @enderror
                                     </div>
+
                                 </div>
 
 
                                 <!-- Account City -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">City</label>
-                                    <div class="col-sm-12 col-md-6">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">City</label>
+                                    <div class="col-sm-12 col-md-9">
                                         <select
                                             class="form-control city-search @error('CityId') is-invalid @enderror"
-                                            name="CityId" id="Cities">
+                                            name="CityId" id="CityId">
                                             @foreach($cities as $id => $value)
                                                 <option
                                                     value="{{$id}}">{{$value}}</option>
@@ -152,32 +148,31 @@
 
                                 <!-- Account District -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Area</label>
-                                    <div class="col-sm-12 col-md-6">
-                                        <select class="form-control area-search @error('DistrictId') is-invalid @enderror"
-                                                name="DistrictId" id="districts">
-                                            @foreach($districts as $id => $value)
-                                                <option
-                                                 value="{{$id}}">{{$value}}</option>
-                                            @endforeach
+                                    <label
+                                        class="col-form-label  col-12 col-md-2 col-lg-1">Area</label>
+                                    <div class="col-sm-12 col-md-9">
+                                        <select
+                                            class="form-control area-search @error('AreaId') is-invalid @enderror"
+                                            name="AreaId" id="AreaId">
+
                                         </select>
-                                        @error('DistrictId')
+                                        @error('AreaId')
                                         <div class="invalid-feedback">
-                                            <p>{{ $errors->first('DistrictId') }}</p>
+                                            <p>{{ $errors->first('AreaId') }}</p>
                                         </div>
                                         @enderror
                                     </div>
                                 </div>
 
 
-
                                 <!-- Account District -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Call
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Call
                                         Source</label>
-                                    <div class="col-sm-12 col-md-6">
-                                        <select class="form-control call-search @error('call_source') is-invalid @enderror"
-                                                name="call_source" id="call_source">
+                                    <div class="col-sm-12 col-md-9">
+                                        <select
+                                            class="form-control call-search @error('call_source') is-invalid @enderror"
+                                            name="call_source" id="call_source">
                                             @foreach($callSource as $id => $value)
                                                 <option
                                                     value="{{$id}}">{{$value}}</option>
@@ -192,8 +187,9 @@
                                 </div>
                                 <!-- Account Comments -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Comments</label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <label
+                                        class="col-form-label  col-12 col-md-2 col-lg-1">Comments</label>
+                                    <div class="col-sm-12 col-md-9">
                                         <input type="text" name="Comments"
                                                class="form-control @error('Comments') is-invalid @enderror"/>
 
@@ -206,8 +202,8 @@
                                 </div>
 
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1"></label>
+                                    <div class="col-sm-12 col-md-9">
                                         <button type="submit" class="btn btn-primary">Add</button>
                                     </div>
                                 </div>
@@ -226,6 +222,36 @@
             $('.city-search').select2();
             $('.area-search').select2();
             $('.call-search').select2();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#CityId').on('change', function () {
+                var CityId = $(this).val();
+                if (CityId) {
+                    $.ajax({
+                        url: '/getAreas/' + CityId,
+                        type: "GET",
+                        data: {"_token": "{{ csrf_token() }}"},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                $('#AreaId').empty();
+                                $('#AreaId').append('<option hidden>Choose Area</option>');
+                                $.each(data, function (key, val) {
+                                    console.log('<option value="' + key + '">' + val + '</option>');
+                                    $('select[name="AreaId"]').append('<option value="' + key + '">' + val + '</option>');
+                                });
+                            } else {
+                                $('#AreaId').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#AreaId').empty();
+                }
+            });
+
         });
     </script>
 @endsection

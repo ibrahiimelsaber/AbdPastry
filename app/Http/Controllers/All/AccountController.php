@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\All;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -81,7 +82,7 @@ class AccountController extends Controller
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
                 'GenderId' => 'required',
                 'CityId' => 'required',
-                'DistrictId' => 'required',
+                'AreaId' => 'required',
                 'call_source' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules);
@@ -103,7 +104,7 @@ class AccountController extends Controller
                     'Address' => $request->Address ?? '',
                     'CityId' => $request->CityId,
                     'AreaId' => $request->AreaId ?? 0,
-                    'DistrictId' => $request->DistrictId,
+                    'DistrictId' => $request->DistrictId ?? 0,
                     'Active' => 1,
                     'call_source' => $request->call_source,
                     'Comments' => $request->Comments ?? '',
@@ -113,11 +114,11 @@ class AccountController extends Controller
 
             DB::commit();
 
-            return redirect()->route('my.accounts')->with('message', 'Account is created successfully')->with('class', 'alert-success');
+            return redirect()->route('all.accounts')->with('message', 'Account is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();
-            return Redirect::to(route('my.accounts.create'))->withErrors('Creation field failed. ' . $ex->getMessage())->withInput($request->all())->with('message', $ex->getMessage())->with('class', 'alert-danger');
+            return Redirect::to(route('all.accounts.create'))->withErrors('Creation field failed. ' . $ex->getMessage())->withInput($request->all())->with('message', $ex->getMessage())->with('class', 'alert-danger');
         }
 
     }
@@ -136,9 +137,8 @@ class AccountController extends Controller
 
     public function edit($id)
     {
-        $account = DB::table('accounts')
-            ->where('Id', '=', $id)
-            ->first();
+        $account = Account::with('area')->where('Id', $id)->first();
+
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
             ->pluck('name', 'id');
@@ -180,9 +180,10 @@ class AccountController extends Controller
             'PhoneTypeId' => 'required',
             'PhoneNumber' => 'required|min:10',
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
-            'GenderId' => 'required',
-            'CityId' => 'required',
-            'DistrictId' => 'required',
+            'GenderId' => 'sometimes',
+            'CityId' => 'sometimes',
+            'DistrictId' => 'sometimes',
+            'AreaId' => 'sometimes',
             'call_source' => 'required',
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -232,13 +233,20 @@ class AccountController extends Controller
                 $inputs['CityId'] = $request->CityId;
 
             } else {
-                $inputs['CityId'] = $account->CityId;
+                $inputs['CityId'] = $account->CityId ?? 0;
             }
+            if (isset($request->AreaId)) {
+                $inputs['AreaId'] = $request->AreaId;
+
+            } else {
+                $inputs['AreaId'] = $account->AreaId ?? 0;
+            }
+
             if (isset($request->DistrictId)) {
                 $inputs['DistrictId'] = $request->DistrictId;
 
             } else {
-                $inputs['DistrictId'] = $account->DistrictId;
+                $inputs['DistrictId'] = $account->DistrictId ?? 0;
             }
             if (isset($request->call_source)) {
                 $inputs['call_source'] = $request->call_source;
@@ -263,7 +271,7 @@ class AccountController extends Controller
             return redirect()->back()->with('message', 'Account is updated successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
-            return Redirect::to(route('accounts.edit', $id))->withErrors('Update failed. ' . $ex->getMessage())->withInput($request->all());
+            return Redirect::to(route('all.accounts.edit', $id))->withErrors('Update failed. ' . $ex->getMessage())->withInput($request->all());
         }
 
     }

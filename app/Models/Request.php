@@ -16,7 +16,7 @@ class Request extends Model
 
     public function contact()
     {
-        return $this->belongsTo(Contact::class, 'ContactId');
+        return $this->belongsTo(Contact::class, 'ContactId','Id');
     }
 
     public function callDirection()

@@ -7,9 +7,7 @@
         <div class="section-header">
             <h1>Add Contact</h1>
             <h1 class="ml-2">|| </h1>
-            <a href="{{route('all.accounts.contacts.show',$accountId)}}"
-               class="ml-2 btn btn-primary">Return Back
-            </a>
+            <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
             </div>
@@ -30,11 +28,15 @@
 
                                 <input type="hidden" name="accountId" value="{{$account->Id}}">
                                 <!--Account Id-->
+
+                                <input type="hidden" name="accountId" value="{{$account->Id}}">
+
+                                <!--Account Id-->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Contact
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Contact
                                         Id</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="AccountId" value="{{old('Id',$account->Id)}}"
+                                    <div class="col-sm-12 col-md-9">
+                                        <input type="text"  value="{{old('Id',$account->Id)}}"
                                                class="form-control @error('AccountId') is-invalid @enderror" disabled/>
 
                                         @error('AccountId')
@@ -47,9 +49,9 @@
 
                                 <!-- Contact Name -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Account
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Account
                                         Name</label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <div class="col-sm-12 col-md-9">
                                         <input type="text"  value="{{old('Name',$account->Name)}}"
                                                class="form-control @error('Name') is-invalid @enderror" disabled/>
 
@@ -63,9 +65,9 @@
 
                                 <!-- Account Type -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Account
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Account
                                         Type</label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <div class="col-sm-12 col-md-9">
                                         <input type="text"  value="{{old('AccountTypeId',optional($account->Type)->Name)}}"
                                                class="form-control @error('AccountTypeId') is-invalid @enderror" disabled/>
 
@@ -78,10 +80,70 @@
                                 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Phone Type</label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <select class="form-control @error('PhoneTypeId') is-invalid @enderror"
+                                                name="PhoneTypeId" id="PhoneTypeId">
+                                            @foreach($phoneTypes as $id => $value)
+                                                <option value="{{$id}}">{{$value}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('PhoneTypeId')
+                                        <div class="invalid-feedback">
+                                            <p>{{ $errors->first('PhoneTypeId') }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Phone Number</label>
+                                    <div class="col-sm-6 col-md-4">
+                                        <input type="number" name="PhoneNumber" min="0"
+                                               class="form-control @error('PhoneNumber') is-invalid @enderror"/>
+
+                                        @error('PhoneNumber')
+                                        <div class="invalid-feedback">
+                                            <p>{{ $errors->first('PhoneNumber') }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+
+
+
                                 <!-- Contact Gender -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Gender</label>
-                                    <div class="col-sm-6 col-md-2">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Gender</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <select class="form-control @error('GenderId') is-invalid @enderror"
                                                 name="GenderId" id="gender">
                                             @foreach($gender as $id => $value)
@@ -96,8 +158,8 @@
                                         @enderror
                                     </div>
 
-                                    <label class="col-form-label text-md-right col-6 col-md-2 col-lg-2">Age</label>
-                                    <div class="col-sm-6 col-md-3">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Age</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <input type="number" name="AgeId"  min="15" max="100"
                                                class="form-control @error('AgeId') is-invalid @enderror"/>
 
@@ -111,8 +173,8 @@
                                 </div>
                                 <!-- Contact Name -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                                    <div class="col-sm-6 col-md-2">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Title</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <select class="form-control @error('TitleId') is-invalid @enderror"
                                                 name="TitleId" id="title">
                                             @foreach($titles as $id => $value)
@@ -127,9 +189,9 @@
                                     </div>
 
 
-                                    <label class="col-form-label text-md-right col-6 col-md-2 col-lg-2">Contact
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Contact
                                         Name</label>
-                                    <div class="col-sm-6 col-md-3">
+                                    <div class="col-sm-6 col-md-4">
                                         <input type="text" name="Name"
                                                class="form-control @error('Name') is-invalid @enderror"/>
 
@@ -144,8 +206,8 @@
 
                                 <!-- Contact Job Title -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Job Title</label>
-                                    <div class="col-sm-6 col-md-2">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Job Title</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <input type="text" name="JobTitle"
                                                class="form-control @error('JobTitle') is-invalid @enderror"/>
 
@@ -157,8 +219,8 @@
                                     </div>
 
 
-                                    <label class="col-form-label text-md-right col-6 col-md-2 col-lg-2">Email</label>
-                                    <div class="col-sm-6 col-md-3">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Email</label>
+                                    <div class="col-sm-6 col-md-4">
                                         <input type="text" name="Email"
                                                class="form-control @error('Email') is-invalid @enderror"/>
 
@@ -173,47 +235,10 @@
 
 
 
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone
-                                        Type</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control @error('PhoneTypeId') is-invalid @enderror"
-                                                name="PhoneTypeId" id="phonetypes">
-                                            @foreach($phoneTypes as $id => $value)
-                                                <option
-                                                    value="{{$id}}">{{$value}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('PhoneTypeId')
-                                        <div class="invalid-feedback">
-                                            <p>{{ $errors->first('PhoneTypeId') }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
-                                <!-- Contact Phone Number -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone
-                                        Number</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="number" name="PhoneNumber"
-
-                                               class="form-control @error('PhoneNumber') is-invalid @enderror"/>
-
-                                        @error('PhoneNumber')
-                                        <div class="invalid-feedback">
-                                            <p>{{ $errors->first('PhoneNumber') }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
                                 <!-- Contact Comments -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Comments</label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Comments</label>
+                                    <div class="col-sm-12 col-md-9">
                                         <input type="text" name="Comments"
                                                class="form-control @error('Comments') is-invalid @enderror"/>
 
@@ -227,8 +252,8 @@
 
 
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                    <div class="col-sm-12 col-md-7">
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1"></label>
+                                    <div class="col-sm-12 col-md-9">
                                         <button type="submit" class="btn btn-primary">Add</button>
                                     </div>
                                 </div>

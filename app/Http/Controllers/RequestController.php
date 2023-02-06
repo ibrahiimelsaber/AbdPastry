@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\My;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
@@ -21,7 +21,20 @@ class RequestController extends Controller
             ->with('requests', $requests)
             ->with('contact', $contact)
             ->with('total', $requests->total())
-            ->with('indexUrl', route('my.accounts.contact.requests', $id));
+            ->with('indexUrl', route('accounts.contact.requests', $id));
+    }
+
+    public function all()
+    {
+
+//        dd(\App\Models\Request::with('contact')->where('Id',582495)->first());
+        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->orderBy('Created','desc')->paginate(30);
+//        dd($requests);
+
+        return view('requests.index')
+            ->with('requests', $requests)
+            ->with('total', $requests->total())
+            ->with('indexUrl', route('all.requests'));
     }
 
 

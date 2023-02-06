@@ -8,8 +8,7 @@
         <div class="section-header">
             <h1 class="ml-2">Manage All Contacts</h1>
             <h1 class="ml-2">||</h1>
-    <a href="{{route('all.accounts')}}" class="ml-2 btn btn-primary">Return Back</a>
-
+<button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
 
 
 
@@ -61,6 +60,13 @@
                                                             <a href="{{route('all.accounts.contacts.edit',$contact->Id)}}"
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Contact</i>
                                                             </a>
+
+
+                                                            <a href="{{route('all.accounts.contact.requests',$contact->Id)}}"
+                                                               class="btn btn-warning"><i class="fa fa-edit">Service Requests</i>
+                                                            </a>
+
+
 
                                                     </td>
 

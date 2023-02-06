@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\My;
+namespace App\Http\Controllers\All;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
@@ -21,7 +21,7 @@ class RequestController extends Controller
             ->with('requests', $requests)
             ->with('contact', $contact)
             ->with('total', $requests->total())
-            ->with('indexUrl', route('my.accounts.contact.requests', $id));
+            ->with('indexUrl', route('accounts.contact.requests', $id));
     }
 
 

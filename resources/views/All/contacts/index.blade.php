@@ -1,14 +1,14 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage My Contacts')
+@section('title','Manage All Contacts')
 
 @section('content')
     <section class="section">
 
         <div class="section-header">
-            <h1 class="ml-2">Manage My Contacts</h1>
+            <h1 class="ml-2">Manage All Contacts</h1>
             <h1 class="ml-2">||</h1>
-    <a href="{{route('my.accounts')}}" class="ml-2 btn btn-primary">Return Back</a>
+<button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
 
 
 
@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>My Contacts <span>({{ $total }})</span></h4>
+                                <h4>All Contacts <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
 {{--                                        <a href="{{route('my.accounts.contacts.create')}}"--}}
 {{--                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Contact</a>--}}
@@ -60,6 +60,12 @@
                                                             <a href="{{route('all.accounts.contacts.edit',$contact->Id)}}"
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Contact</i>
                                                             </a>
+
+
+                                                            <a href="{{route('accounts.contact.requests',$contact->Id)}}"
+                                                               class="btn btn-warning"><i class="fa fa-edit">Service Requests</i>
+                                                            </a>
+
 
                                                     </td>
 

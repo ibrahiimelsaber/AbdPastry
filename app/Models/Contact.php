@@ -30,5 +30,9 @@ class Contact extends Model
         return $this->belongsTo(Picklist::class,'PhoneTypeId','Id');
     }
 
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
 
 }

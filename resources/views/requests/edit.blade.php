@@ -1,13 +1,13 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Create Service Request')
+@section('title','Edit Service Request')
 
 @section('content')
     <section class="section">
         <div class="section-header">
             <h1>Add Service Request</h1>
             <h1 class="ml-2">|| </h1>
-            <a href="{{route('accounts.contact.requests',$contact->Id)}}"
+            <a href="{{route('my.accounts.contact.requests',$contact->Id)}}"
                class="ml-2 btn btn-primary">Go To Service Requests</a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
@@ -20,10 +20,10 @@
                     @include('dashboard.common._alert_message')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Add a New Service Request</h4>
+                            <h4>Update Service Request</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('accounts.contact.requests.store') }}"
+                            <form method="POST" action="{{ route('my.accounts.contact.requests.store') }}"
                                   enctype="multipart/form-data">
                                 @csrf
 

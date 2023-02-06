@@ -1,13 +1,13 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage My Service Requests')
+@section('title','Manage  Service Requests')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1 class="ml-2">Manage My Service Requests</h1>
+            <h1 class="ml-2">Manage  Service Requests</h1>
             <h1 class="ml-2">||</h1>
-    <a href="{{route("my.accounts.contacts.show",$contact->AccountId)}}" class="ml-2 btn btn-primary">Go To Contact</a>
+    <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
 
 
             <div class="section-header-breadcrumb">
@@ -21,11 +21,12 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>My Service Requests <span>({{ $total }})</span></h4>
+                                <h4> Service Requests <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
-                                        <a href="{{route('my.accounts.contact.requests.create',$contact->Id)}}"
+    @if(isset($contact))
+                                        <a href="{{route('accounts.contact.requests.create',$contact->Id)}}"
                                            class="btn btn-primary"><i class="fas fa-plus"></i> Add New Service Request</a>
-
+@endif
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -34,6 +35,7 @@
                                         <table class="table table-responsive-sm table-hover table-outline">
                                             <thead>
                                             <tr>
+{{--                                                <th>Contact Id</th>--}}
                                                 <th>Contact Name</th>
                                                 <th>Request Id</th>
                                                 <th>Request Type</th>
@@ -48,6 +50,7 @@
                                             @foreach($requests as $request)
                                                 <tr>
 
+{{--                                                    <td>{{ optional($request->contact)->Id }}</td>--}}
                                                     <td>{{ optional($request->contact)->Name }}</td>
                                                     <td>{{ $request->Id }}</td>
                                                     <td>{{ optional($request->type)->Name }}</td>
@@ -58,13 +61,14 @@
 
                                                     <td>
 
-                                                            <a href="{{route('my.accounts.edit',$request->Id)}}"
+                                                            <a href="{{route('accounts.contact.requests.edit',$request->Id)}}"
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update SR</i>
                                                             </a>
 
                                                             <a href="{{route('my.accounts.contacts.show',$request->Id)}}"
                                                                class="btn btn-warning"><i class="fa fa-eye"> Activites</i>
                                                             </a>
+                                        <a href="{{route('accounts.contact.requests.create',optional($request->contact)->Id)}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Service Request</a>
 
                                                     </td>
 
