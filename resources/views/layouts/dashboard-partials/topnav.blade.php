@@ -44,9 +44,10 @@
 {{--    <img alt="image" src="{{ Auth::user()->avatarlink }}" class="rounded-circle mr-1">--}}
     <div class="d-sm-none d-lg-inline-block">Hi, {{ session('userName') }}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
-      <div class="dropdown-title">Welcome,  {{ session('userName') }}</div>
-      <a href="" class="dropdown-item has-icon">
-        <i class="far fa-user"></i> Profile Settings
+{{--      <div class="dropdown-title"> {{ session('userName') }}</div>--}}
+      <div class="dropdown-title"> {{ session('GroupId') == 1 ? 'Agent' : 'Team Leader'}}</div>
+      <a href="" class="dropdown-item has-icon disabled">
+        <i class="far fa-user"></i> {{ session('userName') }}
       </a>
       <div class="dropdown-divider"></div>
       <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"

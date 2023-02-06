@@ -9,6 +9,8 @@
             <h1 class="ml-2">Manage All Contacts</h1>
             <h1 class="ml-2">||</h1>
 <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
+        <button class="ml-2 btn btn-outline-light" onclick="window.location.reload()"> Reload Page</button>
+
 
 
 

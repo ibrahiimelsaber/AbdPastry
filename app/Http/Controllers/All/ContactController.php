@@ -236,6 +236,8 @@ class ContactController extends Controller
                     'AgeId' => $inputs['AgeId'],
                     'Email' => $inputs['Email'],
                     'JobTitle' => $inputs['JobTitle'],
+                    'ModifiedOn' => now(),
+                    'ModifiedBy' => session('userName'),
                 ]);
 
             return redirect()->to(route('all.accounts.contacts.show',$accountId))->with('message', 'Contact is updated successfully')->with('class', 'alert-success');

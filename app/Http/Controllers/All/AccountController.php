@@ -266,6 +266,9 @@ class AccountController extends Controller
                     'CityId' => $inputs['CityId'],
                     'DistrictId' => $inputs['DistrictId'],
                     'call_source' => $inputs['call_source'],
+                    'ModifiedOn' => now(),
+                    'ModifiedBy' => session('userName'),
+
                 ]);
 
             return redirect()->back()->with('message', 'Account is updated successfully')->with('class', 'alert-success');

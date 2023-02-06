@@ -168,7 +168,7 @@
                                                 name="ComplaintTypeId" id="ComplaintTypeId">
                                             @foreach($complaintsTypes as $id => $value)
                                                 <option
-                                                {{optional($request->complaintType)->Id==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
+                                                {{$request->complaintType->Id==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('ComplaintTypeId')

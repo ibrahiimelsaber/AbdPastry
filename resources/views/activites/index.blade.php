@@ -1,11 +1,11 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage  Service Requests')
+@section('title','Manage Activities')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1 class="ml-2">Manage  Service Requests</h1>
+            <h1 class="ml-2">Manage Activities</h1>
             <h1 class="ml-2">||</h1>
     <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
     <button class="ml-2 btn btn-outline-light" onclick="window.location.reload()"> Reload Page</button>
@@ -22,7 +22,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4> Service Requests <span>({{ $total }})</span></h4>
+                                <h4>Activities <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
     @if(isset($contact))
                                         <a href="{{route('accounts.contact.requests.create',$contact->Id)}}"
@@ -44,7 +44,7 @@
                                                 <th>Request Status</th>
                                                 <th>Created On</th>
                                                 <th>Created By</th>
-                                                <th class="text-center">Actions</th>
+                                                <th>Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -52,7 +52,6 @@
                                                 <tr>
 
 {{--                                                    <td>{{ optional($request->contact)->Id }}</td>--}}
-
                                                     <td>{{ optional($request->contact)->Name }}</td>
                                                     <td>{{ $request->Id }}</td>
                                                     <td>{{ optional($request->type)->Name }}</td>
@@ -64,18 +63,13 @@
                                                     <td>
 
                                                             <a href="{{route('accounts.contact.requests.edit',$request->Id)}}"
-                                                               class="btn btn-primary"><i class="fa fa-edit"> Update</i>
+                                                               class="btn btn-primary"><i class="fa fa-edit"> Update SR</i>
                                                             </a>
-
-                                                            <a href="{{route('request.history',$request->Id)}}"
-                                                               class="btn btn-info"><i class="fa fa-history"> History</i>
-                                                                </a>
-
 
                                                             <a href="{{route('my.accounts.contacts.show',$request->Id)}}"
                                                                class="btn btn-warning"><i class="fa fa-eye"> Activites</i>
                                                             </a>
-{{--                                        <a href="{{route('accounts.contact.requests.create',optional($request->contact)->Id)}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New SR</a>--}}
+                                        <a href="{{route('accounts.contact.requests.create',optional($request->contact)->Id)}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New SR</a>
 
                                                     </td>
 

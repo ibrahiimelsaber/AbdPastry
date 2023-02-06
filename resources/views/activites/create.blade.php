@@ -1,14 +1,14 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Edit Service Request')
+@section('title','Create Service Request')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Update Service Request</h1>
+            <h1>Add Service Request</h1>
             <h1 class="ml-2">|| </h1>
-            <a href="{{route('accounts.contact.requests',$request->contact->Id)}}"
-               class="ml-2 btn btn-primary">Return Back</a>
+            <a href="{{route('accounts.contact.requests',$contact->Id)}}"
+               class="ml-2 btn btn-primary">Go To Service Requests</a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
             </div>
@@ -20,18 +20,15 @@
                     @include('dashboard.common._alert_message')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Update Service Request</h4>
+                            <h4>Add a New Service Request</h4>
                         </div>
                         <div class="card-body">
-
-                            <form method="POST" action="{{ route('accounts.contact.requests.update') }}"
+                            <form method="POST" action="{{ route('accounts.contact.requests.store') }}"
                                   enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
 
 
-                                <input type="hidden" name="ContactId" value="{{$request->contact->Id}}">
-                                <input type="hidden" name="sr_id" value="{{$request->Id}}">
+                                <input type="hidden" name="ContactId" value="{{$contact->Id}}">
 
 
                                 <!--Status and Direction-->
@@ -42,7 +39,7 @@
                                                 name="StatusId" id="StatusId">
                                             @foreach($status as $id => $value)
                                                 <option
-                                                    {{$request->status->Id==$id?' selected ':''}}    value="{{$id}}">{{$value}}</option>
+                                                    value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('StatusId')
@@ -58,7 +55,7 @@
                                                 name="CallDirectionId" id="CallDirectionId">
                                             @foreach($directions as $id => $value)
                                                 <option
-                                                    {{$request->callDirection->Id==$id?' selected ':''}}   value="{{$id}}">{{$value}}</option>
+                                                    value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('CallDirectionId')
@@ -79,7 +76,7 @@
                                             <option hidden>Choose Sr Type</option>
                                             @foreach($srTypes as $id => $value)
                                                 <option
-                                                    {{$request->type->Id==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
+                                                    value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('TypeId')
@@ -92,11 +89,7 @@
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1">SR Sub Type</label>
                                     <div class="col-sm-6 col-md-4">
                                         <select class="form-control @error('SubTypeId') is-invalid @enderror"
-                                                name="SubTypeId" id="SubTypeId">
-
-                                            <option value="{{optional($request->subType)->Id}}">{{optional($request->subType)->Name}}</option>
-
-                                        </select>
+                                                name="SubTypeId" id="SubTypeId"></select>
                                         @error('SubTypeId')
                                         <div class="invalid-feedback">
                                             <p>{{ $errors->first('SubTypeId') }}</p>
@@ -111,10 +104,7 @@
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1">SR Sub Sub Type</label>
                                     <div class="col-sm-12 col-md-9">
                                         <select class="form-control @error('SubSubType') is-invalid @enderror"
-                                                name="SubSubType" id="SubSubType">
-                                            <option value="{{optional($request->subProduct)->Id}}">{{optional($request->subProduct)->Name}}</option>
-
-                                        </select>
+                                                name="SubSubType" id="SubSubType"></select>
 
                                         @error('SubSubType')
                                         <div class="invalid-feedback">
@@ -134,7 +124,7 @@
                                             <option hidden>Choose Product</option>
                                             @foreach($products as $id => $value)
                                                 <option
-                                                    {{$request->product->Id==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
+                                                    value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('ProductId')
@@ -148,7 +138,6 @@
                                     <div class="col-sm-6 col-md-4">
                                         <select class="form-control @error('SubProductId') is-invalid @enderror"
                                                 name="SubProductId" id="SubProductId">
-                                            <option value="{{optional($request->subProduct)->Id}}">{{optional($request->subProduct)->Name}}</option>
 
                                         </select>
                                         @error('SubProductId')
@@ -168,7 +157,7 @@
                                                 name="ComplaintTypeId" id="ComplaintTypeId">
                                             @foreach($complaintsTypes as $id => $value)
                                                 <option
-                                                {{optional($request->complaintType)->Id==$id?' selected ':''}} value="{{$id}}">{{$value}}</option>
+                                                    value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('ComplaintTypeId')
@@ -184,7 +173,7 @@
                                                 name="BranchId" id="BranchId">
                                             @foreach($branches as $id => $value)
                                                 <option
-                                                {{$request->branch->Id==$id?' selected ':''}}  value="{{$id}}">{{$value}}</option>
+                                                    value="{{$id}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                         @error('BranchId')
@@ -200,7 +189,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1">Customer Comments</label>
                                     <div class="col-sm-12 col-md-9">
-                                        <input type="text" name="CustomerComments" value="{{old('CustomerComments', $request->CustomerComments)}}"
+                                        <input type="text" name="CustomerComments"
                                                class="form-control @error('CustomerComments') is-invalid @enderror"/>
 
                                         @error('CustomerComments')
@@ -215,7 +204,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1">Agent Comments</label>
                                     <div class="col-sm-12 col-md-9">
-                                        <input type="text" name="AgentComments" value="{{old('AgentComments', $request->AgentComments)}}"
+                                        <input type="text" name="AgentComments"
                                                class="form-control @error('AgentComments') is-invalid @enderror"/>
 
                                         @error('AgentComments')
@@ -229,7 +218,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1"></label>
                                     <div class="col-sm-12 col-md-9">
-                                        <button type="submit" class="btn btn-primary">Update Service Request</button>
+                                        <button type="submit" class="btn btn-primary">Save New Service Request</button>
                                     </div>
                                 </div>
                             </form>

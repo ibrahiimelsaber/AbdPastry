@@ -67,6 +67,8 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
 //sr routes
 Route::get('account/contacts/{id}/requests', [RequestController::class, 'index'])->name('accounts.contact.requests');
 Route::get('requests', [RequestController::class, 'all'])->name('all.requests');
+Route::get('request/{id}/history', [RequestController::class, 'history'])->name('request.history');
 Route::get('account/contacts/{id}/requests/create', [RequestController::class, 'create'])->name('accounts.contact.requests.create');
-Route::get('account/contacts/{id}/requests/edit', [RequestController::class, 'edit'])->name('accounts.contact.requests.edit');
+Route::get('account/contacts/requests/{id}/edit', [RequestController::class, 'edit'])->name('accounts.contact.requests.edit');
 Route::post('account/contacts/requests/store', [RequestController::class, 'store'])->name('accounts.contact.requests.store');
+Route::put('account/contacts/requests/update', [RequestController::class, 'update'])->name('accounts.contact.requests.update');

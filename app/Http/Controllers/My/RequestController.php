@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use  App\Models\Request as SR;
+use  App\Models\RequestHistory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +24,10 @@ class RequestController extends Controller
             ->with('total', $requests->total())
             ->with('indexUrl', route('my.accounts.contact.requests', $id));
     }
+
+
+
+
 
 
     public function create($id)

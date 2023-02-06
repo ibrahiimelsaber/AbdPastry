@@ -50,7 +50,7 @@
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1">Account
                                         Name</label>
                                     <div class="col-sm-12 col-md-9">
-                                        <input type="text"  value="{{old('Name',$contact->account->Name)}}"
+                                        <input type="text"  value="{{old('Name',optional($contact->account)->Name)}}"
                                                class="form-control @error('Name') is-invalid @enderror" disabled/>
 
                                         @error('Name')
@@ -65,7 +65,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1">Account Type</label>
                                     <div class="col-sm-12 col-md-9">
-                                        <input type="text"  value="{{$contact->account->Type->Name}}"
+                                        <input type="text"  value="{{optional($contact->account)->Type->Name ?? ''}}"
                                                class="form-control @error('AccountTypeId') is-invalid @enderror" disabled/>
 
                                         @error('AccountTypeId')
