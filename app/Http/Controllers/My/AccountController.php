@@ -175,8 +175,8 @@ class AccountController extends Controller
             'PhoneTypeId' => 'required',
             'PhoneNumber' => 'required|min:10',
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
-            'GenderId' => 'required',
-            'CityId' => 'required',
+            'GenderId' => 'sometimes',
+            'CityId' => 'sometimes',
             'DistrictId' => 'sometimes',
             'AreaId' => 'sometimes',
             'call_source' => 'required',
@@ -189,7 +189,7 @@ class AccountController extends Controller
                 ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
         }
 
-     
+
 
         $account = DB::table('accounts')
             ->where('Id', '=', $id)
@@ -219,7 +219,7 @@ class AccountController extends Controller
             if (isset($request->GenderId)) {
                 $inputs['GenderId'] = $request->GenderId;
             } else {
-                $inputs['GenderId'] = $account->GenderId;
+                $inputs['GenderId'] = $account->GenderId ?? 0;
             }
             if (isset($request->Address)) {
                 $inputs['Address'] = $request->Address;
@@ -230,20 +230,20 @@ class AccountController extends Controller
                 $inputs['CityId'] = $request->CityId;
 
             } else {
-                $inputs['CityId'] = $account->CityId;
+                $inputs['CityId'] = $account->CityId ?? 0;
             }
             if (isset($request->AreaId)) {
                 $inputs['AreaId'] = $request->AreaId;
 
             } else {
-                $inputs['AreaId'] = $account->AreaId;
+                $inputs['AreaId'] = $account->AreaId ?? 0;
             }
 
             if (isset($request->DistrictId)) {
                 $inputs['DistrictId'] = $request->DistrictId;
 
             } else {
-                $inputs['DistrictId'] = $account->DistrictId;
+                $inputs['DistrictId'] = $account->DistrictId ?? 0;
             }
 
 

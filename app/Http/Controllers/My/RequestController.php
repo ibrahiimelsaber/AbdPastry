@@ -72,7 +72,7 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //TODO Create Service Request Store IN DB HAHA
     }
 
     /**
