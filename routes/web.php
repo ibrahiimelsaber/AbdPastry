@@ -7,6 +7,7 @@ use App\Http\Controllers\All\AccountController as AllAccounts;
 use App\Http\Controllers\All\ContactController as AllContacts;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\Route;
 
@@ -78,10 +79,30 @@ Route::put('account/contacts/requests/update', [RequestController::class, 'updat
 //sr activity routes
 Route::get('account/contacts/requests/{id}/activities', [ActivityController::class, 'index'])->name('accounts.contact.requests.activities');
 Route::get('account/contacts/requests/activities/{id}/create', [ActivityController::class, 'create'])->name('accounts.contact.requests.activities.create');
-Route::get('account/contacts/requests/activities/{id}edit', [ActivityController::class, 'edit'])->name('accounts.contact.requests.activities.edit');
+Route::get('account/contacts/requests/activities/{id}/edit', [ActivityController::class, 'edit'])->name('accounts.contact.requests.activities.edit');
 Route::post('account/contacts/requests/activities/store', [ActivityController::class, 'store'])->name('accounts.contact.requests.activities.store');
-Route::put('account/contacts/requests/activities/update', [ActivityController::class, 'update'])->name('accounts.contact.requests.activities.update');
+Route::put('account/contacts/requests/activities/{id}/update', [ActivityController::class, 'update'])->name('accounts.contact.requests.activities.update');
 
-Route::get('st',function (){
-    return view('st');
-});
+//Route::get('st',function (){
+//    return view('login1');
+//});
+
+
+
+//user managements routes
+
+Route::get('users',[UserController::class,'index'])->name('users.index');
+Route::get('users/create',[UserController::class,'create'])->name('users.create');
+Route::post('users/store',[UserController::class,'store'])->name('users.store');
+Route::get('users/{id}/edit',[UserController::class,'edit'])->name('users.edit');
+Route::put('users/{id}/update',[UserController::class,'update'])->name('users.update');
+Route::get('users/{id}/deactivate',[UserController::class,'deactivate'])->name('users.deactivate');
+Route::get('users/{id}/activate',[UserController::class,'activate'])->name('users.activate');
+
+
+
+Route::get('my/activities',[ActivityController::class,'my'])->name('activities.my');
+Route::get('activities',[ActivityController::class,'all'])->name('activities.all');
+Route::get('activities/{id}/edit',[ActivityController::class,'editAll'])->name('activities.all.edit');
+Route::get('my/activities/{id}/edit',[ActivityController::class,'editMy'])->name('activities.my.edit');
+

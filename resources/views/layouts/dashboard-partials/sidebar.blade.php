@@ -61,7 +61,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('all.requests')}}">Activities</a>
+                    <a class="nav-link" href="{{route('activities.my')}}">Activities</a>
                 </li>
 
 
@@ -118,9 +118,22 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('all.requests')}}">Activities</a>
+                    <a class="nav-link" href="{{route('activities.all')}}">Activities</a>
                 </li>
 
+
+            </ul>
+        </li>
+
+        <li class="menu-header">Management</li>
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fa fa-user"></i> <span>Users Management</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="nav-link" href="{{route('users.index')}}">Users</a>
+                </li>
 
             </ul>
         </li>
