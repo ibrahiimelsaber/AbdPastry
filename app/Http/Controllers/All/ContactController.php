@@ -21,7 +21,7 @@ class ContactController extends Controller
             ->paginate(20);
 
 
-        return view('All.contacts.index')
+        return view('all.contacts.index')
             ->with('contacts', $contacts)
             ->with('total', $contacts->total())
             ->with('indexUrl', route('all.accounts.contacts'));
@@ -131,7 +131,7 @@ class ContactController extends Controller
             ->paginate(20);
 
 
-        return view('All.accounts.contacts.index')
+        return view('all.accounts.contacts.index')
             ->with('contacts', $contacts)
             ->with('accountId', $id)
             ->with('total', $contacts->total())
@@ -162,7 +162,7 @@ class ContactController extends Controller
             ->pluck('name', 'id');
 
 
-        return view('All.accounts.contacts.edit')
+        return view('all.accounts.contacts.edit')
             ->with('contact', $contact)
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)

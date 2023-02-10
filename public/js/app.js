@@ -7324,7 +7324,7 @@ function Sizzle( selector, context, results, seed ) {
 		}
 	}
 
-	// All others
+	// all others
 	return select( selector.replace( rtrim, "$1" ), context, results, seed );
 }
 
@@ -7462,7 +7462,7 @@ function createDisabledPseudo( disabled ) {
 			//   https://html.spec.whatwg.org/multipage/forms.html#concept-fe-disabled
 			// * option elements in a disabled optgroup
 			//   https://html.spec.whatwg.org/multipage/forms.html#concept-option-disabled
-			// All such elements have a "form" property.
+			// all such elements have a "form" property.
 			if ( elem.parentNode && elem.disabled === false ) {
 
 				// Option elements defer to a parent optgroup if present
@@ -10240,7 +10240,7 @@ jQuery.extend( {
 			func.call( deferred, deferred );
 		}
 
-		// All done!
+		// all done!
 		return deferred;
 	},
 
@@ -36232,7 +36232,7 @@ function inner(data) {
  * needed by the library.
  *
  * Usually you don't want to override the `order`, `fn` and `onLoad` props.
- * All the other properties are configurations that could be tweaked.
+ * all the other properties are configurations that could be tweaked.
  * @namespace modifiers
  */
 var modifiers = {
@@ -36523,7 +36523,7 @@ var modifiers = {
   /**
    * Applies the computed styles to the popper element.
    *
-   * All the DOM manipulations are limited to this modifier. This is useful in case
+   * all the DOM manipulations are limited to this modifier. This is useful in case
    * you want to integrate Popper.js inside a framework or view library and you
    * want to delegate all the DOM manipulations to it.
    *
@@ -42802,7 +42802,7 @@ var getNow = Date.now;
 // timestamp can either be hi-res (relative to page load) or low-res
 // (relative to UNIX epoch), so in order to compare time we have to use the
 // same timestamp type when saving the flush timestamp.
-// All IE versions use low-res event timestamps, and have problematic clock
+// all IE versions use low-res event timestamps, and have problematic clock
 // implementations (#9632)
 if (inBrowser && !isIE) {
   var performance = window.performance;
@@ -49526,7 +49526,7 @@ function genElement (el, state) {
 function genStatic (el, state) {
   el.staticProcessed = true;
   // Some elements (templates) need to behave differently inside of a v-pre
-  // node.  All pre nodes are static roots, so we can use this as a location to
+  // node.  all pre nodes are static roots, so we can use this as a location to
   // wrap a state change and reset it upon exiting the pre node.
   var originalPreState = state.pre;
   if (el.pre) {
@@ -50911,7 +50911,7 @@ function () {
 
     this.defaultObject = {
       id: undefined,
-      name: '-- All --'
+      name: '-- all --'
     };
     this.countries = [];
     this.init();
@@ -50976,7 +50976,7 @@ function () {
                 _context2.t0 = [this.defaultObject];
                 _context2.t1 = _toConsumableArray;
                 _context2.next = 4;
-                return Object(_commons_NetworkService__WEBPACK_IMPORTED_MODULE_1__["fetchData"])(this.urlPrefix + 'json/My');
+                return Object(_commons_NetworkService__WEBPACK_IMPORTED_MODULE_1__["fetchData"])(this.urlPrefix + 'json/my');
 
               case 4:
                 _context2.t2 = _context2.sent;

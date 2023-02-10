@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('title','All Sessions')
+@section('title','all Sessions')
 
 @section('content')
     <section class="section">

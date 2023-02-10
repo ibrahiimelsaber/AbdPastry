@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage All Accounts')
+@section('title','Manage all accounts')
 
 @section('content')
     <section class="section">

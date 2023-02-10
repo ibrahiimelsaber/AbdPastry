@@ -22,7 +22,7 @@
                             <h4>Add a New Contact</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('my.accounts.contacts.store') }}"
+                            <form method="POST" action="{{ route('my.account.contacts.store') }}"
                                   enctype="multipart/form-data">
                                 @csrf
 
@@ -30,7 +30,7 @@
 
                                 <!--Account Id-->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Contact
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Account
                                         Id</label>
                                     <div class="col-sm-12 col-md-9">
                                         <input type="text"  value="{{old('Id',$account->Id)}}"

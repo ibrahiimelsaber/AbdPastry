@@ -1,16 +1,22 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="#">{{config('app.name')}}</a>
+{{--        <a href="#">Al-abd</a>--}}
+{{--        <img src="{{asset('assets/img/rayacx.jpg')}}" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">--}}
+        <img src="{{asset('assets/img/rayacx.jpg')}}" alt="logo" width="80" height="75" class="shadow-light rounded-circle mb-3 mt-2">
+        <img src="{{asset('assets/img/abd-logo.jpg')}}" alt="logo" width="85" class="shadow-light rounded-circle mb-3 mt-2">
+        <h6>Al- Abd Foods</h6>
+        <span class="mt-2"></span>
     </div>
-    <div class="sidebar-brand sidebar-brand-sm">
-        <a href="#">P</a>
-    </div>
+{{--    <div class="sidebar-brand sidebar-brand-sm">--}}
+{{--        <a href="#">P</a>--}}
+{{--    </div>--}}
     <ul class="sidebar-menu">
-        <li class="{{ Request::route()->getName() === 'dashboard.index' ? ' active' : '' }}">
-            <a class="nav-link" href="#">
-                <i class="fa fa-hamburger"></i> <span>Al-Abd Pastry</span>
-            </a>
-        </li>
+{{--        <li class="{{ Request::route()->getName() === 'dashboard.index' ? ' active' : '' }}">--}}
+{{--            <a class="nav-link" href="#">--}}
+{{--                <i class="fa fa-hamburger"></i> <span>Al-Abd Pastry</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
+
 
         <li class="menu-header">My Actions</li>
         <li class="dropdown">
@@ -19,7 +25,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="nav-link" href="{{route('my.accounts')}}">Accounts</a>
+                    <a class="nav-link" href="{{route('my.accounts.index')}}">Accounts</a>
                 </li>
 
             </ul>
@@ -32,7 +38,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="nav-link" href="{{route('my.contacts')}}">Contacts</a>
+                    <a class="nav-link" href="{{route('my.contacts.index')}}">Contacts</a>
                 </li>
 
 
@@ -47,7 +53,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('all.requests')}}">Service Requests</a>
+                    <a class="nav-link" href="{{route('my.requests.index')}}">Service Requests</a>
                 </li>
 
 
@@ -61,7 +67,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('activities.my')}}">Activities</a>
+                    <a class="nav-link" href="{{route('my.activities.index')}}">Activities</a>
                 </li>
 
 
@@ -75,7 +81,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="nav-link" href="{{route('all.accounts')}}">Accounts</a>
+                    <a class="nav-link" href="{{route('all.accounts.index')}}">Accounts</a>
                 </li>
 
 
@@ -89,7 +95,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('all.contacts')}}">Contacts</a>
+                    <a class="nav-link" href="{{route('all.contacts.index')}}">Contacts</a>
                 </li>
 
 
@@ -104,7 +110,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('all.requests')}}">Service Requests</a>
+                    <a class="nav-link" href="{{route('all.requests.index')}}">Service Requests</a>
                 </li>
 
 
@@ -118,7 +124,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a class="nav-link" href="{{route('activities.all')}}">Activities</a>
+                    <a class="nav-link" href="{{route('all.activities.index')}}">Activities</a>
                 </li>
 
 

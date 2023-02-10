@@ -7,7 +7,7 @@
         <div class="section-header">
             <h1>Update Activity</h1>
             <h1 class="ml-2">|| </h1>
-            <a href="{{route('activities.all')}}"
+            <a href="{{route('all.activities.index')}}"
                class="ml-2 btn btn-primary">Return Back</a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('accounts.contact.requests.activities.update', $activity->Id) }}"
+                            <form method="POST" action="{{ route('all.activities.update', $activity->Id) }}"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')

@@ -135,7 +135,7 @@ class ContactController extends Controller
             ->orderBy('contacts.CreatedOn', 'desc')
             ->paginate(20);
 
-        return view('My.accounts.contacts.index')
+        return view('my.accounts.contacts.index')
             ->with('contacts', $contacts)
             ->with('accountId', $id)
             ->with('total', $contacts->total())
@@ -166,7 +166,7 @@ class ContactController extends Controller
             ->pluck('name', 'id');
 
 
-        return view('My.accounts.contacts.edit')
+        return view('my.accounts.contacts.edit')
             ->with('contact', $contact)
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)

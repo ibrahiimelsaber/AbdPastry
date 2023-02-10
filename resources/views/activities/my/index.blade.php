@@ -6,10 +6,6 @@
     <section class="section">
         <div class="section-header">
             <h1 class="ml-2">Manage Activities</h1>
-            <h1 class="ml-2">||</h1>
-    <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
-    <button class="ml-2 btn btn-outline-light" onclick="window.location.reload()"> Reload Page</button>
-
 
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
@@ -55,7 +51,7 @@
                                                     <td>{{ $activity->Created }}</td>
                                                     <td>{{ $activity->CreatedBy }}</td>
                                                     <td>
-                                                            <a href="{{route('activities.my.edit',$activity->Id)}}"
+                                                            <a href="{{route('my.activities.edit',$activity->Id)}}"
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Activity</i>
                                                             </a>
                                                     </td>

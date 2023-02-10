@@ -38,7 +38,7 @@ class LoginController extends Controller
             Session::put('userName', $user->Username);
             Session::put('GroupId', $user->GroupId);
             Session::put('user', $user);
-            return redirect()->route('my.accounts');
+            return redirect()->route('my.accounts.index');
         }
 
         return back()->withErrors([

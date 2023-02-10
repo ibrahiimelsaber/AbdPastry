@@ -27,7 +27,7 @@ return [
     | supported by Laravel is shown below to make development simple.
     |
     |
-    | All database work in Laravel is done through the PHP PDO facilities
+    | all database work in Laravel is done through the PHP PDO facilities
     | so make sure you have the driver for your particular database of
     | choice installed on your machine before you begin development.
     |
@@ -81,16 +81,25 @@ return [
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'Dtdb\wfmsql'),
+            'database' => env('DB_DATABASE', 'RCCEmail_Service'),
+            'username' => env('DB_USERNAME', 'Email'),
+            'password' => env('DB_PASSWORD', 'Email@123'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+        ],
+        'RCCEmailService' => [
+            'driver' => 'sqlsrv',
+            'host' => 'Dtdb\wfmsql',
+            'database' => 'RCCEmail_Service',
+            'username' => 'Email',
+            'password' => 'Email@123',
+            'charset' => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'prefix' => '',
         ],
 
     ],

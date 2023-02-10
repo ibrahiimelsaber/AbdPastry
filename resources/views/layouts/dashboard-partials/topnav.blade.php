@@ -1,6 +1,6 @@
 <form class="form-inline mr-auto" action="#">
   <ul class="navbar-nav mr-3">
-{{--    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>--}}
+    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
 {{--<li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>--}}
   </ul>
 {{--<div class="search-element">--}}
@@ -17,7 +17,7 @@
     <div class="dropdown-menu dropdown-list dropdown-menu-right">
       <div class="dropdown-header">Notifications
         <div class="float-right">
-          <a href="#">Mark All As Read</a>
+          <a href="#">Mark all As Read</a>
         </div>
       </div>
       <div class="dropdown-list-content dropdown-list-icons">

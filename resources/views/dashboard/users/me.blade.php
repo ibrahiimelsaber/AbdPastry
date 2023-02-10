@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Edit My Profile '.$user->name)
+@section('title','Edit my Profile '.$user->name)
 
 @section('content')
     <section class="section">

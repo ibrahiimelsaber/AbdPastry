@@ -21,7 +21,7 @@ class AccountController extends Controller
             ->orderBy('accounts.CreatedOn', 'desc')->paginate(30);
 
 
-        return view('All.accounts.index')
+        return view('all.accounts.index')
             ->with('accounts', $accounts)
             ->with('total', $accounts->total())
             ->with('indexUrl', route('all.accounts'));
@@ -64,7 +64,7 @@ class AccountController extends Controller
              ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        return view('All.accounts.create')
+        return view('all.accounts.create')
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)
             ->with('cities', $cities)
@@ -173,7 +173,7 @@ class AccountController extends Controller
              ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        return view('All.accounts.edit')
+        return view('all.accounts.edit')
             ->with('account', $account)
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)

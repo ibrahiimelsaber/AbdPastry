@@ -28,6 +28,11 @@ class Account extends Model
         return $this->belongsTo(Picklist::class,'AccountTypeId','Id');
     }
 
+    public function city()
+    {
+        return $this->belongsTo(Picklist::class,'CityId','Id');
+    }
+
     public function area()
     {
         return $this->belongsTo(Picklist::class,'AreaId','Id');

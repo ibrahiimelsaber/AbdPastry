@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage My Contacts')
+@section('title','Manage my Contacts')
 
 @section('content')
     <section class="section">
