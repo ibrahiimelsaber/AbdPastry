@@ -25,7 +25,7 @@
                                 <h4>Activities <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
 
-                                        <a href="{{route('my.contact.request.activities.create',$sr->Id)}}"
+                                        <a href="{{route('my.request.activities.create',$sr->Id)}}"
                                            class="btn btn-primary"><i class="fas fa-plus"></i> Add New Activity</a>
 
                                 </div>
@@ -58,7 +58,7 @@
                                                     <td>{{ $activity->Created }}</td>
                                                     <td>{{ $activity->CreatedBy }}</td>
                                                     <td>
-                                                            <a href="{{route('my.contact.request.activities.edit',$activity->Id)}}"
+                                                            <a href="{{route('my.request.activities.edit',$activity->Id)}}"
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Activity</i>
                                                             </a>
                                                     </td>

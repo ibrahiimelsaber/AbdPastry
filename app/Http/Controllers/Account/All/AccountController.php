@@ -28,43 +28,38 @@ class AccountController extends Controller
     }
 
 
-    public function dashboard()
-    {
-        return view('pages.user-profile');
-    }
-
     public function create()
     {
 
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $phoneTypes = DB::table('picklists')
             ->where('Type', '=', 'PhoneType')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $cities = DB::table('picklists')
             ->where('Type', '=', 'City')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $districts = DB::table('picklists')
             ->where('Type', '=', 'Area')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $callSource = DB::table('picklists')
             ->where('Type', '=', 'callSource')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
-        return view('all.accounts.create')
+        return view('accounts.all.create')
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)
             ->with('cities', $cities)
@@ -79,14 +74,13 @@ class AccountController extends Controller
     {
         try {
             DB::beginTransaction();
-            $rules = [];
             $rules = [
                 'Name' => 'required|string',
                 'AccountTypeId' => 'required',
                 'PhoneTypeId' => 'required',
-                'PhoneNumber' => 'required|min:10',
+                'PhoneNumber' => 'sometimes',
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
-                'GenderId' => 'required',
+                'GenderId' => 'sometimes',
                 'CityId' => 'required',
                 'AreaId' => 'required',
                 'call_source' => 'required',
@@ -94,13 +88,13 @@ class AccountController extends Controller
             $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
-                return Redirect::to(route('my.accounts.create'))
+                return Redirect::to(route('all.accounts.create'))
                     ->withErrors($validator->errors())
                     ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
             }
 
 
-            $acc = DB::table('accounts')->insert(
+            DB::table('accounts')->insert(
                 [
                     'Name' => $request->Name,
                     'AccountTypeId' => $request->AccountTypeId,
@@ -120,7 +114,7 @@ class AccountController extends Controller
 
             DB::commit();
 
-            return redirect()->route('all.accounts')->with('message', 'Account is created successfully')->with('class', 'alert-success');
+            return redirect()->route('all.accounts.index')->with('message', 'Account is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();
@@ -147,30 +141,30 @@ class AccountController extends Controller
 
         $accountTypes = DB::table('picklists')
             ->where('Type', '=', 'AccountType')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $phoneTypes = DB::table('picklists')
             ->where('Type', '=', 'PhoneType')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $cities = DB::table('picklists')
             ->where('Type', '=', 'City')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $districts = DB::table('picklists')
             ->where('Type', '=', 'Area')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         $gender = DB::table('picklists')
             ->where('Type', '=', 'Gender')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
         $callSource = DB::table('picklists')
             ->where('Type', '=', 'callSource')
-             ->where('Active', '=', '1')
+            ->where('Active', '=', '1')
             ->pluck('name', 'id');
 
         return view('accounts.all.edit')
@@ -188,9 +182,9 @@ class AccountController extends Controller
     {
         $rules = [
             'Name' => 'required|string',
-            'AccountTypeId' => 'required',
-            'PhoneTypeId' => 'required',
-            'PhoneNumber' => 'required|min:10',
+            'AccountTypeId' => 'sometimes',
+            'PhoneTypeId' => 'sometimes',
+            'PhoneNumber' => 'sometimes',
 //                'PhoneNumber' => 'required|min:10|unique:accounts,PhoneNumber',
             'GenderId' => 'sometimes',
             'CityId' => 'sometimes',
@@ -201,7 +195,7 @@ class AccountController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to(route('my.accounts.edit',$id))
+            return Redirect::to(route('all.accounts.edit', $id))
                 ->withErrors($validator->errors())
                 ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
         }
@@ -300,5 +294,65 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), ['search' => 'required']);
+
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator->errors())
+                ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
+        }
+        if (isset($request->search) && $request->search != "") {
+
+            $payload = trim($request['search']);
+
+            $accounts = Account::where('Name', 'like', '%' . $payload . '%')->orWhere('PhoneNumber', '=', $payload)->paginate(8);
+        } else {
+            return Redirect::back();
+        }
+
+        $accountTypes = DB::table('picklists')
+            ->where('Type', '=', 'AccountType')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+        $phoneTypes = DB::table('picklists')
+            ->where('Type', '=', 'PhoneType')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        $cities = DB::table('picklists')
+            ->where('Type', '=', 'City')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        $districts = DB::table('picklists')
+            ->where('Type', '=', 'Area')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        $gender = DB::table('picklists')
+            ->where('Type', '=', 'Gender')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+        $callSource = DB::table('picklists')
+            ->where('Type', '=', 'callSource')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        return view('accounts.all.show')
+            ->with('accounts', $accounts)
+            ->with('accountTypes', $accountTypes)
+            ->with('phoneTypes', $phoneTypes)
+            ->with('cities', $cities)
+            ->with('districts', $districts)
+            ->with('gender', $gender)
+            ->with('total', $accounts->total())
+            ->with('callSource', $callSource)
+            ->with('indexUrl', route('account.search'));
     }
 }

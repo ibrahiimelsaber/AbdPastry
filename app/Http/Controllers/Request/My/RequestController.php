@@ -139,7 +139,7 @@ class RequestController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('message', 'Contact is created successfully')->with('class', 'alert-success');
+            return redirect()->back()->with('message', 'Service Request is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();

@@ -7,7 +7,8 @@
         <div class="section-header">
             <h1>Add Account</h1>
             <h1 class="ml-2">|| </h1>
-            <button class="ml-2 btn btn-primary" onclick="history.back()">Return Back</button>
+            <a href="{{route('all.accounts.index')}}"
+               class="ml-2 btn btn-primary">Return Back</a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
             </div>

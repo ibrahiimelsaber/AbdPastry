@@ -24,13 +24,13 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('all.requests.update',$request->Id) }}"
+                            <form method="POST" action="{{ route('all.requests.update', $request->Id) }}"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
 
-                                <input type="hidden" name="ContactId" value="{{$request->contact->Id}}">
+                                <input type="hidden" name="ContactId" value="{{$request->ContactId}}">
                                 <input type="hidden" name="sr_id" value="{{$request->Id}}">
 
 

@@ -1,13 +1,11 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage Activities')
+@section('title','Manage All Activities')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1 class="ml-2">Manage Activities</h1>
-
-
+            <h1 class="ml-2">Manage All Activities</h1>
 
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')

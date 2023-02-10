@@ -124,7 +124,7 @@ class ActivityController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('message', 'Contact is created successfully')->with('class', 'alert-success');
+            return redirect()->back()->with('message', 'Activity is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();
@@ -194,110 +194,6 @@ class ActivityController extends Controller
     }
 
 
-    public function editAll($id)
-    {
-
-        $activity = Activity::with('request', 'status', 'type', 'subType', 'focalStatus', 'branch', 'branch', 'statusBack')->where('Id',$id)->first();
-
-        $activityCallStatus = DB::table('picklists')
-            ->where('Type', '=', 'CallStatus2')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activityCallBackStatus = DB::table('picklists')
-            ->where('Type', '=', 'CallBackStatus')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activityTypes = DB::table('picklists')
-            ->where('Type', '=', 'ActType')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activitySubTypes = DB::table('picklists')
-            ->where('Type', '=', 'ActSubType')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $branches = DB::table('picklists')
-            ->where('Active', '=', '1')
-            ->where('Type', '=', 'Branch')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activityFocalPointBranchStatus = DB::table('picklists')
-            ->where('Type', '=', 'FocalPointBranchStatus')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-
-        return view('activities.all.edit')
-            ->with('activity', $activity)
-            ->with('activityCallStatus', $activityCallStatus)
-            ->with('activityCallBackStatus', $activityCallBackStatus)
-            ->with('activityTypes', $activityTypes)
-            ->with('activitySubTypes', $activitySubTypes)
-            ->with('branches', $branches)
-            ->with('activityFocalPointBranchStatus', $activityFocalPointBranchStatus);
-
-    }
-
-    public function editMy($id)
-    {
-
-        $activity = Activity::with('request', 'status', 'type', 'subType', 'focalStatus', 'branch', 'branch', 'statusBack')->where('Id',$id)->first();
-
-        $activityCallStatus = DB::table('picklists')
-            ->where('Type', '=', 'CallStatus2')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activityCallBackStatus = DB::table('picklists')
-            ->where('Type', '=', 'CallBackStatus')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activityTypes = DB::table('picklists')
-            ->where('Type', '=', 'ActType')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activitySubTypes = DB::table('picklists')
-            ->where('Type', '=', 'ActSubType')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $branches = DB::table('picklists')
-            ->where('Active', '=', '1')
-            ->where('Type', '=', 'Branch')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-        $activityFocalPointBranchStatus = DB::table('picklists')
-            ->where('Type', '=', 'FocalPointBranchStatus')
-            ->where('Active', '=', '1')
-            ->pluck('name', 'id');
-
-
-        return view('activities.my.edit')
-            ->with('activity', $activity)
-            ->with('activityCallStatus', $activityCallStatus)
-            ->with('activityCallBackStatus', $activityCallBackStatus)
-            ->with('activityTypes', $activityTypes)
-            ->with('activitySubTypes', $activitySubTypes)
-            ->with('branches', $branches)
-            ->with('activityFocalPointBranchStatus', $activityFocalPointBranchStatus);
-
-    }
-
-    public function history($id)
-    {
-        $requests = RequestHistory::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('SRID', '=', $id)->paginate(10);
-        return view('requests.history.index')
-            ->with('requests', $requests)
-            ->with('total', $requests->total())
-            ->with('indexUrl', route('request.history', $id));
-    }
 
     public function update(Request $request,$id)
     {
@@ -345,7 +241,7 @@ class ActivityController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('message', 'Contact is created successfully')->with('class', 'alert-success');
+            return redirect()->back()->with('message', 'Activity is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();

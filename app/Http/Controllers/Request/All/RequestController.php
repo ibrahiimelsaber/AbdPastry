@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\Validator;
 class RequestController extends Controller
 {
 
-    public function index1($id)
-    {
-        $contact = Contact::where('Id', '=', $id)->first();
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('ContactId', '=', $id)->paginate(30);
-        return view('requests.index')
-            ->with('requests', $requests)
-            ->with('contact', $contact)
-            ->with('total', $requests->total())
-            ->with('indexUrl', route('accounts.contact.requests', $id));
-    }
 
     public function index()
     {
@@ -33,16 +23,6 @@ class RequestController extends Controller
             ->with('requests', $requests)
             ->with('total', $requests->total())
             ->with('indexUrl', route('all.requests.index'));
-    }
-
-    public function my()
-    {
-
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('CreatedBy',session('userName'))->orderBy('Created', 'desc')->paginate(30);
-        return view('requests.index')
-            ->with('requests', $requests)
-            ->with('total', $requests->total())
-            ->with('indexUrl', route('my.requests'));
     }
 
 
@@ -81,7 +61,7 @@ class RequestController extends Controller
             ->pluck('name', 'id');
 
 
-        return view('requests.create')
+        return view('requests.all.create')
             ->with('contact', $contact)
             ->with('status', $status)
             ->with('directions', $directions)
@@ -161,7 +141,7 @@ class RequestController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('message', 'Contact is created successfully')->with('class', 'alert-success');
+            return redirect()->back()->with('message', 'Service Request is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();
@@ -230,10 +210,11 @@ class RequestController extends Controller
     public function history($id)
     {
         $requests = RequestHistory::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('SRID', '=', $id)->paginate(10);
-        return view('requests.history.index')
+        return view('requests.all.history.index')
+            ->with('id', $id)
             ->with('requests', $requests)
             ->with('total', $requests->total())
-            ->with('indexUrl', route('request.history', $id));
+            ->with('indexUrl', route('all.request.history.index', $id));
     }
 
     public function update(Request $request)

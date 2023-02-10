@@ -22,11 +22,11 @@ class ActivityController extends Controller
 
         $activities = Activity::with('request', 'status', 'type', 'subType', 'focalStatus', 'branch', 'branch', 'statusBack')->where('SRId', '=', $id)->paginate(30);
 
-        return view('requests.my.activities.index')
+        return view('contacts.my.requests.activities.index')
             ->with('sr', $sr)
             ->with('activities', $activities)
             ->with('total', $activities->total())
-            ->with('indexUrl', route('my.request.activities.index', $id));
+            ->with('indexUrl', route('my.contact.request.activities.index', $id));
     }
 
 

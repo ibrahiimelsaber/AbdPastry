@@ -98,7 +98,6 @@
                     <a class="nav-link" href="{{route('all.contacts.index')}}">Contacts</a>
                 </li>
 
-
             </ul>
         </li>
 

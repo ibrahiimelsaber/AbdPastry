@@ -74,7 +74,6 @@ class AccountController extends Controller
     {
         try {
             DB::beginTransaction();
-            $rules = [];
             $rules = [
                 'Name' => 'required|string',
                 'AccountTypeId' => 'required',
@@ -191,6 +190,7 @@ class AccountController extends Controller
             'DistrictId' => 'sometimes',
             'AreaId' => 'sometimes',
             'call_source' => 'required',
+            'comments' => 'sometimes',
         ];
         $validator = Validator::make($request->all(), $rules);
 
@@ -257,6 +257,13 @@ class AccountController extends Controller
                 $inputs['DistrictId'] = $account->DistrictId ?? 0;
             }
 
+            if (isset($request->Comments)) {
+                $inputs['Comments'] = $request->Comments;
+
+            } else {
+                $inputs['Comments'] = $account->Comments ?? 0;
+            }
+
 
             if (isset($request->call_source)) {
                 $inputs['call_source'] = $request->call_source;
@@ -275,6 +282,7 @@ class AccountController extends Controller
                     'Address' => $inputs['Address'],
                     'CityId' => $inputs['CityId'],
                     'AreaId' => $inputs['AreaId'],
+                    'Comments' => $inputs['Comments'],
                     'call_source' => $inputs['call_source'],
                     'ModifiedOn' => now(),
                     'ModifiedBy' => session('userName'),

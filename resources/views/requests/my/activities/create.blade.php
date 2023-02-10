@@ -23,7 +23,7 @@
                             <h4>Add a New Activity</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('my.contact.request.activities.store') }}"
+                            <form method="POST" action="{{ route('my.request.activities.store') }}"
                                   enctype="multipart/form-data">
                                 @csrf
 

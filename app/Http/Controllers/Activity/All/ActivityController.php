@@ -18,7 +18,7 @@ class ActivityController extends Controller
     public function index()
     {
 
-        $activities = Activity::with('request', 'status', 'type', 'subType', 'focalStatus', 'branch', 'branch', 'statusBack')->paginate(30);
+        $activities = Activity::with('request', 'status', 'type', 'subType', 'focalStatus', 'branch', 'branch', 'statusBack') ->orderBy('Id','desc')->paginate(30);
 
         return view('activities.all.index')
             ->with('activities', $activities)

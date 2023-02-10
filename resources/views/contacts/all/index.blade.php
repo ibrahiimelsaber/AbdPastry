@@ -56,10 +56,9 @@
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Contact</i>
                                                             </a>
 
-
-{{--                                                            <a href="{{route('accounts.contact.requests',$contact->Id)}}"--}}
-{{--                                                               class="btn btn-warning"><i class="fa fa-edit">Service Requests</i>--}}
-{{--                                                            </a>--}}
+ <a href="{{route('all.contact.requests.index',$contact->Id)}}"
+                                                               class="btn btn-warning"><i class="fa fa-edit"> Service Requests</i>
+                                                            </a>
 
 
                                                     </td>

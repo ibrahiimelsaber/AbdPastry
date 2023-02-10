@@ -7,7 +7,7 @@
         <div class="section-header">
             <h1>Add Activity</h1>
             <h1 class="ml-2">|| </h1>
-            <a href="{{route('my.request.activities.index',$sr->Id)}}"
+            <a href="{{route('my.contact.request.activities.index',$sr->Id)}}"
                class="ml-2 btn btn-primary">Return Back</a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')

@@ -1,13 +1,11 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage  Service Requests')
+@section('title','Manage All Service Requests')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1 class="ml-2">Manage  Service Requests</h1>
-
-
+            <h1 class="ml-2">Manage All Service Requests</h1>
 
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
@@ -61,12 +59,12 @@
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update</i>
                                                             </a>
 
-                                                            <a href="{{route('request.history',$request->Id)}}"
+                                                            <a href="{{route('all.request.history.index',$request->Id)}}"
                                                                class="btn btn-info"><i class="fa fa-history"> History</i>
                                                                 </a>
 
 
-                                                            <a href="{{route('accounts.contact.requests.activities',$request->Id)}}"
+                                                            <a href="{{route('all.request.activities.index',$request->Id)}}"
                                                                class="btn btn-warning"><i class="fa fa-eye"> Activities</i>
                                                             </a>
 {{--                                        <a href="{{route('accounts.contact.requests.create',optional($request->contact)->Id)}}" class="btn btn-success"><i class="fas fa-plus"></i> Add New SR</a>--}}

@@ -23,7 +23,7 @@
                             <h4>Add a New Service Request</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('my.contact.requests.store') }}"
+                            <form method="POST" action="{{ route('my.requests.store') }}"
                                   enctype="multipart/form-data">
                                 @csrf
 

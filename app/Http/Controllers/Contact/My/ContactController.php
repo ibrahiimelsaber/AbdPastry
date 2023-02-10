@@ -166,7 +166,7 @@ class ContactController extends Controller
             ->pluck('name', 'id');
 
 
-        return view('my.accounts.contacts.edit')
+        return view('accounts.my.contacts.edit')
             ->with('contact', $contact)
             ->with('accountTypes', $accountTypes)
             ->with('phoneTypes', $phoneTypes)

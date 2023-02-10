@@ -54,10 +54,9 @@
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Account</i>
                                                             </a>
 
-{{--                                                            <a href="{{route('all.accounts.contacts.show',$account->Id)}}"--}}
-{{--                                                               class="btn btn-warning"><i class="fa fa-eye"> Contacts</i>--}}
-{{--                                                            </a>--}}
-
+                                                   <a href="{{route('all.account.contacts.index',$account->Id)}}"
+                                                               class="btn btn-warning"><i class="fa fa-eye"> Contacts</i>
+                                                            </a>
                                                     </td>
 
                                                 </tr>

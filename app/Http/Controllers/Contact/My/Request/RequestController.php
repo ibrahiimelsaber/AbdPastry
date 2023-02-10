@@ -214,7 +214,7 @@ class RequestController extends Controller
     {
         $requests = RequestHistory::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('SRID', '=', $id)->paginate(10);
         $sr = SR::where('Id', '=', $id)->first();
-        return view('accounts.my.contacts.requests.history.index')
+        return view('contacts.my.requests.history.index')
             ->with('contact', $sr->ContactId)
             ->with('requests', $requests)
             ->with('total', $requests->total())

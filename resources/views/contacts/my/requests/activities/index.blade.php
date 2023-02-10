@@ -7,7 +7,7 @@
         <div class="section-header">
             <h1 class="ml-2">Manage Activities</h1>
             <h1 class="ml-2">||</h1>
-     <a href="{{route('my.requests.index')}}"
+     <a href="{{route('my.contact.requests.index',$sr->ContactId)}}"
                class="ml-2 btn btn-primary">Return Back</a>
 
 
@@ -58,7 +58,7 @@
                                                     <td>{{ $activity->Created }}</td>
                                                     <td>{{ $activity->CreatedBy }}</td>
                                                     <td>
-                                                            <a href="{{route('my.request.activities.edit',$activity->Id)}}"
+                                                            <a href="{{route('my.contact.request.activities.edit',$activity->Id)}}"
                                                                class="btn btn-primary"><i class="fa fa-edit"> Update Activity</i>
                                                             </a>
                                                     </td>

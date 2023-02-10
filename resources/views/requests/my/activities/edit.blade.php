@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('my.contact.request.activities.update', $activity->Id) }}"
+                            <form method="POST" action="{{ route('my.request.activities.update', $activity->Id) }}"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
