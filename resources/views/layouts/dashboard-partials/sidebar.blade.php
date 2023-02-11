@@ -142,6 +142,18 @@
 
             </ul>
         </li>
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fa fa-code-branch"></i> <span>Branches Management</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="nav-link" href="{{route('branches.index')}}">Branches</a>
+                </li>
+
+            </ul>
+        </li>
+
 
 
 

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\BranchUsersController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RequestController;
@@ -48,11 +50,34 @@ Route::put('users/{id}/update', [UserController::class, 'update'])->name('users.
 Route::get('users/{id}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
 Route::get('users/{id}/activate', [UserController::class, 'activate'])->name('users.activate');
 
-/*get sub drop down lists*/
-Route::get('getSubTypes/{id}', [UtilityController::class, 'getSRSubTypes']);
-Route::get('getSubProducts/{id}', [UtilityController::class, 'getSRProductsSubTypes']);
-Route::get('getSubSubType/{id}', [UtilityController::class, 'getSRSubSubTypes']);
-Route::get('getAreas/{id}', [UtilityController::class, 'getAreas']);
+
+
+/* branches managements routes */
+Route::get('branches', [BranchController::class, 'index'])->name('branches.index');
+Route::get('branches/create', [BranchController::class, 'create'])->name('branches.create');
+Route::post('branches/store', [BranchController::class, 'store'])->name('branches.store');
+Route::get('branches/{id}/edit', [BranchController::class, 'edit'])->name('branches.edit');
+Route::put('branches/{id}/update', [BranchController::class, 'update'])->name('branches.update');
+Route::get('branches/{id}/deactivate', [BranchController::class, 'deactivate'])->name('branches.deactivate');
+Route::get('branches/{id}/activate', [BranchController::class, 'activate'])->name('branches.activate');
+
+/* branches managements routes */
+Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
+    Route::get('/{id}/users', [BranchUsersController::class, 'branch'])->name('users.list');
+    Route::get('users', [BranchUsersController::class, 'index'])->name('users.index');
+    Route::get('/{id}/users/create', [BranchUsersController::class, 'create'])->name('users.create');
+    Route::post('users/store', [BranchUsersController::class, 'store'])->name('users.store');
+    Route::get('users/{id}/edit', [BranchUsersController::class, 'edit'])->name('users.edit');
+    Route::put('users/{id}/update', [BranchUsersController::class, 'update'])->name('users.update');
+    Route::get('users/{id}/deactivate', [BranchUsersController::class, 'deactivate'])->name('users.deactivate');
+    Route::get('users/{id}/activate', [BranchUsersController::class, 'activate'])->name('users.activate');
+
+    /*get sub drop down lists*/
+    Route::get('getSubTypes/{id}', [UtilityController::class, 'getSRSubTypes']);
+    Route::get('getSubProducts/{id}', [UtilityController::class, 'getSRProductsSubTypes']);
+    Route::get('getSubSubType/{id}', [UtilityController::class, 'getSRSubSubTypes']);
+    Route::get('getAreas/{id}', [UtilityController::class, 'getAreas']);
+});
 
 /*  My Routes   */
 
