@@ -93,7 +93,47 @@ class ClientBranchController extends Controller
 
     public function statistics($id)
     {
-        return view('client.branches.statistics');
+
+        $generalInquiry = SR::where('BranchId','=',$id)->where('TypeId','=',846)->count();
+        $complaints = SR::where('BranchId','=',$id)->where('TypeId','=',848)->count();
+        $orderTaking = SR::where('BranchId','=',$id)->where('TypeId','=',847)->count();
+        $faceBookInquiry = SR::where('BranchId','=',$id)->where('TypeId','=',850)->count();
+        $faceBookComplaints = SR::where('BranchId','=',$id)->where('TypeId','=',851)->count();
+        $wrongNumber = SR::where('BranchId','=',$id)->where('TypeId','=',849)->count();
+        $srCounts = SR::where('BranchId','=',$id)->count();
+
+        $deliveryDamage = SR::where('BranchId','=',$id)->where('SubTypeId','=',789)->count();
+        $productQuality = SR::where('BranchId','=',$id)->where('SubTypeId','=',794)->count();
+        $staffAttitude = SR::where('BranchId','=',$id)->where('SubTypeId','=',790)->count();
+        $delayedOrder = SR::where('BranchId','=',$id)->where('SubTypeId','=',1805)->count();
+        $billMistakes = SR::where('BranchId','=',$id)->where('SubTypeId','=',792)->count();
+        $foodSafety = SR::where('BranchId','=',$id)->where('SubTypeId','=',1823)->count();
+        $visaIssues = SR::where('BranchId','=',$id)->where('SubTypeId','=',1807)->count();
+        $foodPoising = SR::where('BranchId','=',$id)->where('SubTypeId','=',802)->count();
+        $missingProducts = SR::where('BranchId','=',$id)->where('SubTypeId','=',798)->count();
+        $branchComplaints = SR::where('BranchId','=',$id)->where('SubTypeId','=',800)->count();
+
+
+        return view('client.branches.statistics')
+            ->with('generalInquiry',$generalInquiry)
+            ->with('complaints',$complaints)
+            ->with('orderTaking',$orderTaking)
+            ->with('faceBookInquiry',$faceBookInquiry)
+            ->with('faceBookComplaints',$faceBookComplaints)
+            ->with('wrongNumber',$wrongNumber)
+            ->with('srCounts',$srCounts)
+
+            ->with('deliveryDamage',$deliveryDamage)
+            ->with('branchComplaints',$branchComplaints)
+            ->with('productQuality',$productQuality)
+            ->with('staffAttitude',$staffAttitude)
+            ->with('delayedOrder',$delayedOrder)
+            ->with('billMistakes',$billMistakes)
+            ->with('foodSafety',$foodSafety)
+            ->with('visaIssues',$visaIssues)
+            ->with('foodPoising',$foodPoising)
+            ->with('missingProducts',$missingProducts)
+            ;
     }
 
 

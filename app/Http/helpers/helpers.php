@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 const senderId = "22";
 
 
+
 function EmailAfterInsert($SRId)
 {
 
@@ -46,7 +47,6 @@ function getSRDetails($id)
 }
 
 
-
 function createMailBody($data, $operation)
 {
     $mailInfo = "";
@@ -58,12 +58,11 @@ function createMailBody($data, $operation)
     }
 
 
-
     foreach ($data as $r) {
-       $row = $r;
+        $row = $r;
     }
 //    dd($row);
-    $body = view('Mailing.insert')->with(['row' =>$row, 'mailInfo' => $mailInfo]);
+    $body = view('Mailing.insert')->with(['row' => $row, 'mailInfo' => $mailInfo]);
     return ['body' => $body];
 
 }
