@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Components &rsaquo; Statistic &mdash; Stisla</title>
+    <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{asset("assets/node_modules/jqvmap/dist/jqvmap.min.css")}}">
-    <link rel="stylesheet" href="{{asset("assets/node_modules/flag-icon-css/css/flag-icon.min.css")}}">
+    <link rel="stylesheet" href="../node_modules/prismjs/themes/prism.css">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="{{asset("assets/css/style.css")}}">
-    <link rel="stylesheet" href="{{asset("assets/css/components.css")}}">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 
 <body>
@@ -266,7 +265,7 @@
                         </ul>
                     </li>
                     <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" href="bootstrap-alert.html">Alert</a></li>
@@ -280,7 +279,7 @@
                             <li><a class="nav-link" href="bootstrap-form.html">Form</a></li>
                             <li><a class="nav-link" href="bootstrap-list-group.html">List Group</a></li>
                             <li><a class="nav-link" href="bootstrap-media-object.html">Media Object</a></li>
-                            <li><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
+                            <li class="active"><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
                             <li><a class="nav-link" href="bootstrap-nav.html">Nav</a></li>
                             <li><a class="nav-link" href="bootstrap-navbar.html">Navbar</a></li>
                             <li><a class="nav-link" href="bootstrap-pagination.html">Pagination</a></li>
@@ -292,7 +291,7 @@
                         </ul>
                     </li>
                     <li class="menu-header">Stisla</li>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Components</span></a>
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" href="components-article.html">Article</a></li>
@@ -303,7 +302,7 @@
                             <li><a class="nav-link beep beep-sidebar" href="components-hero.html">Hero</a></li>
                             <li><a class="nav-link" href="components-multiple-upload.html">Multiple Upload</a></li>
                             <li><a class="nav-link beep beep-sidebar" href="components-pricing.html">Pricing</a></li>
-                            <li class="active"><a class="nav-link" href="components-statistic.html">Statistic</a></li>
+                            <li><a class="nav-link" href="components-statistic.html">Statistic</a></li>
                             <li><a class="nav-link" href="components-tab.html">Tab</a></li>
                             <li><a class="nav-link" href="components-table.html">Table</a></li>
                             <li><a class="nav-link" href="components-user.html">User</a></li>
@@ -403,264 +402,88 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Statistic</h1>
+                    <h1>Modal</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                        <div class="breadcrumb-item"><a href="#">Components</a></div>
-                        <div class="breadcrumb-item">Statistic</div>
+                        <div class="breadcrumb-item"><a href="#">Bootstrap Components</a></div>
+                        <div class="breadcrumb-item">Modal</div>
                     </div>
                 </div>
 
                 <div class="section-body">
-                    <h2 class="section-title">Statistics</h2>
-                    <p class="section-lead">The chat component and is equipped with a JavaScript API, making it easy for you to integrate with Back-end.</p>
+                    <h2 class="section-title">Modal</h2>
+                    <p class="section-lead">
+                        Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.
+                    </p>
 
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Summary</h4>
-                                    <div class="card-header-action">
-                                        <a href="#summary-chart" data-tab="summary-tab" class="btn active">Chart</a>
-                                        <a href="#summary-text" data-tab="summary-tab" class="btn">Text</a>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="modal-dialog m-0" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal Template</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Modal body text goes here.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card card-mt">
+                                <div class="card-header">
+                                    <h4>Modal Confirm</h4>
+                                </div>
                                 <div class="card-body">
-                                    <div class="summary">
-                                        <div class="summary-info" data-tab-group="summary-tab" id="summary-text">
-                                            <h4>$1,858</h4>
-                                            <div class="text-muted">Sold 4 items on 2 customers</div>
-                                            <div class="d-block mt-2">
-                                                <a href="#">View All</a>
-                                            </div>
-                                        </div>
-                                        <div class="summary-chart active" data-tab-group="summary-tab" id="summary-chart">
-                                            <canvas id="myChart" height="180"></canvas>
-                                        </div>
-                                        <div class="summary-item">
-                                            <h6 class="mt-3">Item List <span class="text-muted">(4 Items)</span></h6>
-                                            <ul class="list-unstyled list-unstyled-border">
-                                                <li class="media">
-                                                    <a href="#">
-                                                        <img alt="image" class="mr-3 rounded" width="50" src="../assets/img/products/product-4-50.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="media-right">$805</div>
-                                                        <div class="media-title"><a href="#">iBook Noob</a></div>
-                                                        <div class="text-small text-muted">by <a href="#">Ahmad Sutisna</a> <div class="bullet"></div> Sunday</div>
-                                                    </div>
-                                                </li>
-                                                <li class="media">
-                                                    <a href="#">
-                                                        <img alt="image" class="mr-3 rounded" width="50" src="../assets/img/products/product-1-50.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="media-right">$405</div>
-                                                        <div class="media-title"><a href="#">Headphone Blitz</a></div>
-                                                        <div class="text-small text-muted">by <a href="#">Hasan Basri</a> <div class="bullet"></div> Sunday</div>
-                                                    </div>
-                                                </li>
-                                                <li class="media">
-                                                    <a href="#">
-                                                        <img alt="image" class="mr-3 rounded" width="50" src="../assets/img/products/product-2-50.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="media-right">$499</div>
-                                                        <div class="media-title"><a href="#">RocketZ</a></div>
-                                                        <div class="text-muted text-small">by <a href="#">Hasan Basri</a> <div class="bullet"></div> Sunday
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="media">
-                                                    <a href="#">
-                                                        <img alt="image" class="mr-3 rounded" width="50" src="../assets/img/products/product-3-50.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="media-right">$149</div>
-                                                        <div class="media-title"><a href="#">Xiaomay Readme 4.0</a></div>
-                                                        <div class="text-small text-muted">by <a href="#">Kusnaedi</a> <div class="bullet"></div> Tuesday
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <p class="mb-2">You can easily change the default browser confirmation box with a bootstrap modal.</p>
+                                    <button class="btn btn-danger" data-confirm="Realy?|Do you want to continue?" data-confirm-yes="alert('Deleted :)');">Delete</button>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>The Bootstrap Way</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-2">Use the Bootstrap method to create modal. You need to create an HTML structure for modal and the following button will trigger it.</p>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Aw, yeah!</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-lg-6">
+                        <div class="col-12 col-md-6 col-lg-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Statistics</h4>
-                                    <div class="card-header-action">
-                                        <a href="#" class="btn active">Week</a>
-                                        <a href="#" class="btn">Month</a>
-                                        <a href="#" class="btn">Year</a>
-                                    </div>
+                                    <h4>Modal Demo</h4>
                                 </div>
                                 <div class="card-body">
-                                    <canvas id="myChart2" height="180"></canvas>
-                                    <div class="statistic-details mt-1">
-                                        <div class="statistic-details-item">
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
-                                            <div class="detail-value">$243</div>
-                                            <div class="detail-name">Today</div>
-                                        </div>
-                                        <div class="statistic-details-item">
-                                            <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</div>
-                                            <div class="detail-value">$2,902</div>
-                                            <div class="detail-name">This Week</div>
-                                        </div>
-                                        <div class="statistic-details-item">
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</div>
-                                            <div class="detail-value">$12,821</div>
-                                            <div class="detail-name">This Month</div>
-                                        </div>
-                                        <div class="statistic-details-item">
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</div>
-                                            <div class="detail-value">$92,142</div>
-                                            <div class="detail-name">This Year</div>
-                                        </div>
-                                    </div>
+                                    <p class="mb-2">We've created a plugin to easily create a bootstrap modal.</p>
+                                    <button class="btn btn-primary" id="modal-1">Launch Modal</button>
                                 </div>
                             </div>
-
-                            <div class="card mt-4">
-                                <div class="card-header">
-                                    <h4>Popular Browser</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col mb-4 mb-lg-0 text-center">
-                                            <div class="browser browser-chrome"></div>
-                                            <div class="mt-2 font-weight-bold">Chrome</div>
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 48%</div>
-                                        </div>
-                                        <div class="col mb-4 mb-lg-0 text-center">
-                                            <div class="browser browser-firefox"></div>
-                                            <div class="mt-2 font-weight-bold">Firefox</div>
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 26%</div>
-                                        </div>
-                                        <div class="col mb-4 mb-lg-0 text-center">
-                                            <div class="browser browser-safari"></div>
-                                            <div class="mt-2 font-weight-bold">Safari</div>
-                                            <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 14%</div>
-                                        </div>
-                                        <div class="col mb-4 mb-lg-0 text-center">
-                                            <div class="browser browser-opera"></div>
-                                            <div class="mt-2 font-weight-bold">Opera</div>
-                                            <div class="text-small text-muted">7%</div>
-                                        </div>
-                                        <div class="col mb-4 mb-lg-0 text-center">
-                                            <div class="browser browser-internet-explorer"></div>
-                                            <div class="mt-2 font-weight-bold">IE</div>
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 5%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-lg-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Visitors</h4>
+                                    <h4>Modal Center</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div id="visitorMap" data-height="190"></div>
-                                </div>
-                                <div class="card-footer card-footer-grey pt-0">
-                                    <div class="statistic-details mt-4 align-items-center justify-content-center">
-                                        <div class="statistic-details-item col-sm-4 col-12">
-                                            <div class="detail-chart">
-                                                <div class="sparkline-line-chart"></div>
-                                            </div>
-                                            <div class="detail-value">12,329</div>
-                                            <div class="detail-name">Visits</div>
-                                        </div>
-                                        <div class="statistic-details-item col-sm-4 col-12">
-                                            <div class="detail-chart">
-                                                <div class="sparkline-line-chart"></div>
-                                            </div>
-                                            <div class="detail-value">28%</div>
-                                            <div class="detail-name">Referral</div>
-                                        </div>
-                                        <div class="statistic-details-item col-sm-4 col-12">
-                                            <div class="detail-chart">
-                                                <div class="sparkline-line-chart"></div>
-                                            </div>
-                                            <div class="detail-value">72%</div>
-                                            <div class="detail-name">Organic</div>
-                                        </div>
-                                    </div>
+                                    <p class="mb-2">You can change the modal position to center.</p>
+                                    <button class="btn btn-primary" id="modal-2">Launch Modal</button>
                                 </div>
                             </div>
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-3 col-6 mb-md-0 mb-4 text-center">
-                                            <div class="img-shadow flag-icon flag-icon-id"></div>
-                                            <div class="mt-2 font-weight-bold text-nowrap">Indonesia</div>
-                                            <div class="text-small text-muted">8,400</div>
-                                        </div>
-                                        <div class="col-sm-3 col-6 mb-md-0 mb-4 text-center">
-                                            <div class="img-shadow flag-icon flag-icon-ps"></div>
-                                            <div class="mt-2 font-weight-bold text-nowrap">Palestine</div>
-                                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7,328</div>
-                                        </div>
-                                        <div class="col-sm-3 col-6 text-center">
-                                            <div class="img-shadow flag-icon flag-icon-sy"></div>
-                                            <div class="mt-2 font-weight-bold text-nowrap">Syiria</div>
-                                            <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 5,830</div>
-                                        </div>
-                                        <div class="col-sm-3 col-6 text-center">
-                                            <div class="img-shadow flag-icon flag-icon-my"></div>
-                                            <div class="mt-2 font-weight-bold text-nowrap">Malaysia</div>
-                                            <div class="text-small text-muted">4,763</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-lg-6 mt-lg-0 mt-sm-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Referral URL</h4>
+                                    <h4>The Others</h4>
                                 </div>
                                 <div class="card-body">
-                                    <canvas id="myChart3" height="170"></canvas>
-
-                                    <div class="mb-4 mt-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">558</div>
-                                        <div class="font-weight-bold mb-1">Google</div>
-                                        <div class="progress" data-height="3">
-                                            <div class="progress-bar" role="progressbar" data-width="80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">338</div>
-                                        <div class="font-weight-bold mb-1">Facebook</div>
-                                        <div class="progress" data-height="3">
-                                            <div class="progress-bar" role="progressbar" data-width="67%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">238</div>
-                                        <div class="font-weight-bold mb-1">Bing</div>
-                                        <div class="progress" data-height="3">
-                                            <div class="progress-bar" role="progressbar" data-width="58%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">190</div>
-                                        <div class="font-weight-bold mb-1">Yahoo</div>
-                                        <div class="progress" data-height="3">
-                                            <div class="progress-bar" role="progressbar" data-width="36%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                    <p class="mb-2">Check the <code>modal.js</code> code in the <code>dist/js/page</code> folder to get the source code.</p>
+                                    <div class="buttons">
+                                        <button class="btn btn-primary" id="modal-3">Buttons</button>
+                                        <button class="btn btn-primary" id="modal-4">Footer Background</button>
+                                        <button class="btn btn-primary" id="modal-5">Login</button>
+                                        <button class="btn btn-primary" id="modal-6">Something in the Footer</button>
                                     </div>
                                 </div>
                             </div>
@@ -668,6 +491,58 @@
                     </div>
                 </div>
             </section>
+
+            <form class="modal-part" id="modal-login-part">
+                <p>This login form is taken from elements with <code>#modal-login-part</code> id.</p>
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Email" name="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                    </div>
+                </div>
+                <div class="form-group mb-0">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
+                        <label class="custom-control-label" for="remember-me">Remember Me</label>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <footer class="main-footer">
             <div class="footer-left">
@@ -686,20 +561,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="{{asset("assets/js/stisla.js")}}"></script>
+<script src="../assets/js/stisla.js"></script>
 
 <!-- JS Libraies -->
-<script src="{{asset("assets/node_modules/jquery-sparkline/jquery.sparkline.min.js")}}"></script>
-<script src="{{asset("assets/node_modules/chart.js/dist/Chart.min.js")}}"></script>
-<script src="{{asset("assets/node_modules/jqvmap/dist/jquery.vmap.min.js")}}"></script>
-<script src="{{asset("assets/node_modules/jqvmap/dist/maps/jquery.vmap.world.js")}}"></script>
-<script src="{{asset("assets/node_modules/jqvmap/dist/maps/jquery.vmap.indonesia.js")}}"></script>
+<script src="../node_modules/prismjs/prism.js"></script>
 
 <!-- Template JS File -->
-<script src="{{asset("assets/js/scripts.js")}}"></script>
-<script src="{{asset("assets/js/custom.js")}}"></script>
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/custom.js"></script>
 
 <!-- Page Specific JS File -->
-<script src="{{asset("assets/js/page/components-statistic.js")}}"></script>
+<script src="../assets/js/page/bootstrap-modal.js"></script>
 </body>
 </html>

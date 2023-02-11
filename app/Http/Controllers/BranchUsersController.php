@@ -49,7 +49,7 @@ class BranchUsersController extends Controller
         try {
             DB::beginTransaction();
             $rules = [
-                'Name' => 'required|min:6',
+                'Name' => 'required|unique:branch_users|min:6',
                 'Password' => 'required|min:8',
                 'BranchId' => 'required',
 
@@ -105,7 +105,7 @@ class BranchUsersController extends Controller
         try {
             DB::beginTransaction();
             $rules = [
-                'Name' => 'required|min:6',
+                'Name' => 'required|unique:branch_users|min:6',
                 'Password' => 'required|min:8',
 
             ];

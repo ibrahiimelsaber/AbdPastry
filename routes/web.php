@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BranchUsersController;
+use App\Http\Controllers\ClientBranchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RequestController;
@@ -34,6 +35,9 @@ use App\Http\Controllers\Request\All\RequestController as AllRequests;
 use App\Http\Controllers\Activity\All\ActivityController as AllActivities;
 
 
+Route::get('test',function (){
+    return view('slogin');
+})->name('account.search');
 Route::get('search',[AllAccounts::class, 'search'])->name('account.search');
 
 /* auth routes */
@@ -344,6 +348,15 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
 
 
 
+//
+//Route::post('branch-search', function (\Illuminate\Http\Request $request){
+//    dd($request->all());
+//})->name('branch.search');
+
+Route::get('branch-search', [ClientBranchController::class, 'search'])->name('branch.search');
+
+Route::get('branch/requests/search', [ClientBranchController::class, 'search'])->name('branch.requests.list');
+Route::get('branch/{id}/statistics',[ClientBranchController::class, 'statistics'])->name('branch.requests.statistics');
 
 
 
@@ -369,20 +382,9 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('branch/{id}/requests', [ClientBranchController::class, 'index'])->name('branch.requests.index');
+Route::get('branch/requests/{id}/edit', [ClientBranchController::class, 'edit'])->name('branch.requests.edit');
+Route::put('branch/requests/{id}/update', [ClientBranchController::class, 'update'])->name('branch.requests.update');
 
 
 
