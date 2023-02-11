@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Show Account, ')
+@section('title','Show Account')
 {{--@section('title','Show Account, '.$accounts->Name)--}}
 
 @section('content')

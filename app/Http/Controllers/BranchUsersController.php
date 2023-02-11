@@ -70,6 +70,7 @@ class BranchUsersController extends Controller
                     'Password' => $request->Password,
                     'Active' => 1,
                     'created_at' => now(),
+                    'created_by' => session('userName'),
 
                 ]);
 
@@ -122,6 +123,7 @@ class BranchUsersController extends Controller
                     'Name' => $request->Name,
                     'Password' => $request->Password,
                     'updated_at' => now(),
+                    'updated_by' => session('userName'),
                 ]);
 
             DB::commit();

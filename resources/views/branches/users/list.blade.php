@@ -36,6 +36,10 @@
                                                 <th>User Id</th>
                                                 <th>User Name</th>
                                                 <th>Branch Name</th>
+                                                <th>Created At</th>
+                                                <th>Created By</th>
+                                                <th>Updated At</th>
+                                                <th>Updated By</th>
 
                                                 <th>Actions</th>
                                             </tr>
@@ -46,6 +50,10 @@
                                                     <td>{{ $user->Id }}</td>
                                                     <td>{{ $user->Name}}</td>
                                                     <td>{{ $user->branch->Name}}</td>
+                                                    <td>{{ $user->created_at}}</td>
+                                                    <td>{{ $user->created_by}}</td>
+                                                    <td>{{ $user->updated_at}}</td>
+                                                    <td>{{ $user->updated_by}}</td>
 
                                                     <td>
                                                             <a href="{{route('branch.users.edit',$user->Id)}}"
