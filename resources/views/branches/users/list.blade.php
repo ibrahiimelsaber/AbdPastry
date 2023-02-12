@@ -69,6 +69,10 @@
                                                             </a>
 
 @endif
+                                                          <button class="btn btn-danger delete"
+                                                            data-id="{{$user->Id}}" type="button">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
                                                     </td>
 
                                                 </tr>
@@ -97,6 +101,6 @@
     </section>
 @endsection
 
-{{--@section('scripts')--}}
-{{--    @include('dashboard.common._modal_delete')--}}
-{{--@endsection--}}
+@section('scripts')
+    @include('dashboard.common._modal_delete')
+@endsection

@@ -248,6 +248,7 @@
 
         $(document).ready(function () {
             $('#TypeId').on('change', function () {
+
                 var TypeID = $(this).val();
                 if (TypeID) {
                     $.ajax({
@@ -313,6 +314,7 @@
                             success: function (data) {
 
                                 if (data) {
+                                    // console.log(data)
                                     $('#SubSubType').empty();
                                     $('#SubSubType').append('<option hidden>Choose Sub Sub Product</option>');
                                     $.each(data, function (key, val) {

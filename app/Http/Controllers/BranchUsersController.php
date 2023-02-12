@@ -144,7 +144,7 @@ class BranchUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd('hi');
     }
 
     public function deactivate($id)

@@ -45,6 +45,14 @@ Route::get('/', [LoginController::class, 'show'])->name('login');
 Route::post('/home', [LoginController::class, 'login'])->name('login.perform');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+
+/*Drop Down Lists*/
+/*get sub drop down lists*/
+Route::get('getSubTypes/{id}', [UtilityController::class, 'getSRSubTypes']);
+Route::get('getSubProducts/{id}', [UtilityController::class, 'getSRProductsSubTypes']);
+Route::get('getSubSubType/{id}', [UtilityController::class, 'getSRSubSubTypes']);
+Route::get('getAreas/{id}', [UtilityController::class, 'getAreas']);
+
 /* user managements routes */
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 Route::get('users/create', [UserController::class, 'create'])->name('users.create');
@@ -68,6 +76,7 @@ Route::get('branches/{id}/activate', [BranchController::class, 'activate'])->nam
 /* branches managements routes */
 Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
     Route::get('/{id}/users', [BranchUsersController::class, 'branch'])->name('users.list');
+    Route::delete('/{user_id}/users/{id}', [BranchUsersController::class, 'destroy'])->name('users.delete');
     Route::get('users', [BranchUsersController::class, 'index'])->name('users.index');
     Route::get('/{id}/users/create', [BranchUsersController::class, 'create'])->name('users.create');
     Route::post('users/store', [BranchUsersController::class, 'store'])->name('users.store');
@@ -76,11 +85,7 @@ Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
     Route::get('users/{id}/deactivate', [BranchUsersController::class, 'deactivate'])->name('users.deactivate');
     Route::get('users/{id}/activate', [BranchUsersController::class, 'activate'])->name('users.activate');
 
-    /*get sub drop down lists*/
-    Route::get('getSubTypes/{id}', [UtilityController::class, 'getSRSubTypes']);
-    Route::get('getSubProducts/{id}', [UtilityController::class, 'getSRProductsSubTypes']);
-    Route::get('getSubSubType/{id}', [UtilityController::class, 'getSRSubSubTypes']);
-    Route::get('getAreas/{id}', [UtilityController::class, 'getAreas']);
+
 });
 
 /*  My Routes   */
@@ -396,56 +401,34 @@ Route::put('branch/requests/{id}/update', [ClientBranchController::class, 'updat
 
 
 
-//
-//// Go To Resources => views => accounts => all => blades
-//Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
-//    Route::get('accounts', [AllAccounts::class, 'index'])->name('accounts.index');
-//    Route::get('accounts/create', [AllAccounts::class, 'create'])->name('accounts.create');
-//    Route::post('accounts/store', [AllAccounts::class, 'store'])->name('accounts.store');
-//    Route::get('accounts/{id}/edit', [AllAccounts::class, 'edit'])->name('accounts.edit');
-//    Route::put('accounts/{id}/update', [AllAccounts::class, 'update'])->name('accounts.update');
-//    Route::delete('accounts/{id}/delete', [AllAccounts::class, 'delete'])->name('accounts.delete');
-//
-//});
-//
-//// Go To Resources => views => contacts => all => blades
-//Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
-//    Route::get('contacts', [AllContacts::class, 'index'])->name('contacts.index');
-//    Route::get('contacts/create', [AllContacts::class, 'create'])->name('contacts.create');
-//    Route::post('contacts/store', [AllContacts::class, 'store'])->name('contacts.store');
-//    Route::get('contacts/{id}/edit', [AllContacts::class, 'edit'])->name('contacts.edit');
-//    Route::put('contacts/{id}/update', [AllContacts::class, 'update'])->name('contacts.update');
-//    Route::delete('contacts/{id}/delete', [AllContacts::class, 'delete'])->name('contacts.delete');
-//
-//});
-//
-//// Go To Resources => views => requests => all => blades
-//Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
-//    Route::get('requests', [AllRequests::class, 'index'])->name('requests.index');
-//    Route::get('requests/create', [AllRequests::class, 'create'])->name('requests.create');
-//    Route::post('requests/store', [AllRequests::class, 'store'])->name('requests.store');
-//    Route::get('requests/{id}/edit', [AllRequests::class, 'edit'])->name('requests.edit');
-//    Route::put('requests/{id}/update', [AllRequests::class, 'update'])->name('requests.update');
-//    Route::delete('requests/{id}/delete', [AllRequests::class, 'delete'])->name('requests.delete');
-//
-//});
-//
-//
-//// Go To Resources => views => activities => all => blades
-//Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
-//    Route::get('activities', [AllActivities::class, 'index'])->name('activities.index');
-//    Route::get('activities/create', [AllActivities::class, 'create'])->name('activities.create');
-//    Route::post('activities/store', [AllActivities::class, 'store'])->name('activities.store');
-//    Route::get('activities/{id}/edit', [AllActivities::class, 'edit'])->name('activities.edit');
-//    Route::put('activities/{id}/update', [AllActivities::class, 'update'])->name('activities.update');
-//    Route::delete('activities/{id}/delete', [AllActivities::class, 'delete'])->name('activities.delete');
-//
-//});
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
