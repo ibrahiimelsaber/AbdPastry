@@ -164,7 +164,7 @@ class RequestController extends Controller
             DB::commit();
 
 
-//            EmailAfterInsert($SRID);
+            EmailAfterInsert($SRID);
             return redirect()->back()->with('message', 'Contact is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
@@ -330,7 +330,7 @@ class RequestController extends Controller
 
             DB::commit();
 
-//            EmailAfterUpdate($request->sr_id);
+            EmailAfterUpdate($request->sr_id);
 
             return redirect()->back()->with('message', 'Service Request is updated successfully')->with('class', 'alert-success');
 

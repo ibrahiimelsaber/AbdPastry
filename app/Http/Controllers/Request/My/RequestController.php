@@ -116,7 +116,7 @@ class RequestController extends Controller
                 $DueDate = date('Y-m-d H:i:s', $timestamp);
             }
 
-            DB::table('service_requests')->insert(
+            $SRID = DB::table('service_requests')->insertGetId(
                 [
                     'StatusId' => $request->StatusId,
                     'CallDirectionId' => $request->CallDirectionId,
@@ -138,7 +138,7 @@ class RequestController extends Controller
                 ]);
 
             DB::commit();
-
+            EmailAfterInsert($SRID);
             return redirect()->back()->with('message', 'Service Request is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
@@ -301,7 +301,7 @@ class RequestController extends Controller
                 ]);
 
             DB::commit();
-
+            EmailAfterUpdate($request->sr_id);
             return redirect()->back()->with('message', 'Service Request is updated successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {

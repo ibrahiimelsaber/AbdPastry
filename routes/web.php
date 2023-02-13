@@ -6,7 +6,6 @@ use App\Http\Controllers\BranchUsersController;
 use App\Http\Controllers\ClientBranchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RequestController;
 use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Account\My\AccountController as MyAccounts;

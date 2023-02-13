@@ -308,7 +308,7 @@ class RequestController extends Controller
                 ]);
 
             DB::commit();
-
+            EmailAfterUpdate($request->sr_id);
             return redirect()->back()->with('message', 'Service Request is updated successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
