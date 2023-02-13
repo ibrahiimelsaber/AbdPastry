@@ -1,37 +1,201 @@
 <?php
 
 
+use App\Models\MailList;
 use App\Models\Request as SR;
 use Illuminate\Support\Facades\DB;
 
-const senderId = "22";
-
+const senderId = "123456789";
 
 
 function EmailAfterInsert($SRId)
 {
 
+    $typeId = '';
+    $subTypeId = '';
+    $branchId = '';
     $bodyData = getSRDetails($SRId);
 
 
     if ($bodyData) {
-        $body = createMailBody($bodyData, 'create');
+        foreach ($bodyData as $data) {
+            $typeId = $data['TypeId'];
+            $subTypeId = $data['SubTypeId'];
+            $branchId = $data['BranchId'];
+        }
 
-        sendMail($body);
+        $body = createMailBody($bodyData, 'create');
+        getMailVars($typeId, $subTypeId, $branchId, $body);
+
     }
 }
 
 function EmailAfterUpdate($SRId)
 {
-
+    $typeId = '';
+    $subTypeId = '';
+    $branchId = '';
     $bodyData = getSRDetails($SRId);
 
 
     if ($bodyData) {
-        $body = createMailBody($bodyData, 'update');
+        foreach ($bodyData as $data) {
+            $typeId = $data['TypeId'];
+            $subTypeId = $data['SubTypeId'];
+            $branchId = $data['BranchId'];
+        }
 
-        sendMail($body);
+        $body = createMailBody($bodyData, 'update');
+        getMailVars($typeId, $subTypeId, $branchId, $body);
     }
+}
+
+function getMailVars($typeId, $subTypeId, $branchId, $body)
+{
+    $branchesMailingList = MailList::where('branchCode', '=', 'branch')->pluck('branch_id')->toArray();
+    if (isset($typeId) && isset($subTypeId) && isset($branchId)) {
+
+        $hasMail = in_array($branchId, $branchesMailingList);
+        // subject Product Quality
+        if ($typeId == 848) {
+            if ($subTypeId == 794) {
+                if ($hasMail) {
+                    $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
+                    if ($branchMailVars) {
+                        sendMail($body, $branchMailVars);
+                    }
+                }
+                else{
+                    $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
+                    if ($mailVars) {
+                        sendMail($body, $mailVars);
+                    }
+                }
+                $defaultMailVars = MailList::where('TypeId', $typeId)->where('subTypeId', $subTypeId)->where('branchCode', '=', 'All')->first();
+                if ($defaultMailVars) {
+                    sendMail($body, $defaultMailVars);
+
+
+                }
+
+            }
+
+
+            if ($subTypeId == 1823) {
+                if ($hasMail) {
+                    $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
+                    if ($branchMailVars) {
+                        sendMail($body, $branchMailVars);
+                    }
+                } else{
+                    $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
+                if ($mailVars) {
+                    sendMail($body, $mailVars);
+                }
+            }
+            $defaultMailVars = MailList::where('TypeId', $typeId)->where('subTypeId', $subTypeId)->where('branchCode', '=', 'All')->first();
+            if ($defaultMailVars) {
+                sendMail($body, $defaultMailVars);
+
+
+            }
+
+        }
+        if ($subTypeId == 790) {
+            if ($hasMail) {
+                $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
+                if ($branchMailVars) {
+                    sendMail($body, $branchMailVars);
+                }
+            }else {
+                $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
+                if ($mailVars) {
+                    sendMail($body, $mailVars);
+                }
+            }
+
+            if ($branchId != 1824) {
+                $defaultMailVars = MailList::where('TypeId', $typeId)->where('subTypeId', $subTypeId)->where('branchCode', '=', 'NoCallCenter')->first();
+                if ($defaultMailVars) {
+                    sendMail($body, $defaultMailVars);
+
+                }
+            }
+
+        }
+        if ($subTypeId == 1807) {
+            if ($hasMail) {
+                $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
+                if ($branchMailVars) {
+                    sendMail($body, $branchMailVars);
+                }
+            } else {
+
+                $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
+                if ($mailVars) {
+                    sendMail($body, $mailVars);
+                }
+            }
+
+//                dd('hello');
+            $defaultMailVars = MailList::where('TypeId', $typeId)->where('subTypeId', $subTypeId)->where('branchCode', '=', 'All')->first();
+            if ($defaultMailVars) {
+                sendMail($body, $defaultMailVars);
+
+
+            }
+
+        }
+        if ($subTypeId == 792) {
+            if ($hasMail) {
+                $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
+                if ($branchMailVars) {
+                    sendMail($body, $branchMailVars);
+                }
+            }
+            else{
+                $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
+                if ($mailVars) {
+                    sendMail($body, $mailVars);
+                }
+            }
+            $defaultMailVars = MailList::where('TypeId', $typeId)->where('subTypeId', $subTypeId)->where('branchCode', '=', 'All')->first();
+            if ($defaultMailVars) {
+                sendMail($body, $defaultMailVars);
+
+
+            }
+
+        }
+
+
+        if ($subTypeId != 794 && $subTypeId != 1823 && $subTypeId != 790 && $subTypeId != 1807 && $subTypeId != 792) {
+
+            if ($hasMail) {
+
+                $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
+                if ($branchMailVars) {
+                    sendMail($body, $branchMailVars);
+
+
+                }
+            } else {
+
+                $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
+                if ($mailVars) {
+                    sendMail($body, $mailVars);
+
+
+                }
+
+
+            }
+        }
+
+    }
+}
+
+return true;
 }
 
 
@@ -67,21 +231,24 @@ function createMailBody($data, $operation)
 
 }
 
-function sendMail($body)
+function sendMail($body, $mailVars)
 {
-    $to = "ibrahim_melsaber@rayacx.com";
-    $cc = "ibrahimelsaber8@gmail.com";
-//    $cc = "mohamed_alatif@rayacx.com;nesma_mgad@rayacx.com";
-    $subject = "El-Abd Foods Say Hi";
+
+    $to = $mailVars->mailTo;
+    $cc = $mailVars->mailCC;
+    $subject = $mailVars->subject;
+
 
     $to = str_replace(",", ";", $to);
     $cc = str_replace(",", ";", $cc);
     $subject = str_replace("'", "''", $subject);
 
+
     $body = str_replace("'", "''", $body['body']);
     $createdBy = session('userName');
+//    dd($to, $cc, $subject,$body);
 
-//    dd($body);
+
     try {
 
         $server = "Dtdb\wfmsql";
@@ -103,6 +270,7 @@ function sendMail($body)
             sqlsrv_query($_connection, $Sql);
             return false;
         }
+
 
         return true;
 

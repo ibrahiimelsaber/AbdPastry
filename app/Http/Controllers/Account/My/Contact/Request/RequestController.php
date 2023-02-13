@@ -74,7 +74,7 @@ class RequestController extends Controller
 
         $branches = DB::table('picklists')
             ->where('Type', '=', 'Branch')
-            ->where('Active', '=', '1')
+            ->where('Active', '=', 1)
             ->pluck('name', 'id');
 
         $products = DB::table('picklists')

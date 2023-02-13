@@ -11,6 +11,7 @@ class UtilityController extends Controller
     {
         $subTypes = DB::table('picklists')
             ->where('ParentId', '=', $id)
+            ->where('Active','=',1)
             ->pluck('name', 'id');
 
         return response()->json($subTypes);
@@ -20,6 +21,7 @@ class UtilityController extends Controller
     {
         $areas = DB::table('picklists')
             ->where('ParentId', '=', $id)
+            ->where('Active','=',1)
             ->pluck('name', 'id');
 
         return response()->json($areas);
@@ -29,6 +31,7 @@ class UtilityController extends Controller
     {
         $subTypes = DB::table('picklists')
             ->where('ParentId', '=', $id)
+            ->where('Active','=',1)
             ->pluck('name', 'id');
 
         return response()->json($subTypes);
@@ -37,6 +40,7 @@ class UtilityController extends Controller
     {
         $subsubTypes = DB::table('picklists')
             ->where('ParentId', '=', $id)
+            ->where('Active','=',1)
             ->pluck('name', 'id');
 
         return response()->json($subsubTypes);
