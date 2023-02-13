@@ -34,6 +34,17 @@ use App\Http\Controllers\Request\All\RequestController as AllRequests;
 use App\Http\Controllers\Activity\All\ActivityController as AllActivities;
 
 
+
+
+
+/*Drop Down Lists*/
+/*get sub drop down lists*/
+Route::get('getSubTypes/{id}', [UtilityController::class, 'getSRSubTypes'])->name('getSRSubTypes');
+Route::get('getSubProducts/{id}', [UtilityController::class, 'getSRProductsSubTypes'])->name('getSubProducts');
+Route::get('getSubSubType/{id}', [UtilityController::class, 'getSRSubSubTypes'])->name('getSRSubSubTypes');
+Route::get('getAreas/{id}', [UtilityController::class, 'getAreas'])->name('getAreas');
+
+
 Route::get('test',function (){
     return view('slogin');
 })->name('account.search');
@@ -45,12 +56,6 @@ Route::post('/home', [LoginController::class, 'login'])->name('login.perform');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
-/*Drop Down Lists*/
-/*get sub drop down lists*/
-Route::get('getSubTypes/{id}', [UtilityController::class, 'getSRSubTypes']);
-Route::get('getSubProducts/{id}', [UtilityController::class, 'getSRProductsSubTypes']);
-Route::get('getSubSubType/{id}', [UtilityController::class, 'getSRSubSubTypes']);
-Route::get('getAreas/{id}', [UtilityController::class, 'getAreas']);
 
 /* user managements routes */
 Route::get('users', [UserController::class, 'index'])->name('users.index');
@@ -338,54 +343,9 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//Route::post('branch-search', function (\Illuminate\Http\Request $request){
-//    dd($request->all());
-//})->name('branch.search');
-
 Route::get('branch-search', [ClientBranchController::class, 'search'])->name('branch.search');
-
 Route::get('branch/requests/search', [ClientBranchController::class, 'search'])->name('branch.requests.list');
 Route::get('branch/{id}/statistics',[ClientBranchController::class, 'statistics'])->name('branch.requests.statistics');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('branch/{id}/requests', [ClientBranchController::class, 'index'])->name('branch.requests.index');
 Route::get('branch/requests/{id}/edit', [ClientBranchController::class, 'edit'])->name('branch.requests.edit');
 Route::put('branch/requests/{id}/update', [ClientBranchController::class, 'update'])->name('branch.requests.update');

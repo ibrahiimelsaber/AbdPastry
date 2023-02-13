@@ -208,7 +208,9 @@ class RequestController extends Controller
     public function history($id)
     {
         $requests = RequestHistory::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('SRID', '=', $id)->paginate(10);
+        $sr = SR::where('Id', '=', $id)->first();
         return view('requests.my.history.index')
+            ->with('contact', $sr->ContactId)
             ->with('requests', $requests)
             ->with('total', $requests->total())
             ->with('indexUrl', route('my.request.history.index', $id));

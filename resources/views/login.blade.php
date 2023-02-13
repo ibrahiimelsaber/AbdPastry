@@ -12,11 +12,11 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{asset("node_modules/bootstrap-social/bootstrap-social.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/node_modules/bootstrap-social/bootstrap-social.css")}}">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="{{assert("assets/css/style.css")}}">
-    <link rel="stylesheet" href="{{assert("assets/css/components.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/css/style.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/css/components.css")}}">
 </head>
 
 <body>
@@ -115,8 +115,8 @@
                 </div>
             </div>
             <div
-                class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-                data-background="{{asset('assets/img/abd-logo3.jpg')}}">
+                class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y  position-relative overlay-gradient-bottom"
+                data-background="{{asset('assets/img/abd-logo7.jpg')}}">
                 <div class="absolute-bottom-left index-2">
                     <div class="text-light p-5 pb-2">
                         <div class="mb-5 pb-3">

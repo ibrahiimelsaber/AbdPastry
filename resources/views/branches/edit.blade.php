@@ -73,7 +73,7 @@
                 var TypeID = $(this).val();
                 if (TypeID) {
                     $.ajax({
-                        url: '/getSubTypes/' + TypeID,
+                        url: "{{ url('/getSubTypes') }}"+"/"+TypeID,
                         type: "GET",
                         data: {"_token": "{{ csrf_token() }}"},
                         dataType: "json",
@@ -100,7 +100,7 @@
                 var ProductId = $(this).val();
                 if (ProductId) {
                     $.ajax({
-                        url: '/getSubProducts/' + ProductId,
+                        url: "{{ url('/getSubProducts') }}"+"/"+ProductId,
                         type: "GET",
                         data: {"_token": "{{ csrf_token() }}"},
                         dataType: "json",

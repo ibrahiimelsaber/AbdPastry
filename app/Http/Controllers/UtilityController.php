@@ -9,6 +9,7 @@ class UtilityController extends Controller
 {
     public function getSRSubTypes($id)
     {
+
         $subTypes = DB::table('picklists')
             ->where('ParentId', '=', $id)
             ->where('Active','=',1)

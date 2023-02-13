@@ -240,7 +240,8 @@
                 // console.log(CityId)
                 if (CityId) {
                     $.ajax({
-                        url: '/getAreas/' + CityId,
+                        url: "{{ url('/getAreas') }}"+"/"+CityId,
+
                         type: "GET",
                         data: {"_token": "{{ csrf_token() }}"},
                         dataType: "json",
