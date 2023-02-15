@@ -155,6 +155,17 @@
 
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa fa-chart-area"></i> <span>Statistics</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="{{route('statistics')}}">Statistics</a>
+                    </li>
+
+                </ul>
+            </li>
 
        @else
 

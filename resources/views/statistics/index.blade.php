@@ -1,11 +1,11 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage Branch Service Requests')
+@section('title','Manage Statistics')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1 class="ml-2"><strong class="bg-secondary">{{session('BranchName')}}</strong> Service Requests Statistics</h1>
+            <h1 class="ml-2">Service Requests Statistics</h1>
 
 
             <div class="section-header-breadcrumb">
@@ -21,6 +21,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Service Requests Types</h4>
+                            <div class="card-header-action">
+                                <button class="btn btn-info" id="modal-search">Search For Request</button>
+                            </div>
                             <div class="card-header-action">
 {{--                                <a href="#" class="btn active">Week</a>--}}
 {{--                                <a href="#" class="btn">Month</a>--}}
@@ -233,5 +236,9 @@
             }
         });
     </script>
+
+{{--        @include('dashboard.common._modal_search')--}}
+
+
 
 @endsection

@@ -18,7 +18,7 @@ class RequestController extends Controller
     public function index($id)
     {
         $contact = Contact::where('Id', $id)->first();
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('ContactId', '=', $id)->paginate(30);
+        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('ContactId', '=', $id)->orderBy('Id','desc')->paginate(30);
         return view('accounts.my.contacts.requests.index')
             ->with('account', $contact->AccountId)
             ->with('contact', $id)
@@ -231,9 +231,9 @@ class RequestController extends Controller
 
     }
 
-    public function history($id, $contactID)
+    public function history($id)
     {
-        $requests = RequestHistory::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('SRID', '=', $id)->paginate(10);
+        $requests = RequestHistory::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('SRID', '=', $id)->orderBy('Id','desc')->paginate(10);
         $sr = SR::where('Id', '=', $id)->first();
         return view('accounts.my.contacts.requests.history.index')
             ->with('contact', $sr->ContactId)

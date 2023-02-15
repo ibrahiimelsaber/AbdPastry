@@ -142,9 +142,7 @@ function getMailVars($typeId, $subTypeId, $branchId, $body)
             if ($defaultMailVars) {
                 sendMail($body, $defaultMailVars);
 
-
             }
-
         }
         if ($subTypeId == 792) {
             if ($hasMail) {
@@ -162,33 +160,20 @@ function getMailVars($typeId, $subTypeId, $branchId, $body)
             $defaultMailVars = MailList::where('TypeId', $typeId)->where('subTypeId', $subTypeId)->where('branchCode', '=', 'All')->first();
             if ($defaultMailVars) {
                 sendMail($body, $defaultMailVars);
-
-
             }
-
         }
 
-
         if ($subTypeId != 794 && $subTypeId != 1823 && $subTypeId != 790 && $subTypeId != 1807 && $subTypeId != 792) {
-
             if ($hasMail) {
-
                 $branchMailVars = MailList::where('TypeId', $typeId)->where('branch_id', '=', $branchId)->first();
                 if ($branchMailVars) {
                     sendMail($body, $branchMailVars);
-
-
                 }
             } else {
-
                 $mailVars = MailList::where('TypeId', $typeId)->where('branchCode', '=', 'Hubs')->first();
                 if ($mailVars) {
                     sendMail($body, $mailVars);
-
-
                 }
-
-
             }
         }
 

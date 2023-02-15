@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use JetBrains\PhpStorm\NoReturn;
+
 
 class LoginController extends Controller
 {
@@ -22,31 +22,30 @@ class LoginController extends Controller
     public function login(Request $request): RedirectResponse
     {
 
-
-        $credentials = $request->validate([
+        $validator = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
             'role' => ['required'],
         ]);
+        if (!$validator) {
+            return redirect()->back()->withErrors($validator->errors())->with('message', 'You are not authorized')->with('class', 'alert-danger');
+        }
 
-        if ($request->role == 'user') {
+        try {
+            if ($request->role == 'user') {
 
-            try {
+                $username = $validator['username'];
+                $password = $validator['password'];
+                $protectedUser = strtoupper($username);
 
-                $username = $credentials['username'];
-//                $protectedUser = strtoupper($username);
+                $user = UserLogin::whereRaw("UPPER(Username) = ?", $protectedUser)->where("Active", 1)->first();
 
-                $user = UserLogin::where("Username","=" , $username)->where("Active", 1)->first();
-//                $user = UserLogin::whereRaw("UPPER([Username]) =  ? ", $username)->where("Active", 1)->first()->toSql();
-//                dd($user);
-//                $user = UserLogin::whereRaw("UPPER([Username]) =  ? ", [$username])->where("Active", 1)->first();
                 if (!$user || $user == null) {
                     return redirect()->back()->withErrors('You are not authorized')->with('message', 'You are not authorized')->with('class', 'alert-danger');
                 }
 
-        if ($username == "ibrahim_melsaber") {
-//        if ($this->checkActiveDirectory($username, $credentials["password"])) {
-
+                if (true) {
+//                if ($this->checkActiveDirectory($username, $password)) {
                     Session::put('userId', $user->Id);
                     Session::put('userName', $user->Username);
                     Session::put('GroupId', $user->GroupId);
@@ -54,18 +53,15 @@ class LoginController extends Controller
                     Session::put('user', $user);
                     return redirect()->route('my.accounts.index');
                 } else {
-            return redirect()->back()->withErrors('You are not authorized')->with('message', 'Wrong password, please make sure you enter your windows password..!')->with('class', 'alert-danger');
-        }
-            } catch (\Exception $ex) {
-                DB::rollBack();
-                return Redirect::back()->withErrors('You are not authorized.' . $ex->getMessage())->withInput($request->all())->with('message', $ex->getMessage())->with('class', 'alert-danger');
+                    return redirect()->back()->withErrors('You are not authorized')->with('message', 'Wrong password, please make sure you enter your windows password..!')->with('class', 'alert-danger');
+                }
             }
-        }
-        if ($request->role == 'branch') {
-            try {
 
-                $Name = $credentials['username'];
-                $Password = $credentials['password'];
+            if ($request->role == 'branch') {
+
+
+                $Name = $validator['username'];
+                $Password = $validator['password'];
                 $protectedUser = strtoupper($Name);
                 $user = Branch::whereRaw('Name= ? and Password = ?', [$protectedUser, $Password])->where('Active', 1)->first();
 
@@ -79,19 +75,20 @@ class LoginController extends Controller
                 Session::put('BranchName', $user->branch->Name);
                 Session::put('role', $request->role);
                 Session::put('user', $user);
-                return redirect()->route('branch.requests.statistics',$user->BranchId);
-            } catch
-            (\Exception $ex) {
-                DB::rollBack();
-                return Redirect::back()->withErrors('You are not authorized.' . $ex->getMessage())->withInput($request->all())->with('message', $ex->getMessage())->with('class', 'alert-danger');
+                return redirect()->route('branch.requests.statistics', $user->BranchId);
             }
-
+        } catch
+        (\Exception $ex) {
+            DB::rollBack();
+            return Redirect::back()->withErrors('You are not authorized.' . $ex->getMessage())->withInput($request->all())->with('message', $ex->getMessage())->with('class', 'alert-danger');
         }
+
 
     }
 
 
-    public function logout()
+    public
+    function logout()
     {
         Session::forget('userId');
         Session::forget('userName');
@@ -99,27 +96,32 @@ class LoginController extends Controller
         Session::forget('user');
         Session::forget('role');
         Session::forget('BranchId');
+        Session::forget('BranchName');
 
         return Redirect::to('/');
     }
+
     function checkActiveDirectory($username, $password)
     {
-        $adServer = "LDAP://contactcntr.raya.corp";
 
-        $ldap = ldap_connect($adServer);
+        return true;
 
-        $ldaprdn = 'contactcntr' . "\\" . $username;
-
-        ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
-        ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
-
-        $bind = @ldap_bind($ldap, $ldaprdn, $password);
-
-        if ($bind) {
-            @ldap_close($ldap);
-            return true;
-        }
-        return false;
+//        $adServer = "LDAP://contactcntr.raya.corp";
+//
+//        $ldap = ldap_connect($adServer);
+//
+//        $ldaprdn = 'contactcntr' . "\\" . $username;
+//
+//        ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+//        ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+//
+//        $bind = @ldap_bind($ldap, $ldaprdn, $password);
+//
+//        if ($bind) {
+//            @ldap_close($ldap);
+//            return true;
+//        }
+//        return false;
     }
 
 }

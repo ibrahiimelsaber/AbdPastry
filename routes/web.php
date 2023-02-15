@@ -351,6 +351,8 @@ Route::get('branch/requests/{id}/edit', [ClientBranchController::class, 'edit'])
 Route::put('branch/requests/{id}/update', [ClientBranchController::class, 'update'])->name('branch.requests.update');
 
 
+Route::get('statistics',[UtilityController::class, 'statistics'])->name('statistics');
+
 
 
 
