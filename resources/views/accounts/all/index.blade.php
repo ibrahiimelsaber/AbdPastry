@@ -57,6 +57,10 @@
                                                    <a href="{{route('all.account.contacts.index',$account->Id)}}"
                                                                class="btn btn-warning"><i class="fa fa-eye"> Contacts</i>
                                                             </a>
+         <a href="{{route('all.account.eed-surveys.index',$account->Id)}}"
+                                                               class="btn btn-info"><i class="fa fa-question"> Eed Surveys</i>
+                                                            </a>
+
                                                     </td>
 
                                                 </tr>

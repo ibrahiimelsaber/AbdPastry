@@ -76,6 +76,28 @@
                 </ul>
             </li>
 
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa fa-question"></i> <span>My Surveys</span>
+                </a>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a class="nav-link" href="{{route('my.activities.index')}}">Surveys</a>
+                    </li>
+
+
+                </ul>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a class="nav-link" href="{{route('my.eed-surveys.index')}}">Eid Surveys</a>
+                    </li>
+
+
+                </ul>
+            </li>
+
             <li class="menu-header">All Actions</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
@@ -126,6 +148,28 @@
 
                     <li>
                         <a class="nav-link" href="{{route('all.activities.index')}}">Activities</a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa fa-question"></i> <span>All Surveys</span>
+                </a>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a class="nav-link" href="{{route('all.activities.index')}}">Surveys</a>
+                    </li>
+
+
+                </ul>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a class="nav-link" href="{{route('all.eed-surveys.index')}}">Eid Surveys</a>
                     </li>
 
 

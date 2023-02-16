@@ -47,6 +47,15 @@ class UtilityController extends Controller
 
         return response()->json($subsubTypes);
     }
+    public function getSubQuestion($id)
+    {
+        $subQuestion = DB::table('picklists')
+            ->where('ParentId', '=', $id)
+            ->where('Active','=',1)
+            ->pluck('name', 'id');
+
+        return response()->json($subQuestion);
+    }
 
     public function statistics()
     {

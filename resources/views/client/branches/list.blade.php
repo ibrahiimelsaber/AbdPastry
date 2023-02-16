@@ -151,7 +151,7 @@
                                     @else
                                         <div class="text-center p-3 text-muted">
                                             <h5>No Results</h5>
-                                            <p>Looks like you have not added any users yet!</p>
+                                            <p>Looks like you have not added any requests yet!</p>
                                         </div>
                                     @endif
                                 </div>

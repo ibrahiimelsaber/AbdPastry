@@ -61,6 +61,10 @@
                                                                class="btn btn-warning"><i class="fa fa-eye"> Contacts</i>
                                                             </a>
 
+                                                            <a href="{{route('my.account.eed-surveys.index',$account->Id)}}"
+                                                               class="btn btn-info"><i class="fa fa-question"> Eed Surveys</i>
+                                                            </a>
+
                                                     </td>
 
                                                 </tr>
@@ -70,7 +74,7 @@
                                     @else
                                         <div class="text-center p-3 text-muted">
                                             <h5>No Results</h5>
-                                            <p>Looks like you have not added any users yet!</p>
+                                            <p>Looks like you have not added any accounts yet!</p>
                                         </div>
                                     @endif
                                 </div>
