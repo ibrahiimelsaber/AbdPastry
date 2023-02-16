@@ -14,6 +14,11 @@ class Request extends Model
     public const UPDATED_AT = 'Modified';
 
 
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'AccountId', 'Id');
+    }
+
     public function contact()
     {
         return $this->belongsTo(Contact::class, 'ContactId', 'Id');

@@ -1,16 +1,24 @@
-<form class="form-inline mr-auto" action="{{route('account.search')}}">
+<?php
+$route = "";
+if (session('role') == 'user') {
+    $route = "account.search";
+}
+if (session('role') == 'branch') {
+
+    $route = "branch.account.search";
+}
+?>
+<form class="form-inline mr-auto" action="{{route($route)}}">
     <ul class="navbar-nav mr-3">
         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
         {{--<li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>--}}
     </ul>
-    @if(session('role') == 'user')
-        <div class="search-element">
-            <input class="form-control" name="search" type="search"
-                   placeholder="Search For Account Name Or Phone" aria-label="Search" data-width="300">
-            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-            <div class="search-backdrop"></div>
-        </div>
-    @endif
+    <div class="search-element">
+        <input class="form-control" name="search" type="search"
+               placeholder="Search For Account Name Or Phone" aria-label="Search" data-width="300">
+        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        <div class="search-backdrop"></div>
+    </div>
 </form>
 <ul class="navbar-nav navbar-right">
     {{--<li class="dropdown dropdown-list-toggle">
@@ -48,7 +56,11 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right">
             {{--      <div class="dropdown-title"> {{ session('userName') }}</div>--}}
-            <div class="dropdown-title">   @if(session('role') == 'user'){{ session('GroupId') == 1 ? 'Agent' : 'Team Leader'}}@else {{session('BranchName')}} @endif</div>
+            <div class="dropdown-title">   @if(session('role') == 'user')
+                    {{ session('GroupId') == 1 ? 'Agent' : 'Team Leader'}}
+                @else
+                    {{session('BranchName')}}
+                @endif</div>
             <a href="" class="dropdown-item has-icon disabled">
                 <i class="far fa-user"></i> {{ session('userName') }}
             </a>
