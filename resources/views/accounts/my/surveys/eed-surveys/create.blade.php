@@ -506,7 +506,7 @@
 
                                 if (data) {
                                     $('#Eid_q3_subID').empty();
-                                    $('#Eid_q3_subID').append('<option value="0" hidden>إختر الإجابة</option>');
+                                    $('#Eid_q3_subID').append('<option value="0" hidden>إختر المكان</option>');
                                     $.each(data, function (key, val) {
                                         // console.log('<option value="' + key + '">' + val + '</option>');
                                         $('select[name="Eid_q3_subID"]').append('<option value="' + key + '">' + val + '</option>');
@@ -541,7 +541,7 @@
 
                                 if (data) {
                                     $('#Eid_q6_subID').empty();
-                                    $('#Eid_q6_subID').append('<option value="0" hidden>إختر الإجابة</option>');
+                                    $('#Eid_q6_subID').append('<option value="0" hidden>إختر المنتج</option>');
                                     $.each(data, function (key, val) {
                                         // console.log('<option value="' + key + '">' + val + '</option>');
                                         $('select[name="Eid_q6_subID"]').append('<option value="' + key + '">' + val + '</option>');
@@ -576,7 +576,7 @@
 
                                 if (data) {
                                     $('#Eid_q7_subID').empty();
-                                    $('#Eid_q7_subID').append('<option value="0" hidden>إختر الإجابة</option>');
+                                    $('#Eid_q7_subID').append('<option value="0" hidden>إختر المنتج</option>');
                                     $.each(data, function (key, val) {
                                         // console.log('<option value="' + key + '">' + val + '</option>');
                                         $('select[name="Eid_q7_subID"]').append('<option value="' + key + '">' + val + '</option>');

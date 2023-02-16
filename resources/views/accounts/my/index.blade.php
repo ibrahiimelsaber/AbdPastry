@@ -61,8 +61,11 @@
                                                                class="btn btn-warning"><i class="fa fa-eye"> Contacts</i>
                                                             </a>
 
-                                                            <a href="{{route('my.account.eed-surveys.index',$account->Id)}}"
-                                                               class="btn btn-info"><i class="fa fa-question"> Eed Surveys</i>
+                                                            <a href="{{route('all.account.surveys.index',$account->Id)}}"
+                                                               class="btn btn-info"><i class="fa fa-question"> Surveys</i>
+                                                            </a>
+    <a href="{{route('my.account.eed-surveys.index',$account->Id)}}"
+                                                               class="btn btn-primary"><i class="fa fa-question"> Eed Surveys</i>
                                                             </a>
 
                                                     </td>

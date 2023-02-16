@@ -1,12 +1,12 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Manage my Eed Surveys')
+@section('title','Manage my Surveys')
 
 @section('content')
     <section class="section">
 
         <div class="section-header">
-            <h1 class="ml-2">Manage My Eed Surveys</h1>
+            <h1 class="ml-2">Manage My Surveys</h1>
     <h1 class="ml-2">|| </h1>
             <a href="{{route('my.accounts.index')}}"
                class="ml-2 btn btn-primary">Return Back
@@ -23,12 +23,12 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>My Eed Surveys <span>({{ $total }})</span></h4>
+                                <h4>My Surveys <span>({{ $total }})</span></h4>
                                 <div class="card-header-action">
 
 
-                                        <a href="{{route('my.account.eed-surveys.create',$account)}}"
-                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Eed Survey</a>
+                                        <a href="{{route('my.account.surveys.create',$account)}}"
+                                           class="btn btn-primary"><i class="fas fa-plus"></i> Add New Survey</a>
 
                                 </div>
                             </div>
@@ -51,12 +51,12 @@
                                             @foreach($surveys as $survey)
                                                 <tr>
 
-                                                    <td>{{ $survey->account->Id }}</td>
-                                                    <td>{{ $survey->account->Name }}</td>
+                                                    <td>{{ optional($survey->account)->Id }}</td>
+                                                    <td>{{ optional($survey->account)->Name }}</td>
                                                     <td>{{ $survey->id }}</td>
-                                                        <td>{{ $survey->callStatus->Name }}</td>
-                                                    <td>{{ $survey->createdOn }}</td>
-                                                    <td>{{ $survey->createdBy }}</td>
+                                                        <td>{{ optional($survey->callStatus)->Name }}</td>
+                                                    <td>{{ $survey->CreatedOn }}</td>
+                                                    <td>{{ $survey->CreatedBy }}</td>
 
                                                     <td>
 

@@ -14,6 +14,8 @@ use App\Http\Controllers\Account\All\AccountController as AllAccounts;
 use App\Http\Controllers\Account\My\Contact\ContactController as MyAccountContacts;
 use App\Http\Controllers\Account\My\Surveys\EedSurveyController as MyEedSurveyController;
 use App\Http\Controllers\Account\All\Surveys\EedSurveyController as AllEedSurveyController;
+use App\Http\Controllers\Account\My\Surveys\SurveyController as MySurveyController;
+use App\Http\Controllers\Account\All\Surveys\SurveyController as AllSurveyController;
 use App\Http\Controllers\Account\All\Contact\ContactController as AllAccountContacts;
 use App\Http\Controllers\Account\My\Contact\Request\RequestController as MyAccountContactsRequests;
 use App\Http\Controllers\Account\All\Contact\Request\RequestController as AllAccountContactsRequests;
@@ -123,12 +125,16 @@ Route::group(['prefix' => 'my', 'as' => 'my.'], function () {
         Route::get('eed-surveys/{id}/edit', [MyEedSurveyController::class, 'edit'])->name('eed-surveys.edit');
         Route::put('eed-surveys/{id}/update', [MyEedSurveyController::class, 'update'])->name('eed-surveys.update');
         Route::delete('eed-surveys/{id}/delete', [MyEedSurveyController::class, 'delete'])->name('eed-surveys.delete');
-
-
-
-
         //End OF Eed Survey
 
+        //Normal Survey
+        Route::get('{id}/surveys', [MySurveyController::class, 'index'])->name('surveys.index');
+        Route::get('{id}/surveys/create', [MySurveyController::class, 'create'])->name('surveys.create');
+        Route::post('surveys/store', [MySurveyController::class, 'store'])->name('surveys.store');
+        Route::get('surveys/{id}/edit', [MySurveyController::class, 'edit'])->name('surveys.edit');
+        Route::put('surveys/{id}/update', [MySurveyController::class, 'update'])->name('surveys.update');
+        Route::delete('surveys/{id}/delete', [MySurveyController::class, 'delete'])->name('surveys.delete');
+        //End OF Normal Survey
 
         // Go To Resources => views => contacts => my => blades
         Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
@@ -157,6 +163,7 @@ Route::group(['prefix' => 'my', 'as' => 'my.'], function () {
     });
 
     //Eed Survey
+    Route::get('/norm-surveys', [MySurveyController::class, 'mySurveys'])->name('surveys.mine');
     Route::get('/eed-surveys', [MyEedSurveyController::class, 'my'])->name('eed-surveys.index');
 
 });
@@ -283,6 +290,14 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
         Route::put('eed-surveys/{id}/update', [AllEedSurveyController::class, 'update'])->name('eed-surveys.update');
         Route::delete('eed-surveys/{id}/delete', [AllEedSurveyController::class, 'delete'])->name('eed-surveys.delete');
 
+        //Normal Survey
+        Route::get('{id}/surveys', [AllSurveyController::class, 'index'])->name('surveys.index');
+        Route::get('{id}/surveys/create', [AllSurveyController::class, 'create'])->name('surveys.create');
+        Route::post('surveys/store', [AllSurveyController::class, 'store'])->name('surveys.store');
+        Route::get('surveys/{id}/edit', [AllSurveyController::class, 'edit'])->name('surveys.edit');
+        Route::put('surveys/{id}/update', [AllSurveyController::class, 'update'])->name('surveys.update');
+        Route::delete('surveys/{id}/delete', [AllSurveyController::class, 'delete'])->name('surveys.delete');
+
 
         // Go To Resources => views => contacts => my => blades
         Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
@@ -311,6 +326,7 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
     });
     //Eed Survey
     Route::get('/eed-surveys', [AllEedSurveyController::class, 'all'])->name('eed-surveys.index');
+    Route::get('/surveys', [AllSurveyController::class, 'all'])->name('surveys.index');
 });
 
 // Go To Resources => views => contacts => all => blades

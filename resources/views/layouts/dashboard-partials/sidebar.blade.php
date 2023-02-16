@@ -83,7 +83,7 @@
                 <ul class="dropdown-menu">
 
                     <li>
-                        <a class="nav-link" href="{{route('my.activities.index')}}">Surveys</a>
+                        <a class="nav-link" href="{{route('my.surveys.mine')}}">Surveys</a>
                     </li>
 
 
@@ -161,7 +161,7 @@
                 <ul class="dropdown-menu">
 
                     <li>
-                        <a class="nav-link" href="{{route('all.activities.index')}}">Surveys</a>
+                        <a class="nav-link" href="{{route('all.surveys.index')}}">Surveys</a>
                     </li>
 
 
