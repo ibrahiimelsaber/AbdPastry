@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Account\My\Phone\PhoneController as MyPhoneController;
+use App\Http\Controllers\Account\All\Phone\PhoneController as AllPhoneController;
 use App\Http\Controllers\Account\My\Surveys\SurveyController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BranchController;
@@ -83,6 +85,10 @@ Route::put('branches/{id}/update', [BranchController::class, 'update'])->name('b
 Route::get('branches/{id}/deactivate', [BranchController::class, 'deactivate'])->name('branches.deactivate');
 Route::get('branches/{id}/activate', [BranchController::class, 'activate'])->name('branches.activate');
 
+
+Route::get('phones/{id}/deactivate', [MyPhoneController::class, 'deactivate'])->name('phones.deactivate');
+Route::get('phones/{id}/activate', [MyPhoneController::class, 'activate'])->name('phones.activate');
+
 /* branches managements routes */
 Route::group(['prefix' => 'branch', 'as' => 'branch.'], function () {
     Route::get('/{id}/users', [BranchUsersController::class, 'branch'])->name('users.list');
@@ -135,6 +141,18 @@ Route::group(['prefix' => 'my', 'as' => 'my.'], function () {
         Route::put('surveys/{id}/update', [MySurveyController::class, 'update'])->name('surveys.update');
         Route::delete('surveys/{id}/delete', [MySurveyController::class, 'delete'])->name('surveys.delete');
         //End OF Normal Survey
+
+
+        //my accounts phones
+        Route::get('{id}/phones', [MyPhoneController::class, 'index'])->name('phones.index');
+        Route::get('{id}/phones/create', [MyPhoneController::class, 'create'])->name('phones.create');
+        Route::post('phones/store', [MyPhoneController::class, 'store'])->name('phones.store');
+        Route::get('phones/{id}/edit', [MyPhoneController::class, 'edit'])->name('phones.edit');
+        Route::put('phones/{id}/update', [MyPhoneController::class, 'update'])->name('phones.update');
+        Route::delete('phones/{id}/delete', [MyPhoneController::class, 'delete'])->name('phones.delete');
+
+
+        // Go To Resources => views => contacts => my => blades
 
         // Go To Resources => views => contacts => my => blades
         Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
@@ -297,6 +315,15 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
         Route::get('surveys/{id}/edit', [AllSurveyController::class, 'edit'])->name('surveys.edit');
         Route::put('surveys/{id}/update', [AllSurveyController::class, 'update'])->name('surveys.update');
         Route::delete('surveys/{id}/delete', [AllSurveyController::class, 'delete'])->name('surveys.delete');
+
+
+        //all accounts phones
+        Route::get('{id}/phones', [AllPhoneController::class, 'index'])->name('phones.index');
+        Route::get('{id}/phones/create', [AllPhoneController::class, 'create'])->name('phones.create');
+        Route::post('phones/store', [AllPhoneController::class, 'store'])->name('phones.store');
+        Route::get('phones/{id}/edit', [AllPhoneController::class, 'edit'])->name('phones.edit');
+        Route::put('phones/{id}/update', [AllPhoneController::class, 'update'])->name('phones.update');
+        Route::delete('phones/{id}/delete', [AllPhoneController::class, 'delete'])->name('phones.delete');
 
 
         // Go To Resources => views => contacts => my => blades

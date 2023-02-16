@@ -47,6 +47,9 @@
 
                                                 <td>
 
+                                                    <a href="{{route('all.account.phones.index',$account->Id)}}"
+                                                       class="btn btn-danger"><i class="fa fa-phone"> Phones</i>
+                                                    </a>
                                                     <a href="{{route('all.accounts.edit',$account->Id)}}"
                                                        class="btn btn-primary"><i class="fa fa-edit"> Update Account</i>
                                                     </a>
