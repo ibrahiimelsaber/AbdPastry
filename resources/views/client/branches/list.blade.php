@@ -100,7 +100,8 @@
                                             <thead>
                                             <tr>
 
-                                                <th>Contact Name</th>
+                                                <th>Account Name</th>
+                                                <th>Account Phone</th>
                                                 <th>Branch Name</th>
                                                 <th>Request Id</th>
                                                 <th>Status</th>
@@ -121,7 +122,8 @@
                                             <tbody>
                                             @foreach($requests as $request)
                                                 <tr>
-                                                    <td>{{ optional($request->contact)->Name }}</td>
+                                                    <td>{{ optional($request->contact->account)->Name }}</td>
+                                                    <td>{{ optional($request->contact->account)->PhoneNumber }}</td>
                                                     <td class="font-weight-bolder">{{ optional($request->branch)->Name }}</td>
                                                     <td>{{ $request->Id }}</td>
                                                     <td class="font-weight-bolder">{{ optional($request->status)->Name }}</td>

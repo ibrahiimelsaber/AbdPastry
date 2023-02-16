@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Branch;
+use App\Models\Contact;
 use App\Models\Picklist;
 use App\Models\Request as SR;
 use App\Models\userLogin;
@@ -52,6 +54,51 @@ class ClientBranchController extends Controller
 //        dd($request->all());
         $branch = DB::table('picklists')->where('Id', $request->BranchID)->first();
         $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->Search($request->all())->paginate(20);
+
+        $status = DB::table('picklists')
+            ->where('Type', '=', 'Status')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        $srTypes = DB::table('picklists')
+            ->where('Type', '=', 'Type')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        $products = DB::table('picklists')
+            ->where('Type', '=', 'Product')
+            ->where('Active', '=', '1')
+            ->pluck('name', 'id');
+
+        return view('client.branches.list')
+            ->with('branch', $branch)
+            ->with('requests', $requests)
+            ->with('searchStatus', $status)
+            ->with('searchSrTypes', $srTypes)
+            ->with('searchProducts', $products)
+            ->with('total', $requests->total())
+            ->with('indexUrl', route('branch.requests.list'));
+    }
+
+
+    public function searchAccount(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), ['search' => 'required']);
+
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator->errors())
+                ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
+        }
+
+        $branch = DB::table('picklists')->where('Id', session('BranchId'))->first();
+        $payload = trim($request['search']);
+        $accounts = Account::where('Name', 'like', '%' . $payload . '%')->orWhere('PhoneNumber', '=', $payload)->pluck('id')->toArray();
+        $contacts = Contact::whereIn('AccountId',$accounts)->pluck('id')->toArray();
+
+      $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId',session('BranchId'))->whereIn('ContactId', $contacts)->orderBy('Id','desc')->paginate(20);
+//        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->Accsearch($contacts)->orderBy('Id','desc')->paginate(20);
 
         $status = DB::table('picklists')
             ->where('Type', '=', 'Status')

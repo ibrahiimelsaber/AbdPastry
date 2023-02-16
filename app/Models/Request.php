@@ -14,10 +14,10 @@ class Request extends Model
     public const UPDATED_AT = 'Modified';
 
 
-    public function account()
-    {
-        return $this->belongsTo(Account::class, 'AccountId', 'Id');
-    }
+//    public function account()
+//    {
+//        return $this->belongsTo(Account::class, 'AccountId', 'Id');
+//    }
 
     public function contact()
     {
@@ -73,6 +73,7 @@ class Request extends Model
 
     public function scopeSearch($query, $data)
     {
+
         if (isset($data['from']) && isset($data["to"]) && $data['from'] != "" && $data["to"] != "") {
 
             $query = $query->whereDate('Created', '>=', $data['from'])
@@ -95,6 +96,14 @@ class Request extends Model
         }
 
         return $query;
+    }
+
+    public function scopeAccsearch($query, $data)
+    {
+//        $query = $query->where('BranchId',session('BranchId'));
+//        if (isset($data['search']) && $data['search'] != "") {
+            return $query->whereIn('ContactId', $data);
+//        }
     }
 
 
