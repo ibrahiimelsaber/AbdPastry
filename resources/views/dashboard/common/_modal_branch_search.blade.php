@@ -32,7 +32,7 @@
             });
 
             $.ajax({
-                url: '/statistics-search',
+                url: '/branch-search',
                 type: "GET",
                 data: form_data,
                 dataType: "json",

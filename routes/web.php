@@ -432,6 +432,7 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
 
 
 Route::get('branch-search', [ClientBranchController::class, 'search'])->name('branch.search');
+//Route::get('statistics-search', [ClientBranchController::class, 'searchStatistics'])->name('statistics.search');
 Route::get('accounts/search', [ClientBranchController::class, 'searchAccount'])->name('branch.account.search');
 Route::get('branch/requests/search', [ClientBranchController::class, 'search'])->name('branch.requests.list');
 Route::get('branch/{id}/statistics',[ClientBranchController::class, 'statistics'])->name('branch.requests.statistics');
@@ -441,6 +442,7 @@ Route::put('branch/requests/{id}/update', [ClientBranchController::class, 'updat
 
 
 Route::get('statistics',[UtilityController::class, 'statistics'])->name('statistics');
+
 
 
 
