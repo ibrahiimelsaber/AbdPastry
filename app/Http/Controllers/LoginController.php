@@ -16,8 +16,15 @@ class LoginController extends Controller
 
     public function show()
     {
-        $agents = Agent::orderBy('Id')->paginate(10);
-        return view('login')->with('agents', $agents);
+        $agents = Agent::orderBy('Id')->paginate(6);
+
+        if (count($agents) > 0) {
+            return view('login')->with('agents', $agents);
+        }
+
+        return view('dlogin');
+
+
     }
 
     public function login(Request $request)

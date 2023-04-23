@@ -57,7 +57,13 @@
                                                        class="btn btn-primary"><i class="fa fa-user-cog"> Update
                                                             Agent</i>
                                                     </a>
+                                                    <a href="{{route('agents.delete',$agent->id)}}"
+                                                       class="btn btn-danger"><i class="fa fa-trash"> Delete
+                                                            Agent</i>
+                                                    </a>
                                                 </td>
+
+
 
                                             </tr>
                                         @endforeach

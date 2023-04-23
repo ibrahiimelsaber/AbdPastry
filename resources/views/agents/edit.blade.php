@@ -1,13 +1,13 @@
 @extends('layouts.dashboard-master')
 
-@section('title','Edit User')
+@section('title','Edit Agent')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Update User</h1>
+            <h1>Update Agent</h1>
             <h1 class="ml-2">|| </h1>
-            <a href="{{route('users.index')}}"
+            <a href="{{route('agents.index')}}"
                class="ml-2 btn btn-primary">Return Back</a>
             <div class="section-header-breadcrumb">
                 @include('dashboard.common._breadcrumbs')
@@ -20,84 +20,75 @@
                     @include('dashboard.common._alert_message')
                     <div class="card">
                         <div class="card-header">
-                            <h4>Update User</h4>
+                            <h4>Update Agent</h4>
                         </div>
                         <div class="card-body">
 
-                            <form method="POST" action="{{ route('users.update',$user->Id) }}"
+                            <form method="POST" action="{{ route('agents.update',$user->id) }}"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
 
 
-                                <!-- User Name -->
+                                <!-- Agent Name -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">User Name</label>
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Agent Name</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="Username" value="{{old('Username',$user->Username)}}"
-                                               class="form-control @error('Username') is-invalid @enderror"/>
+                                        <input type="text" name="username" value="{{old('username',$user->username)}}"
+                                               class="form-control @error('username') is-invalid @enderror"/>
 
-                                        @error('Username')
+                                        @error('username')
                                         <div class="invalid-feedback">
-                                            <p>{{ $errors->first('Username') }}</p>
+                                            <p>{{ $errors->first('username') }}</p>
                                         </div>
                                         @enderror
                                     </div>
                                 </div>
 
 
-
-                                <!--Call Status and Call Back Status-->
-
+                                <!-- Agent Image -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">User Group</label>
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Agent Image</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <select class="form-control @error('GroupId') is-invalid @enderror"
-                                                name="GroupId" id="GroupId">
-
-                                            <option {{$user->GroupId==1?' selected ':''}}  value="1">Agent</option>
-                                            <option {{$user->GroupId==2?' selected ':''}}  value="2">Team Leader</option>
-                                            <option {{$user->GroupId==3?' selected ':''}}  value="3">Admin</option>
-
-                                        </select>
-                                        @error('GroupId')
+                                        <input type="file" name="image" id="formFileLg"
+                                               value="{{$user->name}}"
+                                               class="form-control form-control-file border border-danger @error('image') is-invalid @enderror"/>
+                                        @error('image')
                                         <div class="invalid-feedback">
-                                            <p>{{ $errors->first('GroupId') }}</p>
+                                            <p>{{ $errors->first('image') }}</p>
                                         </div>
                                         @enderror
                                     </div>
+                                    <div>
 
-
+                                    </div>
                                 </div>
 
+                                <input type="text" name="old_path" value="{{$user->path}}" hidden>
+                                <input type="text" name="old_name" value="{{$user->name}}" hidden>
 
-                                <!--Call Status and Call Back Status-->
-
+                                <!-- Agent Percentage -->
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">User Activation</label>
+                                    <label class="col-form-label  col-12 col-md-2 col-lg-1">Agent Percentage</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <select class="form-control @error('Active') is-invalid @enderror"
-                                                name="Active" id="Active">
+                                        <input type="number" name="percentage" max="100"
+                                               value="{{old('percentage',$user->percentage)}}"
+                                               class="form-control @error('percentage') is-invalid @enderror"/>
 
-                                            <option {{$user->Active==1?' selected ':''}}  value="1">Active</option>
-                                            <option {{$user->Active==0?' selected ':''}}  value="0">Deactivate</option>
-
-                                        </select>
-                                        @error('Active')
+                                        @error('percentage')
                                         <div class="invalid-feedback">
-                                            <p>{{ $errors->first('Active') }}</p>
+                                            <p>{{ $errors->first('percentage') }}</p>
                                         </div>
                                         @enderror
                                     </div>
-
                                 </div>
 
 
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label  col-12 col-md-2 col-lg-1"></label>
                                     <div class="col-sm-12 col-md-9">
-                                        <button type="submit" class="btn btn-primary">Update User</button>
+                                        <button type="submit" class="btn btn-primary">Update Agent</button>
                                     </div>
                                 </div>
                             </form>
@@ -118,7 +109,7 @@
                 var TypeID = $(this).val();
                 if (TypeID) {
                     $.ajax({
-                        url: "{{ url('/getSubTypes') }}"+"/"+TypeID,
+                        url: "{{ url('/getSubTypes') }}" + "/" + TypeID,
                         type: "GET",
                         data: {"_token": "{{ csrf_token() }}"},
                         dataType: "json",
@@ -145,7 +136,7 @@
                 var ProductId = $(this).val();
                 if (ProductId) {
                     $.ajax({
-                        url: "{{ url('/getSubProducts') }}"+"/"+ProductId,
+                        url: "{{ url('/getSubProducts') }}" + "/" + ProductId,
                         type: "GET",
                         data: {"_token": "{{ csrf_token() }}"},
                         dataType: "json",

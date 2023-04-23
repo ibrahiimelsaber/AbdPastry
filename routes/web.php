@@ -82,8 +82,7 @@ Route::get('agents/create', [AgentController::class, 'create'])->name('agents.cr
 Route::post('agents/store', [AgentController::class, 'store'])->name('agents.store');
 Route::get('agents/{id}/edit', [AgentController::class, 'edit'])->name('agents.edit');
 Route::put('agents/{id}/update', [AgentController::class, 'update'])->name('agents.update');
-Route::get('agents/{id}/deactivate', [AgentController::class, 'deactivate'])->name('agents.deactivate');
-Route::get('agents/{id}/activate', [AgentController::class, 'activate'])->name('agents.activate');
+Route::get('agents/{id}/deactivate', [AgentController::class, 'destroy'])->name('agents.delete');
 
 
 
