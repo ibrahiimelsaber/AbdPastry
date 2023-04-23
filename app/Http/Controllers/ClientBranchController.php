@@ -18,7 +18,7 @@ class ClientBranchController extends Controller
         $branch = DB::table('picklists')->where('Id', $id)->first();
 //        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('Id', '=', 44286)->first();
 //        dd($requests);
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId', '=', $id)->orderBy('Id', 'desc')->paginate(30);
+        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId', '=', $id)->orderBy('Id', 'desc')->paginate(10);
         $status = DB::table('picklists')
             ->where('Type', '=', 'Status')
             ->where('Active', '=', '1')
@@ -50,7 +50,7 @@ class ClientBranchController extends Controller
 
 //        dd($request->all());
         $branch = DB::table('picklists')->where('Id', $request->BranchID)->first();
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->Search($request->all())->paginate(20);
+        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->Search($request->all())->paginate(10);
 
         $status = DB::table('picklists')
             ->where('Type', '=', 'Status')
@@ -94,7 +94,7 @@ class ClientBranchController extends Controller
         $accounts = Account::where('Name', 'like', '%' . $payload . '%')->orWhere('PhoneNumber', '=', $payload)->pluck('id')->toArray();
         $contacts = Contact::whereIn('AccountId', $accounts)->pluck('id')->toArray();
 
-        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId', session('BranchId'))->whereIn('ContactId', $contacts)->orderBy('Id', 'desc')->paginate(20);
+        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId', session('BranchId'))->whereIn('ContactId', $contacts)->orderBy('Id', 'desc')->paginate(10);
 //        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->Accsearch($contacts)->orderBy('Id','desc')->paginate(20);
 
         $status = DB::table('picklists')

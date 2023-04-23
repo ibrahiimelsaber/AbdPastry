@@ -81,6 +81,15 @@ class Request extends Model
             $query = $query->whereDate('Created', '>=', $data['from'])
                 ->whereDate('Created', '<=', $data['to']);
         }
+        if (isset($data['from'])  && $data['from'] != "") {
+
+            $query = $query->whereDate('Created', '>=', $data['from']);
+        }
+
+        if (isset($data['to'])  && $data["to"] != "") {
+
+            $query = $query->whereDate('Created', '<=', $data['to']);
+        }
 
         if (isset($data['BranchId'])) {
 
