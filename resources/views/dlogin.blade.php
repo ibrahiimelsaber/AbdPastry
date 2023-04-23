@@ -29,8 +29,7 @@
                          class="shadow-light rounded-circle mb-5 mt-2">
                     <h4 class="text-dark font-weight-normal">Welcome to <span
                             class="font-weight-bold">Al-abd Pastry CRM</span></h4>
-                    <p class="text-muted">Before you get started, you must login with your Rayacx Username And
-                        Password.</p>
+                    <p class="text-muted">Before you get started, you must log in with your username, password and choose your role.</p>
 
                     @include('dashboard.common._alert_message')
                     <form method="POST" action="{{ route('login.perform') }}">
@@ -72,7 +71,7 @@
                                     name="role" id="GroupId">
 
                                 <option value="">Choose User Role</option>
-                                <option value="user">Crm</option>
+                                <option value="user">Agent</option>
                                 <option value="branch">Branch</option>
 
                             </select>
@@ -116,7 +115,7 @@
             </div>
             <div
                 class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y  position-relative overlay-gradient-bottom"
-                data-background="{{asset('assets/img/abd-logo3.jpg')}}">
+                data-background="{{asset('assets/img/abd-logo7.jpg')}}">
                 <div class="absolute-bottom-left index-2">
                     <div class="text-light p-5 pb-2">
                         <div class="mb-5 pb-3">
