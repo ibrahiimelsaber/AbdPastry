@@ -2,56 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branch;
-use App\Models\userLogin;
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class BranchUsersController extends Controller
+class AgentController extends Controller
 {
 
     public function index()
     {
-        $users = userLogin::orderBy('Id')->paginate(10);
+//        $agents = Agent::where('id', 5)->first();
+//        dd($agents->path);
+        $agents = Agent::orderBy('Id')->paginate(10);
 
-        return view('branches.users.index')
-            ->with('branches', $users)
-            ->with('total', $users->total())
-            ->with('indexUrl', route('users.index'));
-    }
-
-    public function branch($id)
-    {
-        $users = Branch::where('BranchId', '=', $id)->paginate(20);
-        $branch = DB::table('picklists')->where('Id', $id)->first();
-
-
-        return view('branches.users.list')
-            ->with('users', $users)
-            ->with('branch', $branch)
-            ->with('total', $users->total())
-            ->with('indexUrl', route('branch.users.list', $id));
+        return view('agents.index')
+            ->with('agents', $agents)
+            ->with('total', $agents->total())
+            ->with('indexUrl', route('agents.index'));
     }
 
 
-    public function create($id)
+    public function create()
     {
-        $branch = DB::table('picklists')->where('Id', $id)->first();
-        return view('branches.users.create')->with('branch', $branch);
+        return view('agents.create');
     }
 
 
     public function store(Request $request)
     {
-        try {
-            DB::beginTransaction();
-            $rules = [
-                'Name' => 'required|unique:branch_users|min:6',
-                'Password' => 'required|min:8',
-                'BranchId' => 'required',
 
+        try {
+
+            $rules = [
+                'username' => 'required',
+                'percentage' => 'required',
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             ];
             $validator = Validator::make($request->all(), $rules);
 
@@ -61,21 +48,28 @@ class BranchUsersController extends Controller
                     ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
             }
 
+            // process image
+            $file_extension = $request->file('image')->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'images/agents';
+            $db_path = $request->file('image')->move($path, $file_name);
 
-            DB::table('branch_users')->insert(
+
+            DB::beginTransaction();
+
+            DB::table('agents')->insert(
                 [
-                    'Name' => $request->Name,
-                    'BranchId' => $request->BranchId,
-                    'Password' => $request->Password,
-                    'Active' => 1,
-                    'created_at' => now(),
+                    'username' => $request->username,
+                    'percentage' => $request->percentage,
+                    'name' => $file_name,
+                    'path' => $db_path,
                     'created_by' => session('userName'),
-
+                    'created_at' => now(),
                 ]);
 
             DB::commit();
 
-            return redirect()->back()->with('message', 'User is created successfully')->with('class', 'alert-success');
+            return redirect()->back()->with('message', 'Agent is created successfully')->with('class', 'alert-success');
 
         } catch (\Exception $ex) {
             DB::rollBack();
@@ -92,22 +86,19 @@ class BranchUsersController extends Controller
 
     public function edit($id)
     {
-
-        $user = Branch::with('branch')->where('Id', $id)->first();
-
-        return view('branches.users.edit')->with('user', $user);
+        $user = DB::table('agents')->where('Id', $id)->first();
+        return view('agents.edit')->with('user', $user);
     }
 
 
     public function update(Request $request, $id)
     {
-        $branch = DB::table('branch_users')->where('Id', $id)->first();
         try {
             DB::beginTransaction();
             $rules = [
-                'Name' => 'required|unique:branch_users,Name, ' . $branch->Id,
-                'Password' => 'required|min:8',
-
+                'Username' => 'required',
+                'GroupId' => 'required',
+                'Active' => 'required'
             ];
             $validator = Validator::make($request->all(), $rules);
 
@@ -118,12 +109,11 @@ class BranchUsersController extends Controller
             }
 
 
-            DB::table('branch_users')->where('Id', $id)->update(
+            DB::table('agents')->where('Id', $id)->update(
                 [
-                    'Name' => $request->Name,
-                    'Password' => $request->Password,
-                    'updated_at' => now(),
-                    'updated_by' => session('userName'),
+                    'Username' => $request->Username,
+                    'GroupId' => $request->GroupId,
+                    'Active' => $request->Active
                 ]);
 
             DB::commit();
@@ -144,18 +134,18 @@ class BranchUsersController extends Controller
      */
     public function destroy($id)
     {
-        dd('hi');
+        //
     }
 
     public function deactivate($id)
     {
-        $user = DB::table('branch_users')->where('Id', $id)->update(['Active' => 0]);
+        $user = DB::table('agents')->where('Id', $id)->update(['Active' => 0]);
         return redirect()->back()->with('message', 'User is deactivated successfully')->with('class', 'alert-success');
     }
 
     public function activate($id)
     {
-        $user = DB::table('branch_users')->where('Id', $id)->update(['Active' => 1]);
+        $user = DB::table('agents')->where('Id', $id)->update(['Active' => 1]);
         return redirect()->back()->with('message', 'User is activated successfully')->with('class', 'alert-success');
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\My\Phone\PhoneController as MyPhoneController;
 use App\Http\Controllers\Account\All\Phone\PhoneController as AllPhoneController;
 use App\Http\Controllers\Account\My\Surveys\SurveyController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BranchUsersController;
 use App\Http\Controllers\ClientBranchController;
@@ -60,7 +61,7 @@ Route::get('search',[AllAccounts::class, 'search'])->name('account.search');
 
 /* auth routes */
 Route::get('/', [LoginController::class, 'show'])->name('login');
-Route::post('/home', [LoginController::class, 'login'])->name('login.perform');
+Route::post('/crm', [LoginController::class, 'login'])->name('login.perform');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
@@ -73,6 +74,16 @@ Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('users.edit
 Route::put('users/{id}/update', [UserController::class, 'update'])->name('users.update');
 Route::get('users/{id}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
 Route::get('users/{id}/activate', [UserController::class, 'activate'])->name('users.activate');
+
+
+/* agent managements routes */
+Route::get('agents', [AgentController::class, 'index'])->name('agents.index');
+Route::get('agents/create', [AgentController::class, 'create'])->name('agents.create');
+Route::post('agents/store', [AgentController::class, 'store'])->name('agents.store');
+Route::get('agents/{id}/edit', [AgentController::class, 'edit'])->name('agents.edit');
+Route::put('agents/{id}/update', [AgentController::class, 'update'])->name('agents.update');
+Route::get('agents/{id}/deactivate', [AgentController::class, 'deactivate'])->name('agents.deactivate');
+Route::get('agents/{id}/activate', [AgentController::class, 'activate'])->name('agents.activate');
 
 
 
@@ -432,6 +443,7 @@ Route::group(['prefix' => 'all', 'as' => 'all.'], function () {
 
 
 Route::get('branch-search', [ClientBranchController::class, 'search'])->name('branch.search');
+//Route::get('statistics-search', [ClientBranchController::class, 'searchStatistics'])->name('statistics.search');
 Route::get('accounts/search', [ClientBranchController::class, 'searchAccount'])->name('branch.account.search');
 Route::get('branch/requests/search', [ClientBranchController::class, 'search'])->name('branch.requests.list');
 Route::get('branch/{id}/statistics',[ClientBranchController::class, 'statistics'])->name('branch.requests.statistics');

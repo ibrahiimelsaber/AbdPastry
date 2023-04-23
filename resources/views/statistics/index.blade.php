@@ -22,7 +22,7 @@
                         <div class="card-header">
                             <h4>Service Requests Types</h4>
                             <div class="card-header-action">
-                                <button class="btn btn-info" id="modal-search">Search For Request</button>
+{{--                                <button class="btn btn-info" id="modal-search">Search For Request</button>--}}
                             </div>
                             <div class="card-header-action">
 {{--                                <a href="#" class="btn active">Week</a>--}}

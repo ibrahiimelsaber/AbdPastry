@@ -62,10 +62,12 @@
                                                             </a>
 
 @endif
+    @if(session('userName') == 'Ibrahim_MElsaber')
+{{--    @if(session('GroupId') == 4)--}}
     <a href="{{route('branch.users.list',$branch->Id)}}"
                                                                    class="btn btn-warning"><i class="fa fa-users"> Branch Users</i> </a>
                                                     </td>
-
+@endif
                                                 </tr>
                                             @endforeach
                                             </tbody>

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class Request extends Model
@@ -102,9 +104,20 @@ class Request extends Model
     {
 //        $query = $query->where('BranchId',session('BranchId'));
 //        if (isset($data['search']) && $data['search'] != "") {
-            return $query->whereIn('ContactId', $data);
+        return $query->whereIn('ContactId', $data);
 //        }
     }
 
+    public function scopeStatistics($query, $data)
+    {
+        if (isset($data['from']) && isset($data["to"]) && $data['from'] != "" && $data["to"] != "") {
+
+            return $query->whereDate('Created', '>=', $data['from'])
+                ->whereDate('Created', '<=', $data['to']);
+        } else{
+            return $query->whereDate('Created', '>=', date('Y-m-d'))
+                ->whereDate('Created', '<=', date('Y-m-d'));
+        }
+    }
 
 }

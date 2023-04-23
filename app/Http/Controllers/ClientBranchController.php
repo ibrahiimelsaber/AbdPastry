@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use App\Models\Branch;
 use App\Models\Contact;
-use App\Models\Picklist;
 use App\Models\Request as SR;
-use App\Models\userLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -95,9 +92,9 @@ class ClientBranchController extends Controller
         $branch = DB::table('picklists')->where('Id', session('BranchId'))->first();
         $payload = trim($request['search']);
         $accounts = Account::where('Name', 'like', '%' . $payload . '%')->orWhere('PhoneNumber', '=', $payload)->pluck('id')->toArray();
-        $contacts = Contact::whereIn('AccountId',$accounts)->pluck('id')->toArray();
+        $contacts = Contact::whereIn('AccountId', $accounts)->pluck('id')->toArray();
 
-      $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId',session('BranchId'))->whereIn('ContactId', $contacts)->orderBy('Id','desc')->paginate(20);
+        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->where('BranchId', session('BranchId'))->whereIn('ContactId', $contacts)->orderBy('Id', 'desc')->paginate(20);
 //        $requests = SR::with('contact', 'callDirection', 'type', 'subType', 'subSubType', 'status', 'product', 'subProduct', 'branch', 'complaintType')->Accsearch($contacts)->orderBy('Id','desc')->paginate(20);
 
         $status = DB::table('picklists')
@@ -138,49 +135,112 @@ class ClientBranchController extends Controller
     }
 
 
-    public function statistics($id)
+//    public function statistics($id)
+//    {
+//
+//        $generalInquiry = SR::where('BranchId','=',$id)->where('TypeId','=',846)->count();
+//        $complaints = SR::where('BranchId','=',$id)->where('TypeId','=',848)->count();
+//        $orderTaking = SR::where('BranchId','=',$id)->where('TypeId','=',847)->count();
+//        $faceBookInquiry = SR::where('BranchId','=',$id)->where('TypeId','=',850)->count();
+//        $faceBookComplaints = SR::where('BranchId','=',$id)->where('TypeId','=',851)->count();
+//        $wrongNumber = SR::where('BranchId','=',$id)->where('TypeId','=',849)->count();
+//        $srCounts = SR::where('BranchId','=',$id)->where('Active',1)->count();
+//
+//        $deliveryDamage = SR::where('BranchId','=',$id)->where('SubTypeId','=',789)->count();
+//        $productQuality = SR::where('BranchId','=',$id)->where('SubTypeId','=',794)->count();
+//        $staffAttitude = SR::where('BranchId','=',$id)->where('SubTypeId','=',790)->count();
+//        $delayedOrder = SR::where('BranchId','=',$id)->where('SubTypeId','=',1805)->count();
+//        $billMistakes = SR::where('BranchId','=',$id)->where('SubTypeId','=',792)->count();
+//        $foodSafety = SR::where('BranchId','=',$id)->where('SubTypeId','=',1823)->count();
+//        $visaIssues = SR::where('BranchId','=',$id)->where('SubTypeId','=',1807)->count();
+//        $foodPoising = SR::where('BranchId','=',$id)->where('SubTypeId','=',802)->count();
+//        $missingProducts = SR::where('BranchId','=',$id)->where('SubTypeId','=',798)->count();
+//        $branchComplaints = SR::where('BranchId','=',$id)->where('SubTypeId','=',800)->count();
+//
+//
+//        return view('client.branches.statistics')
+//            ->with('generalInquiry',$generalInquiry)
+//            ->with('complaints',$complaints)
+//            ->with('orderTaking',$orderTaking)
+//            ->with('faceBookInquiry',$faceBookInquiry)
+//            ->with('faceBookComplaints',$faceBookComplaints)
+//            ->with('wrongNumber',$wrongNumber)
+//            ->with('srCounts',$srCounts)
+//
+//            ->with('deliveryDamage',$deliveryDamage)
+//            ->with('branchComplaints',$branchComplaints)
+//            ->with('productQuality',$productQuality)
+//            ->with('staffAttitude',$staffAttitude)
+//            ->with('delayedOrder',$delayedOrder)
+//            ->with('billMistakes',$billMistakes)
+//            ->with('foodSafety',$foodSafety)
+//            ->with('visaIssues',$visaIssues)
+//            ->with('foodPoising',$foodPoising)
+//            ->with('missingProducts',$missingProducts)
+//            ;
+//    }
+
+
+    public function statistics(Request $request, $id)
     {
 
-        $generalInquiry = SR::where('BranchId','=',$id)->where('TypeId','=',846)->count();
-        $complaints = SR::where('BranchId','=',$id)->where('TypeId','=',848)->count();
-        $orderTaking = SR::where('BranchId','=',$id)->where('TypeId','=',847)->count();
-        $faceBookInquiry = SR::where('BranchId','=',$id)->where('TypeId','=',850)->count();
-        $faceBookComplaints = SR::where('BranchId','=',$id)->where('TypeId','=',851)->count();
-        $wrongNumber = SR::where('BranchId','=',$id)->where('TypeId','=',849)->count();
-        $srCounts = SR::where('BranchId','=',$id)->count();
+        if ($request->key == 'search') {
 
-        $deliveryDamage = SR::where('BranchId','=',$id)->where('SubTypeId','=',789)->count();
-        $productQuality = SR::where('BranchId','=',$id)->where('SubTypeId','=',794)->count();
-        $staffAttitude = SR::where('BranchId','=',$id)->where('SubTypeId','=',790)->count();
-        $delayedOrder = SR::where('BranchId','=',$id)->where('SubTypeId','=',1805)->count();
-        $billMistakes = SR::where('BranchId','=',$id)->where('SubTypeId','=',792)->count();
-        $foodSafety = SR::where('BranchId','=',$id)->where('SubTypeId','=',1823)->count();
-        $visaIssues = SR::where('BranchId','=',$id)->where('SubTypeId','=',1807)->count();
-        $foodPoising = SR::where('BranchId','=',$id)->where('SubTypeId','=',802)->count();
-        $missingProducts = SR::where('BranchId','=',$id)->where('SubTypeId','=',798)->count();
-        $branchComplaints = SR::where('BranchId','=',$id)->where('SubTypeId','=',800)->count();
+            $rules = [
+                'from' => 'required',
+                'to' => 'required',
+                'BranchId' => 'required',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return Redirect::to(route('branch.requests.statistics', session('BranchId')))
+                    ->withErrors($validator->errors())
+                    ->withInput($request->all())->with('message', $validator->errors())->with('class', 'alert-danger');
+            }
+        }
+
+        $generalInquiry = SR::where('BranchId', '=', $id)->where('TypeId', '=', 846)->Statistics($request->all())->count();
+        $complaints = SR::where('BranchId', '=', $id)->where('TypeId', '=', 848)->Statistics($request->all())->count();
+        $orderTaking = SR::where('BranchId', '=', $id)->where('TypeId', '=', 847)->Statistics($request->all())->count();
+        $faceBookInquiry = SR::where('BranchId', '=', $id)->where('TypeId', '=', 850)->Statistics($request->all())->count();
+        $faceBookComplaints = SR::where('BranchId', '=', $id)->where('TypeId', '=', 851)->Statistics($request->all())->count();
+        $wrongNumber = SR::where('BranchId', '=', $id)->where('TypeId', '=', 849)->Statistics($request->all())->count();
+        $srCounts = SR::where('BranchId', '=', $id)->Statistics($request->all())->count();
+
+        $deliveryDamage = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 789)->Statistics($request->all())->count();
+        $productQuality = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 794)->Statistics($request->all())->count();
+        $staffAttitude = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 790)->Statistics($request->all())->count();
+        $delayedOrder = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 1805)->Statistics($request->all())->count();
+        $billMistakes = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 792)->Statistics($request->all())->count();
+        $foodSafety = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 1823)->Statistics($request->all())->count();
+        $visaIssues = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 1807)->Statistics($request->all())->count();
+        $foodPoising = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 802)->Statistics($request->all())->count();
+        $missingProducts = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 798)->Statistics($request->all())->count();
+        $branchComplaints = SR::where('BranchId', '=', $id)->where('SubTypeId', '=', 800)->Statistics($request->all())->count();
 
 
         return view('client.branches.statistics')
-            ->with('generalInquiry',$generalInquiry)
-            ->with('complaints',$complaints)
-            ->with('orderTaking',$orderTaking)
-            ->with('faceBookInquiry',$faceBookInquiry)
-            ->with('faceBookComplaints',$faceBookComplaints)
-            ->with('wrongNumber',$wrongNumber)
-            ->with('srCounts',$srCounts)
-
-            ->with('deliveryDamage',$deliveryDamage)
-            ->with('branchComplaints',$branchComplaints)
-            ->with('productQuality',$productQuality)
-            ->with('staffAttitude',$staffAttitude)
-            ->with('delayedOrder',$delayedOrder)
-            ->with('billMistakes',$billMistakes)
-            ->with('foodSafety',$foodSafety)
-            ->with('visaIssues',$visaIssues)
-            ->with('foodPoising',$foodPoising)
-            ->with('missingProducts',$missingProducts)
-            ;
+            ->with('generalInquiry', $generalInquiry)
+            ->with('complaints', $complaints)
+            ->with('orderTaking', $orderTaking)
+            ->with('faceBookInquiry', $faceBookInquiry)
+            ->with('faceBookComplaints', $faceBookComplaints)
+            ->with('wrongNumber', $wrongNumber)
+            ->with('srCounts', $srCounts)
+            ->with('deliveryDamage', $deliveryDamage)
+            ->with('branchComplaints', $branchComplaints)
+            ->with('productQuality', $productQuality)
+            ->with('staffAttitude', $staffAttitude)
+            ->with('delayedOrder', $delayedOrder)
+            ->with('billMistakes', $billMistakes)
+            ->with('foodSafety', $foodSafety)
+            ->with('visaIssues', $visaIssues)
+            ->with('foodPoising', $foodPoising)
+            ->with('key', isset($request->key) ? $request->key : '')
+            ->with('from', isset($request->from) ? $request->from : '')
+            ->with('to', isset($request->to) ? $request->to : '')
+            ->with('missingProducts', $missingProducts);
     }
 
 

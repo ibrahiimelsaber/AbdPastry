@@ -176,68 +176,83 @@
                 </ul>
             </li>
 
-            <li class="menu-header">Management</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa fa-user"></i> <span>Users Management</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="{{route('users.index')}}">Users</a>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa fa-code-branch"></i> <span>Branches Management</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="{{route('branches.index')}}">Branches</a>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa fa-chart-area"></i> <span>Statistics</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="{{route('statistics')}}">Statistics</a>
-                    </li>
-
-                </ul>
-            </li>
-
-       @else
 
 
-        <li class="menu-header">Requests</li>
-        <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-user"></i> <span>Branch Requests</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="nav-link" href="{{route('branch.requests.index', session('BranchId') ?? 0)}}">Requests</a>
+            @if(session('GroupId') == 3)
+                <li class="menu-header">Management</li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa fa-user"></i> <span>Users Management</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="{{route('users.index')}}">Users</a>
+                        </li>
+
+                    </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa fa-user"></i> <span>Agents Management</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="{{route('agents.index')}}">Agents</a>
+                        </li>
 
-            </ul>
-        </li>
-
-        <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fa fa-chart-area"></i> <span>Branch Statistics</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="nav-link" href="{{route('branch.requests.statistics', session('BranchId') ?? 0)}}">Statistics</a>
+                    </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa fa-code-branch"></i> <span>Branches Management</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="{{route('branches.index')}}">Branches</a>
+                        </li>
 
-            </ul>
-        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa fa-chart-area"></i> <span>Statistics</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="{{route('statistics')}}">Statistics</a>
+                        </li>
+
+                    </ul>
+                </li>
+            @endif
+
+        @else
+
+            <li class="menu-header">Requests</li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa fa-user"></i> <span>Branch Requests</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link"
+                           href="{{route('branch.requests.index', session('BranchId') ?? 0)}}">Requests</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa fa-chart-area"></i> <span>Branch Statistics</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="{{route('branch.requests.statistics', session('BranchId') ?? 0)}}">Statistics</a>
+                    </li>
+
+                </ul>
+            </li>
         @endif
     </ul>
 </aside>

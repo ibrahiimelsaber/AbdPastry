@@ -46,7 +46,6 @@
                                 </div>
 
 
-
                                 <!--Call Status and Call Back Status-->
 
                                 <div class="form-group row mb-4">
@@ -57,7 +56,7 @@
 
                                             <option value="1">Agent</option>
                                             <option value="2">Team Leader</option>
-
+                                                <option value="3">Admin</option>
                                         </select>
                                         @error('GroupId')
                                         <div class="invalid-feedback">
@@ -67,7 +66,6 @@
                                     </div>
 
                                 </div>
-
 
 
                                 <div class="form-group row mb-4">

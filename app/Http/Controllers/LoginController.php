@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
 use App\Models\Branch;
 use App\Models\userLogin;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -16,10 +16,11 @@ class LoginController extends Controller
 
     public function show()
     {
-        return view('login');
+        $agents = Agent::orderBy('Id')->paginate(10);
+        return view('login')->with('agents', $agents);
     }
 
-    public function login(Request $request): RedirectResponse
+    public function login(Request $request)
     {
 
         $validator = $request->validate([
@@ -51,6 +52,7 @@ class LoginController extends Controller
                     Session::put('GroupId', $user->GroupId);
                     Session::put('role', $request->role);
                     Session::put('user', $user);
+
                     return redirect()->route('my.accounts.index');
                 } else {
                     return redirect()->back()->withErrors('You are not authorized')->with('message', 'Wrong password, please make sure you enter your windows password..!')->with('class', 'alert-danger');
